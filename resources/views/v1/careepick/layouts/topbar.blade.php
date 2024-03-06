@@ -47,7 +47,8 @@
                     </a>
                 </li>
                 <li class="sign-up">
-                    <a class="btn-signup red-btn" href="{{ route('signup') }}">
+                    {{-- <a class="btn-signup red-btn" href="{{ route('signup') }}"> --}}
+                    <a class="btn-signup red-btn" href="javascript:void(0)" data-toggle="modal" data-target="#signup">
                         <span class="ti-briefcase"></span>Register
                     </a>
                 </li>

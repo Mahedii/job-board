@@ -77,7 +77,7 @@
     </div>
 </footer>
 
-<!-- Signup Code -->
+<!-- Signin Code -->
 <div class="modal fade" id="signin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content" id="myModalLabel1">
@@ -160,5 +160,53 @@
         </div>
     </div>
 </div>
+<!-- End Signin -->
+
+<!-- Signup Code -->
+<div class="modal fade" id="signup" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content" id="myModalLabel2">
+            <div class="modal-header">
+                <h5 class="modal-title text-center">Register</h5>
+              </div>
+            <div class="modal-body">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs nav-advance theme-bg" role="tablist">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{ route('signup') }}">
+                            <i class="ti-user"></i> Job Seeker
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('register-company') }}">
+                            <i class="ti-user"></i> Job Provider
+                        </a>
+                    </li>
+                </ul>
+                <!-- Nav tabs -->
+                <!-- Tab panels -->
+                <div class="tab-content">
+                    <!-- Employer Panel 1-->
+                    <div class="tab-pane fade in show active" role="tabpanel">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <a href="{{ route('social.auth.redirectTo','facebook') }}" class="fb-log-btn log-btn">
+                                    <i class="fa fa-facebook"></i> Facebook
+                                </a>
+                            </div>
+                            <div class="col-md-6">
+                                <a href="{{ route('social.auth.redirectTo','google') }}" class="gplus-log-btn log-btn">
+                                    <i class="fa fa-google"></i> Google
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Tab panels -->
+            </div>
+        </div>
+    </div>
+</div>
 <!-- End Signup -->
+
 <div><a href="#" class="scrollup">Scroll</a></div>

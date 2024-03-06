@@ -19,6 +19,13 @@ use App\Http\Controllers\v1\employer\SocialLoginController;
 |
 */
 
+Route::post('/user-login', [AuthController::class, 'login'])->name('user.signin');
+Route::get('/signout', [AuthController::class, 'signOut'])->name('logout');
+Route::get('/auth', [AuthController::class, 'loginPage'])->name('loginPage');
+Route::get('/dashboard', [AuthController::class, 'dashboard'])->middleware(['auth'])->name('dashboard');
+
+Route::get('/register-company', [EmployerController::class, 'createCompany'])->name('register-company');
+
 Route::controller(SocialLoginController::class)->group(function () {
     Route::get('authorized/{platform}', 'redirectTo')->name('social.auth.redirectTo');
     Route::get('authorized/{platform}/callback', 'handleCallback')->name('social.auth.handleCallback');
