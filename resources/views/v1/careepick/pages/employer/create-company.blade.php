@@ -58,6 +58,15 @@
                                 <input name="company_year_of_establishment" type="text" class="form-control" placeholder="Company Name">
                             </div>
                             <div class="col-md-4 col-sm-6 col-xs-12">
+                                <label>Comapny Type <span class="text-danger">*</span></label>
+                                <select name="company_type" class="wide form-control">
+                                    <option data-display="Comapny Type">10 - 50</option>
+                                    <option value="1">50 - 100</option>
+                                    <option value="2">100 - 500</option>
+                                    <option value="3" disabled>500 - 1000</option>
+                                </select>
+                            </div>  
+                            <div class="col-md-4 col-sm-6 col-xs-12">
                                 <label>Comapny Size <span class="text-danger">*</span></label>
                                 <select name="company_size" class="wide form-control">
                                     <option data-display="Comapny Size">10 - 50</option>
