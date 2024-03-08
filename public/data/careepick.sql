@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 06, 2024 at 11:11 AM
+-- Generation Time: Mar 08, 2024 at 11:24 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -873,11 +873,12 @@ CREATE TABLE `statuses` (
 INSERT INTO `statuses` (`id`, `type`, `name`, `created_at`, `updated_at`) VALUES
 (1, 0, 'Enabled', NULL, NULL),
 (2, 1, 'Disabled', NULL, NULL),
-(3, 2, 'Paid', NULL, NULL),
-(4, 3, 'Unpaid', NULL, NULL),
-(5, 4, 'Preferred', NULL, NULL),
+(3, 2, 'Pending', NULL, NULL),
+(4, 3, 'Paid', NULL, NULL),
+(5, 4, 'Unpaid', NULL, NULL),
 (6, 5, 'Hot', NULL, NULL),
-(7, 6, 'Bad', NULL, NULL);
+(7, 6, 'Bad', NULL, NULL),
+(8, 7, 'Preferred', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1684,7 +1685,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `statuses`
 --
 ALTER TABLE `statuses`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `upazilas`
