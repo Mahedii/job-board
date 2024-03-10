@@ -13,6 +13,26 @@ return new class extends Migration
     {
         Schema::create('school_and_colleges', function (Blueprint $table) {
             $table->id();
+            $table->string('institute_name');
+            $table->string('eiin')->nullable();
+            $table->string('institute_type');
+            $table->string('division');
+            $table->string('district');
+            $table->string('thana')->nullable();
+            $table->string('union_name')->nullable();
+            $table->string('mauza_name')->nullable();
+            $table->string('area_status')->nullable();
+            $table->string('geographical_status')->nullable();
+            $table->text('address');
+            $table->string('post_office')->nullable();
+            $table->string('management_type')->nullable();
+            $table->string('mobile')->nullable();
+            $table->string('student_type')->nullable();
+            $table->string('education_level');
+            $table->string('affiliation')->nullable();
+            $table->string('mpo_status')->nullable();
+            $table->string('slug')->unique()->nullable();
+            $table->tinyText('remarks')->nullable();
             $table->timestamps();
         });
     }

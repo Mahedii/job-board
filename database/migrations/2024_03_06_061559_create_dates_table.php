@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('dates', function (Blueprint $table) {
             $table->id();
+            $table->string('date_value')->nullable();
+            $table->string('day_number')->nullable();
+            $table->string('day_name')->nullable();
+            $table->string('month_number')->nullable();
+            $table->string('month_name')->nullable();
+            $table->string('year_number')->nullable();
+            $table->string('slug')->unique()->nullable();
+            $table->text('remarks')->nullable();
             $table->timestamps();
         });
     }

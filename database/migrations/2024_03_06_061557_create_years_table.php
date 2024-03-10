@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('years', function (Blueprint $table) {
             $table->id();
+            $table->string('year');
+            $table->string('slug')->unique()->nullable();
+            $table->tinyText('remarks')->nullable();
             $table->timestamps();
         });
     }

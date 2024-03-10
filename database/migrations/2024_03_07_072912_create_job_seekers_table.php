@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('jobseeker_name');
             $table->string('jobseeker_mail');
             $table->string('jobseeker_password');
-            $table->string('jobseeker_gender');
+            $table->integer('jobseeker_gender');
             $table->text('jobseeker_address');
             $table->string('jobseeker_image');
             $table->string('jobseeker_custom_resume');
@@ -27,8 +27,8 @@ return new class extends Migration
             $table->string('jobseeker_phone_no_1');
             $table->string('jobseeker_phone_no_2')->nullable();
             $table->integer('jobseeker_status')->default(0);
-            $table->string('slug')->unique();
-            $table->tinyText('remarks')->nullable();
+            $table->string('slug')->unique()->nullable();
+            $table->text('remarks')->nullable();
             $table->timestamps();
         });
     }

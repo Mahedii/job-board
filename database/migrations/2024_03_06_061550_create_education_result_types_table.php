@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::create('education_result_types', function (Blueprint $table) {
             $table->id();
+            $table->string('result_type');
+            $table->string('slug')->unique()->nullable();
+            $table->tinyText('remarks')->nullable();
             $table->timestamps();
         });
     }

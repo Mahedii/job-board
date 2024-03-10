@@ -13,6 +13,19 @@ return new class extends Migration
     {
         Schema::create('job_seeker_experiences', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('job_seeker_id');
+            $table->foreign('job_seeker_id')->references('id')->on('job_seekers')->onDelete('cascade');
+            $table->string('organization_name');
+            $table->string('designation');
+            $table->text('summary')->nullable();
+            $table->integer('start_date')->nullable();
+            $table->integer('start_month');
+            $table->integer('start_year');
+            $table->integer('end_date')->nullable();
+            $table->integer('end_month')->nullable();
+            $table->integer('end_year')->nullable();
+            $table->string('slug')->unique()->nullable();
+            $table->text('remarks')->nullable();
             $table->timestamps();
         });
     }

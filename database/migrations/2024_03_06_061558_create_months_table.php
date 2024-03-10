@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('months', function (Blueprint $table) {
             $table->id();
+            $table->integer('month_number');
+            $table->string('month_name');
+            $table->string('slug')->unique()->nullable();
+            $table->tinyText('remarks')->nullable();
             $table->timestamps();
         });
     }

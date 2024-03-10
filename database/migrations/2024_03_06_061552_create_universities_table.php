@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('universities', function (Blueprint $table) {
             $table->id();
+            $table->string('university_name');
+            $table->string('university_type')->nullable();
+            $table->string('country_code')->nullable();
+            $table->string('website_url')->nullable();
+            $table->string('slug')->unique()->nullable();
+            $table->tinyText('remarks')->nullable();
             $table->timestamps();
         });
     }

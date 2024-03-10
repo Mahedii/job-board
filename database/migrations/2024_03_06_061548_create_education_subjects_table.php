@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('education_subjects', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('education_level_id')->nullable();
+            $table->foreign('education_level_id')->references('id')->on('education_levels')->onDelete('set null');
+            $table->string('subject_name');
+            $table->string('degree_level');
+            $table->string('slug')->unique()->nullable();
+            $table->tinyText('remarks')->nullable();
             $table->timestamps();
         });
     }
