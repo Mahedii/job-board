@@ -15,7 +15,6 @@ class SchoolAndCollegesTableSeeder extends Seeder
      */
     public function run(): void
     {
-
         try {
             // Read SQL file content
             $sqlContent = file_get_contents(public_path('seeder-file/school_and_colleges.sql'));

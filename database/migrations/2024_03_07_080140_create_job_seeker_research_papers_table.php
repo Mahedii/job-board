@@ -15,6 +15,9 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('job_seeker_id');
             $table->foreign('job_seeker_id')->references('id')->on('job_seekers')->onDelete('cascade');
+            $table->string('research_paper_subject');
+            $table->text('research_paper_summary');
+            $table->string('research_paper_url')->nullable();
             $table->string('slug')->unique()->nullable();
             $table->text('remarks')->nullable();
             $table->timestamps();

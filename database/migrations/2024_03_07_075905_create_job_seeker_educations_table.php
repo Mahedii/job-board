@@ -22,7 +22,8 @@ return new class extends Migration
             $table->string('education_degree_title')->nullable();
             $table->unsignedBigInteger('education_subjects_id')->nullable();
             $table->foreign('education_subjects_id')->references('id')->on('education_subjects')->onDelete('set null');
-            $table->integer('education_institute_type');
+            $table->unsignedBigInteger('education_institute_type_id')->nullable();
+            $table->foreign('education_institute_type_id')->references('id')->on('institutions_types')->onDelete('set null');
             $table->unsignedBigInteger('school_college_id')->nullable();
             $table->foreign('school_college_id')->references('id')->on('school_and_colleges')->onDelete('set null');
             $table->unsignedBigInteger('university_id')->nullable();

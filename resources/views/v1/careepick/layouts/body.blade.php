@@ -1,1 +1,1 @@
-<body class="utf_skin_area">
+<body class="green-theme">

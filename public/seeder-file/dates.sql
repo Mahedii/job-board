@@ -1,4 +1,4 @@
-INSERT INTO dates (date_value, day_number, day_name, month_number, month_name, year_number)
+INSERT INTO dates (`date_value`, `day_number`, `day_name`, `month_number`, `month_name`, `year_number`)
 SELECT
     date_table.date_value,
     EXTRACT(DOW FROM date_table.date_value) AS day_number,

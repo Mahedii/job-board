@@ -1,576 +1,894 @@
 @extends('v1.careepick.layouts.master')
 @section('content')
-    <!-- ======================= Start Banner ===================== -->
-    <div class="utf_main_banner_area" style="background-image:url(assets/img/slider_bg.jpg);" data-overlay="8">
-        <div class="container">
-            <div class="col-md-8 col-sm-10">
-                <div class="caption cl-white home_two_slid">
-                    <h2>Search Between More Then <span class="theme-cl">50,000</span> Open Jobs.</h2>
-                    <p>Trending Jobs Keywords: <span class="trending_key"><a href="#">Web Designer</a></span> <span
-                            class="trending_key"><a href="#">Web Developer</a></span> <span class="trending_key"><a
-                                href="#">IOS Developer</a></span> <span class="trending_key"><a href="#">Android
-                                Developer</a></span></p>
+    <!-- ============================ Hero Banner  Start================================== -->
+    <div class="image-cover hero-header primary-bg-dark" data-overlay="0">
+        <div class="position-absolute top-0 end-0 z-0">
+            <img src="{{ URL::asset('assets/img/shape-3-soft-light.svg') }}" alt="SVG" width="500">
+        </div>
+        <div class="position-absolute top-0 start-0 me-10 z-0">
+            <img src="{{ URL::asset('assets/img/shape-1-soft-light.svg') }}" alt="SVG" width="250">
+        </div>
+        <div
+            class="container d-flex flex-column justify-content-center position-relative zindex-2 pt-sm-3 pt-md-4 pt-xl-5">
+
+            <div class="row justify-content-between align-items-center">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                    <h6 class="primary-2-cl fw-medium d-inline-flex align-items-center mb-3"><span
+                            class="primary-2-bg w-10 h-05 me-2"></span>Get Hot & Trending Jobs</h6>
+                    <h1 class="mb-4">Find & Hire<br><span>Top Experts on Job Stock</span></h1>
+                    <p class="fs-5">Getting a new job is never easy. Check what new jobs we have in store for you on
+                        Job Stock.</p>
+                    <div class="lios-vrst">
+                        <ul>
+                            <li>
+                                <div class="lios-parts">
+                                    <h2><span class="ctr">200</span><span class="primary-2-cl">M</span></h2>
+                                    <h6>Active Jobs</h6>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="lios-parts">
+                                    <h2><span class="ctr">40</span><span class="primary-2-cl">K</span></h2>
+                                    <h6>Startups</h6>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="lios-parts">
+                                    <h2><span class="ctr">340</span><span class="primary-2-cl">K</span></h2>
+                                    <h6>Talents</h6>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <form>
-                    <fieldset class="utf_home_form_one">
-                        <div class="col-md-4 col-sm-4 padd-0">
-                            <input type="text" class="form-control br-1" placeholder="Search Keywords..." />
+
+                <div class="col-xl-5 col-lg-5 col-md-12 col-sm-12">
+                    <div class="hero-search-wrap">
+                        <div class="hero-search">
+                            <h1>Grow Your Career with <span class="text-primary">Job Stock</span></h1>
                         </div>
-                        <div class="col-md-3 col-sm-3 padd-0">
-                            <select class="wide form-control br-1">
-                                <option data-display="Location">All Country</option>
-                                <option value="1">Afghanistan</option>
-                                <option value="2">Albania</option>
-                                <option value="3">Algeria</option>
-                                <option value="4">Brazil</option>
-                                <option value="5">Burundi</option>
-                                <option value="6">Bulgaria</option>
-                                <option value="7">Germany</option>
-                                <option value="8">Grenada</option>
-                                <option value="9">Guatemala</option>
-                                <option value="10" disabled>Iceland</option>
-                            </select>
+                        <div class="hero-search-content verticle-space">
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                    <div class="form-group">
+                                        <div class="input-with-icon">
+                                            <input type="text" class="form-control border"
+                                                placeholder="Search Job Keywords..">
+                                            <img src="{{ URL::asset('assets/img/pin.svg') }}" width="18" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-xl-6 col-lg-12 col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label>Job Category</label>
+                                        <select class="form-control">
+                                            <option value="1">Software & Application</option>
+                                            <option value="2">Banking</option>
+                                            <option value="3">Health & Medical</option>
+                                            <option value="4">Mobile & App</option>
+                                            <option value="5">Education</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-12 col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label>Job Type</label>
+                                        <select class="form-control">
+                                            <option value="1">All Type</option>
+                                            <option value="2">Full Time</option>
+                                            <option value="3">Part Time</option>
+                                            <option value="4">Contractor</option>
+                                            <option value="5">Freelance</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label>Job Lavel</label>
+                                        <select class="form-control">
+                                            <option value="1">Junior Lavel</option>
+                                            <option value="2">Mid Lavel</option>
+                                            <option value="3">Manager</option>
+                                            <option value="4">Team Leader</option>
+                                            <option value="5">Senior Lavel</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label>Experience</label>
+                                        <select class="form-control">
+                                            <option value="1">1 Year</option>
+                                            <option value="2">2 Year</option>
+                                            <option value="3">3 Year</option>
+                                            <option value="4">4 Year</option>
+                                            <option value="5">5 Year</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Expected Sallary</label>
+                                        <select class="form-control">
+                                            <option value="1">$500 - $1000 PA</option>
+                                            <option value="2">$200 - $5000 PA</option>
+                                            <option value="3">$5000 - $10000 PA</option>
+                                            <option value="4">$10000 - $20000 PA</option>
+                                            <option value="5">$20000 - $40000 PA</option>
+                                            <option value="6">$40000 - $50000 PA</option>
+                                            <option value="7">$50000 - $100000 PA</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                    <button type="submit" class="btn btn-dark full-width">Search Result</button>
+                                </div>
+
+                            </div>
                         </div>
-                        <div class="col-md-3 col-sm-3 padd-0">
-                            <select class="wide form-control">
-                                <option data-display="Category">Show All</option>
-                                <option value="1">Software Developer</option>
-                                <option value="2">Java Developer</option>
-                                <option value="3">Software Engineer</option>
-                                <option value="4">Web Developer</option>
-                                <option value="5">PHP Developer</option>
-                                <option value="6">Python Developer</option>
-                                <option value="7">Front end Developer</option>
-                                <option value="8">Associate Developer</option>
-                                <option value="9">Back end Developer</option>
-                                <option value="10">XML Developer</option>
-                                <option value="11">.NET Developer</option>
-                                <option value="12" disabled>Marketting Developer</option>
-                            </select>
-                        </div>
-                        <div class="col-md-2 col-sm-2 padd-0 m-clear">
-                            <button type="submit" class="btn theme-btn cl-white seub-btn">Search</button>
-                        </div>
-                    </fieldset>
-                </form>
+
+                    </div>
+                </div>
+
             </div>
+
+        </div>
+
+        <div class="position-absolute bottom-0 start-0 z-0">
+            <img src="{{ URL::asset('assets/img/shape-2-soft-light.svg') }}" alt="SVG" width="400">
         </div>
     </div>
-    <!-- ======================= End Banner ===================== -->
+    <!-- ============================ Hero Banner End ================================== -->
 
-    <!-- ================= Job start ========================= -->
-    <section class="padd-top-80 padd-bot-80">
+    <!-- ============================ Our Partners Start ================================== -->
+    <section class="min">
         <div class="container">
-            <ul class="nav nav-tabs nav-advance theme-bg" role="tablist">
-                <li class="nav-item active"> <a class="nav-link" data-toggle="tab" href="#recent" role="tab"> Latest
-                        Jobs</a> </li>
-                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#" role="tab"> Recent Jobs</a>
-                </li>
-            </ul>
-            <div class="tab-content">
-                <div class="tab-pane fade in show active" id="recent" role="tabpanel">
-                    <div class="row">
-                        <!-- Single Job -->
-                        <div class="col-md-3 col-sm-6">
-                            <div class="utf_grid_job_widget_area"> <span class="job-type full-type">Full Time</span>
-                                <div class="utf_job_like">
-                                    <label class="toggler toggler-danger">
-                                        <input type="checkbox" checked>
-                                        <i class="fa fa-heart"></i>
-                                    </label>
-                                </div>
-                                <div class="u-content">
-                                    <div class="avatar box-80"> <a href="employer-detail.html"> <img class="img-responsive"
-                                                src="{{ URL::asset('assets/img/company_logo_1.png') }}" alt=""> </a> </div>
-                                    <h5><a href="employer-detail.html">Product Redesign</a></h5>
-                                    <p class="text-muted">2708 Scenic Way, IL 62373</p>
-                                </div>
-                                <div class="utf_apply_job_btn_item"> <a href="job-detail.html"
-                                        class="btn job-browse-btn btn-radius br-light">Apply Now</a> </div>
-                            </div>
-                        </div>
 
-                        <!-- Single Job -->
-                        <div class="col-md-3 col-sm-6">
-                            <div class="utf_grid_job_widget_area"> <span class="job-type full-type">Full Time</span>
-                                <div class="utf_job_like">
-                                    <label class="toggler toggler-danger">
-                                        <input type="checkbox">
-                                        <i class="fa fa-heart"></i>
-                                    </label>
-                                </div>
-                                <div class="u-content">
-                                    <div class="avatar box-80"> <a href="employer-detail.html"> <img class="img-responsive"
-                                                src="{{ URL::asset('assets/img/company_logo_2.png') }}" alt=""> </a> </div>
-                                    <h5><a href="employer-detail.html">New Product Mockup</a></h5>
-                                    <p class="text-muted">2708 Scenic Way, IL 62373</p>
-                                </div>
-                                <div class="utf_apply_job_btn_item"> <a href="job-detail.html"
-                                        class="btn job-browse-btn btn-radius br-light">Apply Now</a> </div>
-                            </div>
-                        </div>
-
-                        <!-- Single Job -->
-                        <div class="col-md-3 col-sm-6">
-                            <div class="utf_grid_job_widget_area"> <span class="job-type part-type">Part Time</span>
-                                <div class="utf_job_like">
-                                    <label class="toggler toggler-danger">
-                                        <input type="checkbox" checked>
-                                        <i class="fa fa-heart"></i>
-                                    </label>
-                                </div>
-                                <div class="u-content">
-                                    <div class="avatar box-80"> <a href="employer-detail.html"> <img
-                                                class="img-responsive" src="{{ URL::asset('assets/img/company_logo_3.png') }}"
-                                                alt=""> </a> </div>
-                                    <h5><a href="employer-detail.html">Custom Php Developer</a></h5>
-                                    <p class="text-muted">3765 C Street, Worcester</p>
-                                </div>
-                                <div class="utf_apply_job_btn_item"> <a href="job-detail.html"
-                                        class="btn job-browse-btn btn-radius br-light">Apply Now</a> </div>
-                            </div>
-                        </div>
-
-                        <!-- Single Job -->
-                        <div class="col-md-3 col-sm-6">
-                            <div class="utf_grid_job_widget_area"> <span class="job-type part-type">Part Time</span>
-                                <div class="utf_job_like">
-                                    <label class="toggler toggler-danger">
-                                        <input type="checkbox">
-                                        <i class="fa fa-heart"></i>
-                                    </label>
-                                </div>
-                                <div class="u-content">
-                                    <div class="avatar box-80"> <a href="employer-detail.html"> <img
-                                                class="img-responsive" src="{{ URL::asset('assets/img/company_logo_4.png') }}"
-                                                alt=""> </a> </div>
-                                    <h5><a href="employer-detail.html">Wordpress Developer</a></h5>
-                                    <p class="text-muted">2719 Duff Avenue, Winooski</p>
-                                </div>
-                                <div class="utf_apply_job_btn_item"> <a href="job-detail.html"
-                                        class="btn job-browse-btn btn-radius br-light">Apply Now</a> </div>
-                            </div>
-                        </div>
-
-                        <!-- Single Job -->
-                        <div class="col-md-3 col-sm-6">
-                            <div class="utf_grid_job_widget_area"> <span
-                                    class="job-type internship-type">Internship</span>
-                                <div class="utf_job_like">
-                                    <label class="toggler toggler-danger">
-                                        <input type="checkbox" checked>
-                                        <i class="fa fa-heart"></i>
-                                    </label>
-                                </div>
-                                <div class="u-content">
-                                    <div class="avatar box-80"> <a href="employer-detail.html"> <img
-                                                class="img-responsive" src="{{ URL::asset('assets/img/company_logo_5.png') }}"
-                                                alt=""> </a> </div>
-                                    <h5><a href="employer-detail.html">Web Maintenence</a></h5>
-                                    <p class="text-muted">2708 Scenic Way, IL 62373</p>
-                                </div>
-                                <div class="utf_apply_job_btn_item"> <a href="job-detail.html"
-                                        class="btn job-browse-btn btn-radius br-light">Apply Now</a> </div>
-                            </div>
-                        </div>
-
-                        <!-- Single Job -->
-                        <div class="col-md-3 col-sm-6">
-                            <div class="utf_grid_job_widget_area"> <span class="job-type part-type">Part Time</span>
-                                <div class="utf_job_like">
-                                    <label class="toggler toggler-danger">
-                                        <input type="checkbox">
-                                        <i class="fa fa-heart"></i>
-                                    </label>
-                                </div>
-                                <div class="u-content">
-                                    <div class="avatar box-80"> <a href="employer-detail.html"> <img
-                                                class="img-responsive" src="{{ URL::asset('assets/img/company_logo_6.png') }}"
-                                                alt=""> </a> </div>
-                                    <h5><a href="employer-detail.html">Photoshop Designer</a></h5>
-                                    <p class="text-muted">2865 Emma Street, Lubbock</p>
-                                </div>
-                                <div class="utf_apply_job_btn_item"> <a href="job-detail.html"
-                                        class="btn job-browse-btn btn-radius br-light">Apply Now</a> </div>
-                            </div>
-                        </div>
-
-                        <!-- Single Job -->
-                        <div class="col-md-3 col-sm-6">
-                            <div class="utf_grid_job_widget_area"> <span class="job-type full-type">Full Time</span>
-                                <div class="utf_job_like">
-                                    <label class="toggler toggler-danger">
-                                        <input type="checkbox">
-                                        <i class="fa fa-heart"></i>
-                                    </label>
-                                </div>
-                                <div class="u-content">
-                                    <div class="avatar box-80"> <a href="employer-detail.html"> <img
-                                                class="img-responsive" src="{{ URL::asset('assets/img/company_logo_7.png') }}"
-                                                alt=""> </a> </div>
-                                    <h5><a href="employer-detail.html">HTML5 & CSS3 Coder</a></h5>
-                                    <p class="text-muted">2719 Burnside Avenue, Logan</p>
-                                </div>
-                                <div class="utf_apply_job_btn_item"> <a href="job-detail.html"
-                                        class="btn job-browse-btn btn-radius br-light">Apply Now</a> </div>
-                            </div>
-                        </div>
-
-                        <!-- Single Job -->
-                        <div class="col-md-3 col-sm-6">
-                            <div class="utf_grid_job_widget_area"> <span class="job-type part-type">Part Time</span>
-                                <div class="utf_job_like">
-                                    <label class="toggler toggler-danger">
-                                        <input type="checkbox" checked>
-                                        <i class="fa fa-heart"></i>
-                                    </label>
-                                </div>
-                                <div class="u-content">
-                                    <div class="avatar box-80"> <a href="employer-detail.html"> <img
-                                                class="img-responsive" src="{{ URL::asset('assets/img/company_logo_8.png') }}"
-                                                alt=""> </a> </div>
-                                    <h5><a href="employer-detail.html">.Net Developer</a></h5>
-                                    <p class="text-muted">3815 Forest Drive, Alexandria</p>
-                                </div>
-                                <div class="utf_apply_job_btn_item"> <a href="job-detail.html"
-                                        class="btn job-browse-btn btn-radius br-light">Apply Now</a> </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Featured Job -->
-                <div class="tab-pane fade" id="featured" role="tabpanel">
-                    <div class="row">
-                        <!-- Single Job -->
-                        <div class="col-md-3 col-sm-6">
-                            <div class="utf_grid_job_widget_area"> <span class="job-type full-type">Full Time</span>
-                                <div class="utf_job_like">
-                                    <label class="toggler toggler-danger">
-                                        <input type="checkbox">
-                                        <i class="fa fa-heart"></i>
-                                    </label>
-                                </div>
-                                <div class="u-content">
-                                    <div class="avatar box-80"> <a href="employer-detail.html"> <img
-                                                class="img-responsive" src="{{ URL::asset('assets/img/company_logo_6.png') }}"
-                                                alt=""> </a> </div>
-                                    <h5><a href="employer-detail.html">.Net Developer</a></h5>
-                                    <p class="text-muted">2708 Scenic Way, IL 62373</p>
-                                </div>
-                                <div class="utf_apply_job_btn_item"> <a href="job-detail.html"
-                                        class="btn job-browse-btn btn-radius br-light">Apply Now</a> </div>
-                            </div>
-                        </div>
-
-                        <!-- Single Job -->
-                        <div class="col-md-3 col-sm-6">
-                            <div class="utf_grid_job_widget_area"> <span class="job-type full-type">Full Time</span>
-                                <div class="utf_job_like">
-                                    <label class="toggler toggler-danger">
-                                        <input type="checkbox">
-                                        <i class="fa fa-heart"></i>
-                                    </label>
-                                </div>
-                                <div class="u-content">
-                                    <div class="avatar box-80"> <a href="employer-detail.html"> <img
-                                                class="img-responsive" src="{{ URL::asset('assets/img/company_logo_4.png') }}"
-                                                alt=""> </a> </div>
-                                    <h5><a href="employer-detail.html">Java Developer</a></h5>
-                                    <p class="text-muted">2708 Scenic Way, IL 62373</p>
-                                </div>
-                                <div class="utf_apply_job_btn_item"> <a href="job-detail.html"
-                                        class="btn job-browse-btn btn-radius br-light">Apply Now</a> </div>
-                            </div>
-                        </div>
-
-                        <!-- Single Job -->
-                        <div class="col-md-3 col-sm-6">
-                            <div class="utf_grid_job_widget_area"> <span class="job-type part-type">Full Time</span>
-                                <div class="utf_job_like">
-                                    <label class="toggler toggler-danger">
-                                        <input type="checkbox">
-                                        <i class="fa fa-heart"></i>
-                                    </label>
-                                </div>
-                                <div class="u-content">
-                                    <div class="avatar box-80"> <a href="employer-detail.html"> <img
-                                                class="img-responsive" src="{{ URL::asset('assets/img/company_logo_5.png') }}"
-                                                alt=""> </a> </div>
-                                    <h5><a href="employer-detail.html">Web Maintenence</a></h5>
-                                    <p class="text-muted">3765 C Street, Worcester</p>
-                                </div>
-                                <div class="utf_apply_job_btn_item"> <a href="job-detail.html"
-                                        class="btn job-browse-btn btn-radius br-light">Apply Now</a> </div>
-                            </div>
-                        </div>
-
-                        <!-- Single Job -->
-                        <div class="col-md-3 col-sm-6">
-                            <div class="utf_grid_job_widget_area"> <span class="job-type part-type">Part Time</span>
-                                <div class="utf_job_like">
-                                    <label class="toggler toggler-danger">
-                                        <input type="checkbox">
-                                        <i class="fa fa-heart"></i>
-                                    </label>
-                                </div>
-                                <div class="u-content">
-                                    <div class="avatar box-80"> <a href="employer-detail.html"> <img
-                                                class="img-responsive" src="{{ URL::asset('assets/img/company_logo_1.png') }}"
-                                                alt=""> </a> </div>
-                                    <h5><a href="employer-detail.html">Wordpress Developer</a></h5>
-                                    <p class="text-muted">2719 Duff Avenue, Winooski</p>
-                                </div>
-                                <div class="utf_apply_job_btn_item"> <a href="job-detail.html"
-                                        class="btn job-browse-btn btn-radius br-light">Apply Now</a> </div>
-                            </div>
-                        </div>
-
-                        <!-- Single Job -->
-                        <div class="col-md-3 col-sm-6">
-                            <div class="utf_grid_job_widget_area"> <span
-                                    class="job-type internship-type">Internship</span>
-                                <div class="utf_job_like">
-                                    <label class="toggler toggler-danger">
-                                        <input type="checkbox">
-                                        <i class="fa fa-heart"></i>
-                                    </label>
-                                </div>
-                                <div class="u-content">
-                                    <div class="avatar box-80"> <a href="employer-detail.html"> <img
-                                                class="img-responsive" src="{{ URL::asset('assets/img/company_logo_7.png') }}"
-                                                alt=""> </a> </div>
-                                    <h5><a href="employer-detail.html">Custom Php Developer</a></h5>
-                                    <p class="text-muted">2708 Scenic Way, IL 62373</p>
-                                </div>
-                                <div class="utf_apply_job_btn_item"> <a href="job-detail.html"
-                                        class="btn job-browse-btn btn-radius br-light">Apply Now</a> </div>
-                            </div>
-                        </div>
-
-                        <!-- Single Job -->
-                        <div class="col-md-3 col-sm-6">
-                            <div class="utf_grid_job_widget_area"> <span class="job-type part-type">Part Time</span>
-                                <div class="utf_job_like">
-                                    <label class="toggler toggler-danger">
-                                        <input type="checkbox">
-                                        <i class="fa fa-heart"></i>
-                                    </label>
-                                </div>
-                                <div class="u-content">
-                                    <div class="avatar box-80"> <a href="employer-detail.html"> <img
-                                                class="img-responsive" src="{{ URL::asset('assets/img/company_logo_8.png') }}"
-                                                alt=""> </a> </div>
-                                    <h5><a href="employer-detail.html">New Product Mockup</a></h5>
-                                    <p class="text-muted">2865 Emma Street, Lubbock</p>
-                                </div>
-                                <div class="utf_apply_job_btn_item"> <a href="job-detail.html"
-                                        class="btn job-browse-btn btn-radius br-light">Apply Now</a> </div>
-                            </div>
-                        </div>
-
-                        <!-- Single Job -->
-                        <div class="col-md-3 col-sm-6">
-                            <div class="utf_grid_job_widget_area"> <span class="job-type full-type">Full Time</span>
-                                <div class="utf_job_like">
-                                    <label class="toggler toggler-danger">
-                                        <input type="checkbox">
-                                        <i class="fa fa-heart"></i>
-                                    </label>
-                                </div>
-                                <div class="u-content">
-                                    <div class="avatar box-80"> <a href="employer-detail.html"> <img
-                                                class="img-responsive" src="{{ URL::asset('assets/img/company_logo_3.png') }}"
-                                                alt=""> </a> </div>
-                                    <h5><a href="employer-detail.html">Product Redesign</a></h5>
-                                    <p class="text-muted">2719 Burnside Avenue, Logan</p>
-                                </div>
-                                <div class="utf_apply_job_btn_item"> <a href="job-detail.html"
-                                        class="btn job-browse-btn btn-radius br-light">Apply Now</a> </div>
-                            </div>
-                        </div>
-
-                        <!-- Single Job -->
-                        <div class="col-md-3 col-sm-6">
-                            <div class="utf_grid_job_widget_area"> <span class="job-type part-type">Part Time</span>
-                                <div class="utf_job_like">
-                                    <label class="toggler toggler-danger">
-                                        <input type="checkbox">
-                                        <i class="fa fa-heart"></i>
-                                    </label>
-                                </div>
-                                <div class="u-content">
-                                    <div class="avatar box-80"> <a href="employer-detail.html"> <img
-                                                class="img-responsive" src="{{ URL::asset('assets/img/company_logo_6.png') }}"
-                                                alt=""> </a> </div>
-                                    <h5><a href="employer-detail.html">Front End Designer</a></h5>
-                                    <p class="text-muted">3815 Forest Drive, Alexandria</p>
-                                </div>
-                                <div class="utf_apply_job_btn_item"> <a href="job-detail.html"
-                                        class="btn job-browse-btn btn-radius br-light">Apply Now</a> </div>
-                            </div>
-                        </div>
+            <div class="row justify-content-center mb-2">
+                <div class="col-xl-4 col-lg-7 col-md-10 text-center">
+                    <div class="center mb-4">
+                        <h5 class="fw-medium lh-lg">Join over 2,000 companies around the world that trust the <span
+                                class="text-primary">Job Stock</span> platforms</h5>
                     </div>
                 </div>
             </div>
-            <div class="col-md-12 mrg-top-20 text-center">
-                <a href="job-layout-one.html" class="btn theme-btn btn-m">Browse All Jobs</a>
+
+            <div
+                class="row align-items-center justify-content-center row-cols-xl-5 row-cols-lg-5 row-cols-md-3 row-cols-3 gx-3 gy-3">
+                <div class="col">
+                    <figure class="single-brand thumb-figure">
+                        <img src="{{ URL::asset('assets/img/brand/layar-primary.svg') }}" class="img-fluid" alt="">
+                    </figure>
+                </div>
+
+                <div class="col">
+                    <figure class="single-brand thumb-figure">
+                        <img src="{{ URL::asset('assets/img/brand/mailchimp-primary.svg') }}" class="img-fluid" alt="">
+                    </figure>
+                </div>
+
+                <div class="col">
+                    <figure class="single-brand thumb-figure">
+                        <img src="{{ URL::asset('assets/img/brand/fitbit-primary.svg') }}" class="img-fluid" alt="">
+                    </figure>
+                </div>
+
+                <div class="col">
+                    <figure class="single-brand thumb-figure">
+                        <img src="{{ URL::asset('assets/img/brand/capsule-primary.svg') }}" class="img-fluid" alt="">
+                    </figure>
+                </div>
+
+                <div class="col">
+                    <figure class="single-brand thumb-figure">
+                        <img src="{{ URL::asset('assets/img/brand/vidados-primary.svg') }}" class="img-fluid" alt="">
+                    </figure>
+                </div>
+
             </div>
+
         </div>
     </section>
+    <div class="clearfix"></div>
+    <!-- ============================ Our Partners End ================================== -->
 
-    <!-- ================= Category start ========================= -->
-    <section class="utf_job_category_area">
+    <!-- ============================ Featured Jobs Start ================================== -->
+    <section class="pt-2">
         <div class="container">
-            <div class="row">
-                <div class="col-md-8 col-md-offset-2">
-                    <div class="heading">
-                        <h2>Job Categories</h2>
-                        <p>Lorem Ipsum is simply dummy text printing and type setting industry Lorem Ipsum been industry
-                            standard dummy text ever since when unknown printer took a galley.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="col-md-3 col-sm-6">
-                        <a href="browse-job.html" title="">
-                            <div class="utf_category_box_area">
-                                <div class="utf_category_desc">
-                                    <div class="utf_category_icon"> <i class="icon-bargraph" aria-hidden="true"></i>
-                                    </div>
-                                    <div class="category-detail utf_category_desc_text">
-                                        <h4>Web & Software Dev</h4>
-                                        <p>122 Jobs</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <a href="browse-job.html" title="">
-                            <div class="utf_category_box_area">
-                                <div class="utf_category_desc">
-                                    <div class="utf_category_icon"> <i class="icon-tools" aria-hidden="true"></i> </div>
-                                    <div class="category-detail utf_category_desc_text">
-                                        <h4>Data Science & Analitycs</h4>
-                                        <p>155 Jobs</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <a href="browse-job.html" title="">
-                            <div class="utf_category_box_area">
-                                <div class="utf_category_desc">
-                                    <div class="utf_category_icon"> <i class="ti-briefcase" aria-hidden="true"></i>
-                                    </div>
-                                    <div class="category-detail utf_category_desc_text">
-                                        <h4>Accounting & Consulting</h4>
-                                        <p>300 Jobs</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <a href="browse-job.html" title="">
-                            <div class="utf_category_box_area">
-                                <div class="utf_category_desc">
-                                    <div class="utf_category_icon"> <i class="ti-ruler-pencil" aria-hidden="true"></i>
-                                    </div>
-                                    <div class="category-detail utf_category_desc_text">
-                                        <h4>Writing & Translations</h4>
-                                        <p>80 Jobs</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <a href="browse-job.html" title="">
-                            <div class="utf_category_box_area">
-                                <div class="utf_category_desc">
-                                    <div class="utf_category_icon"> <i class="icon-briefcase" aria-hidden="true"></i>
-                                    </div>
-                                    <div class="category-detail utf_category_desc_text">
-                                        <h4>Sales & Marketing</h4>
-                                        <p>120 Jobs</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <a href="browse-job.html" title="">
-                            <div class="utf_category_box_area">
-                                <div class="utf_category_desc">
-                                    <div class="utf_category_icon"> <i class="icon-wine" aria-hidden="true"></i> </div>
-                                    <div class="category-detail utf_category_desc_text">
-                                        <h4>Graphics & Design</h4>
-                                        <p>78 Jobs</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <a href="browse-job.html" title="">
-                            <div class="utf_category_box_area">
-                                <div class="utf_category_desc">
-                                    <div class="utf_category_icon"> <i class="ti-world" aria-hidden="true"></i> </div>
-                                    <div class="category-detail utf_category_desc_text">
-                                        <h4>Digital Marketing</h4>
-                                        <p>90 Jobs</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <a href="browse-job.html" title="">
-                            <div class="utf_category_box_area">
-                                <div class="utf_category_desc">
-                                    <div class="utf_category_icon"> <i class="ti-desktop" aria-hidden="true"></i> </div>
-                                    <div class="category-detail utf_category_desc_text">
-                                        <h4>Education & Training</h4>
-                                        <p>210 Jobs</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-md-12 mrg-top-20 text-center">
-                        <a href="browse-category.html" class="btn theme-btn btn-m">View All Categories</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <section class="newsletter theme-bg" style="background-image:url(assets/img/bg-new.png)">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8 col-md-offset-2">
-                    <div class="heading light">
-                        <h2>Subscribe Our Newsletter!</h2>
-                        <p>Lorem Ipsum is simply dummy text printing and type setting industry Lorem Ipsum been industry
-                            standard dummy text ever since when unknown printer took a galley.</p>
+            <div class="row justify-content-center">
+                <div class="col-xl-6 col-lg-7 col-md-10 text-center">
+                    <div class="sec-heading center">
+                        <h2>Featured Jobs</h2>
+                        <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium
+                            voluptatum deleniti atque corrupti quos dolores</p>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-md-6 col-sm-6 col-md-offset-3 col-sm-offset-3">
-                    <div class="newsletter-box text-center">
-                        <div class="input-group"> <span class="input-group-addon"><span
-                                    class="ti-email theme-cl"></span></span>
-                            <input type="text" class="form-control" placeholder="Enter your Email...">
+
+            <div class="row justify-content-center gx-xl-3 gx-3 gy-4">
+
+                <!-- Single Item -->
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                    <div class="job-instructor-layout border">
+                        <div class="left-tags-capt">
+                            <span class="featured-text">Featured</span>
+                            <span class="urgent">Urgent</span>
                         </div>
-                        <button type="button" class="btn theme-btn btn-radius btn-m">Subscribe</button>
+                        <div class="brows-job-type"><span class="enternship">Enternship</span></div>
+                        <div class="job-instructor-thumb">
+                            <a href="job-detail.html"><img src="{{ URL::asset('assets/img/l-1.png') }}" class="img-fluid" alt=""></a>
+                        </div>
+                        <div class="job-instructor-content">
+                            <h4 class="instructor-title"><a href="job-detail.html">Jr. PHP Developer</a></h4>
+                            <div class="instructor-skills">
+                                CSS3, HTML5, Javascript, Bootstrap, Jquery
+                            </div>
+                        </div>
+                        <div class="job-instructor-footer">
+                            <div class="instructor-students">
+                                <h5 class="instructor-scount">$5K - $8K</h5>
+                            </div>
+                            <div class="instructor-corses">
+                                <span class="c-counting">6 Open</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Single Item -->
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                    <div class="job-instructor-layout border">
+                        <div class="left-tags-capt">
+                            <span class="urgent">Urgent</span>
+                        </div>
+                        <div class="brows-job-type"><span class="freelanc">Freelancer</span></div>
+                        <div class="job-instructor-thumb">
+                            <a href="job-detail.html"><img src="{{ URL::asset('assets/img/l-2.png') }}" class="img-fluid" alt=""></a>
+                        </div>
+                        <div class="job-instructor-content">
+                            <h4 class="instructor-title"><a href="job-detail.html">Exp. Project manager</a></h4>
+                            <div class="instructor-skills">
+                                CSS3, HTML5, Javascript, Bootstrap, Jquery
+                            </div>
+                        </div>
+                        <div class="job-instructor-footer">
+                            <div class="instructor-students">
+                                <h5 class="instructor-scount">$6K - $10K</h5>
+                            </div>
+                            <div class="instructor-corses">
+                                <span class="c-counting">4 Open</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Single Item -->
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                    <div class="job-instructor-layout border">
+                        <div class="left-tags-capt">
+                            <span class="featured-text">Featured</span>
+                            <span class="urgent">Urgent</span>
+                        </div>
+                        <div class="brows-job-type"><span class="part-time">Part Time</span></div>
+                        <div class="job-instructor-thumb">
+                            <a href="job-detail.html"><img src="{{ URL::asset('assets/img/l-3.png') }}" class="img-fluid" alt=""></a>
+                        </div>
+                        <div class="job-instructor-content">
+                            <h4 class="instructor-title"><a href="job-detail.html">Sr. WordPress Developer</a></h4>
+                            <div class="instructor-skills">
+                                CSS3, HTML5, Javascript, Bootstrap, Jquery
+                            </div>
+                        </div>
+                        <div class="job-instructor-footer">
+                            <div class="instructor-students">
+                                <h5 class="instructor-scount">$5K - $8K</h5>
+                            </div>
+                            <div class="instructor-corses">
+                                <span class="c-counting">3 Open</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Single Item -->
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                    <div class="job-instructor-layout border">
+                        <div class="left-tags-capt">
+                            <span class="featured-text">Featured</span>
+                        </div>
+                        <div class="brows-job-type"><span class="full-time">Full Time</span></div>
+                        <div class="job-instructor-thumb">
+                            <a href="job-detail.html"><img src="{{ URL::asset('assets/img/l-4.png') }}" class="img-fluid" alt=""></a>
+                        </div>
+                        <div class="job-instructor-content">
+                            <h4 class="instructor-title"><a href="job-detail.html">Jr. Laravel Developer</a></h4>
+                            <div class="instructor-skills">
+                                CSS3, HTML5, Javascript, Bootstrap, Jquery
+                            </div>
+                        </div>
+                        <div class="job-instructor-footer">
+                            <div class="instructor-students">
+                                <h5 class="instructor-scount">$4.2K - $6K</h5>
+                            </div>
+                            <div class="instructor-corses">
+                                <span class="c-counting">2 Open</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Single Item -->
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                    <div class="job-instructor-layout border">
+                        <div class="left-tags-capt">
+                            <span class="urgent">Urgent</span>
+                        </div>
+                        <div class="brows-job-type"><span class="freelanc">Freelancer</span></div>
+                        <div class="job-instructor-thumb">
+                            <a href="job-detail.html"><img src="{{ URL::asset('assets/img/l-5.png') }}" class="img-fluid" alt=""></a>
+                        </div>
+                        <div class="job-instructor-content">
+                            <h4 class="instructor-title"><a href="job-detail.html">Sr. UI/UX Designer</a></h4>
+                            <div class="instructor-skills">
+                                CSS3, HTML5, Javascript, Bootstrap, Jquery
+                            </div>
+                        </div>
+                        <div class="job-instructor-footer">
+                            <div class="instructor-students">
+                                <h5 class="instructor-scount">$4K - $5.5K</h5>
+                            </div>
+                            <div class="instructor-corses">
+                                <span class="c-counting">5 Open</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Single Item -->
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                    <div class="job-instructor-layout border">
+                        <div class="left-tags-capt">
+                            <span class="featured-text">Featured</span>
+                            <span class="urgent">Urgent</span>
+                        </div>
+                        <div class="brows-job-type"><span class="part-time">Part Time</span></div>
+                        <div class="job-instructor-thumb">
+                            <a href="job-detail.html"><img src="{{ URL::asset('assets/img/l-6.png') }}" class="img-fluid" alt=""></a>
+                        </div>
+                        <div class="job-instructor-content">
+                            <h4 class="instructor-title"><a href="job-detail.html">Java & Python Developer</a></h4>
+                            <div class="instructor-skills">
+                                CSS3, HTML5, Javascript, Bootstrap, Jquery
+                            </div>
+                        </div>
+                        <div class="job-instructor-footer">
+                            <div class="instructor-students">
+                                <h5 class="instructor-scount">$2K - $4K</h5>
+                            </div>
+                            <div class="instructor-corses">
+                                <span class="c-counting">4 Open</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Single Item -->
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                    <div class="job-instructor-layout border">
+                        <div class="left-tags-capt">
+                            <span class="urgent">Urgent</span>
+                        </div>
+                        <div class="brows-job-type"><span class="full-time">FullTime</span></div>
+                        <div class="job-instructor-thumb">
+                            <a href="job-detail.html"><img src="{{ URL::asset('assets/img/l-7.png') }}" class="img-fluid" alt=""></a>
+                        </div>
+                        <div class="job-instructor-content">
+                            <h4 class="instructor-title"><a href="job-detail.html">Sr. Code Ignetor Developer</a>
+                            </h4>
+                            <div class="instructor-skills">
+                                CSS3, HTML5, Javascript, Bootstrap, Jquery
+                            </div>
+                        </div>
+                        <div class="job-instructor-footer">
+                            <div class="instructor-students">
+                                <h5 class="instructor-scount">$5K - $6K</h5>
+                            </div>
+                            <div class="instructor-corses">
+                                <span class="c-counting">3 Open</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Single Item -->
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
+                    <div class="job-instructor-layout border">
+                        <div class="left-tags-capt">
+                            <span class="featured-text">Featured</span>
+                        </div>
+                        <div class="brows-job-type"><span class="enternship">Enternship</span></div>
+                        <div class="job-instructor-thumb">
+                            <a href="job-detail.html"><img src="{{ URL::asset('assets/img/l-8.png') }}" class="img-fluid" alt=""></a>
+                        </div>
+                        <div class="job-instructor-content">
+                            <h4 class="instructor-title"><a href="job-detail.html">Sr. Magento Developer</a></h4>
+                            <div class="instructor-skills">
+                                CSS3, HTML5, Javascript, Bootstrap, Jquery
+                            </div>
+                        </div>
+                        <div class="job-instructor-footer">
+                            <div class="instructor-students">
+                                <h5 class="instructor-scount">$3.2K - $5K</h5>
+                            </div>
+                            <div class="instructor-corses">
+                                <span class="c-counting">5 Open</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+    <!-- ============================ Featured Jobs End ================================== -->
+
+    <!-- ============================ Top Job Categories Start ================================== -->
+    <section class="gray-simple">
+        <div class="container">
+
+            <div class="row justify-content-center">
+                <div class="col-xl-6 col-lg-7 col-md-10 text-center">
+                    <div class="sec-heading center">
+                        <h2>Explore Top Categories</h2>
+                        <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium
+                            voluptatum deleniti atque corrupti quos dolores</p>
                     </div>
                 </div>
             </div>
+
+            <div class="row justify-content-center gx-4 gy-4">
+
+                <!-- Single Item -->
+                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
+                    <div class="category-box">
+                        <div class="category-desc">
+                            <div class="category-icon">
+                                <i class="fa-solid fa-file-invoice text-primary"></i>
+                                <i class="fa-solid fa-file-invoice abs-icon"></i>
+                            </div>
+                            <div class="category-detail category-desc-text">
+                                <h4 class="fs-5"><a href="browse-jobs-grid.html">Accounting & Finance</a></h4>
+                                <p class="block">122 Active Jobs</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Single Item -->
+                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
+                    <div class="category-box">
+                        <div class="category-desc">
+                            <div class="category-icon">
+                                <i class="fa-solid fa-caravan text-primary"></i>
+                                <i class="fa-solid fa-caravan abs-icon"></i>
+                            </div>
+                            <div class="category-detail category-desc-text">
+                                <h4 class="fs-5"><a href="browse-jobs-grid.html">Automotive Jobs</a></h4>
+                                <p class="block">78 Active Jobs</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Single Item -->
+                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
+                    <div class="category-box">
+                        <div class="category-desc">
+                            <div class="category-icon">
+                                <i class="fa-solid fa-person-chalkboard text-primary"></i>
+                                <i class="fa-solid fa-person-chalkboard abs-icon"></i>
+                            </div>
+                            <div class="category-detail category-desc-text">
+                                <h4 class="fs-5"><a href="browse-jobs-grid.html">Business & Tech</a></h4>
+                                <p class="block">25 Active Jobs</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Single Item -->
+                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
+                    <div class="category-box">
+                        <div class="category-desc">
+                            <div class="category-icon">
+                                <i class="fa-solid fa-user-graduate text-primary"></i>
+                                <i class="fa-solid fa-user-graduate abs-icon"></i>
+                            </div>
+                            <div class="category-detail category-desc-text">
+                                <h4 class="fs-5"><a href="browse-jobs-grid.html">Education Training</a></h4>
+                                <p class="block">212 Active Jobs</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Single Item -->
+                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
+                    <div class="category-box">
+                        <div class="category-desc">
+                            <div class="category-icon">
+                                <i class="fa-solid fa-briefcase-medical text-primary"></i>
+                                <i class="fa-solid fa-briefcase-medical abs-icon"></i>
+                            </div>
+                            <div class="category-detail category-desc-text">
+                                <h4 class="fs-5"><a href="browse-jobs-grid.html">Healthcare</a></h4>
+                                <p class="block">90 Active Jobs</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Single Item -->
+                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
+                    <div class="category-box">
+                        <div class="category-desc">
+                            <div class="category-icon">
+                                <i class="fa-solid fa-burger text-primary"></i>
+                                <i class="fa-solid fa-burger abs-icon"></i>
+                            </div>
+                            <div class="category-detail category-desc-text">
+                                <h4 class="fs-5"><a href="browse-jobs-grid.html">Restaurant & Food</a></h4>
+                                <p class="block">65 Active Jobs</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Single Item -->
+                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
+                    <div class="category-box">
+                        <div class="category-desc">
+                            <div class="category-icon">
+                                <i class="fa-solid fa-jet-fighter text-primary"></i>
+                                <i class="fa-solid fa-jet-fighter abs-icon"></i>
+                            </div>
+                            <div class="category-detail category-desc-text">
+                                <h4 class="fs-5"><a href="browse-jobs-grid.html">Transportation</a></h4>
+                                <p class="block">160 Active Jobs</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Single Item -->
+                <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6">
+                    <div class="category-box">
+                        <div class="category-desc">
+                            <div class="category-icon">
+                                <i class="fa-solid fa-mobile-screen-button text-primary"></i>
+                                <i class="fa-solid fa-mobile-screen-button abs-icon"></i>
+                            </div>
+                            <div class="category-detail category-desc-text">
+                                <h4 class="fs-5"><a href="browse-jobs-grid.html">Telecommunications</a></h4>
+                                <p class="block">80 Active Jobs</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
         </div>
     </section>
+    <!-- ============================ Top Job Categories End ================================== -->
+
+    <!-- ============================ Top Features & Process Start ================================== -->
+    <section>
+        <div class="container">
+
+            <div class="row justify-content-center">
+                <div class="col-xl-6 col-lg-7 col-md-10">
+                    <div class="sec-heading center">
+                        <h2>Features & Process</h2>
+                        <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium
+                            voluptatum deleniti atque corrupti quos dolores</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row justify-content-center gx-xl-4 gx-lg-4">
+
+                <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12 order-xl-1 order-lg-1 order-md-1">
+                    <div class="work-process mb-5">
+                        <div class="work-process-icon"><span><i
+                                    class="fa-solid fa-file-shield text-primary"></i></span></div>
+                        <div class="work-process-caption">
+                            <h4>Search Job</h4>
+                            <p>Aliquam vestibulum cursus felis. In iaculis iaculis sapien ac condimentum. Vestibulum
+                                congue posuere lacus</p>
+                        </div>
+                    </div>
+
+                    <div class="work-process mb-5">
+                        <div class="work-process-icon"><span><i class="fa-solid fa-paste text-primary"></i></span>
+                        </div>
+                        <div class="work-process-caption">
+                            <h4>FIND JOB</h4>
+                            <p>Aliquam vestibulum cursus felis. In iaculis iaculis sapien ac condimentum. Vestibulum
+                                congue posuere lacus</p>
+                        </div>
+                    </div>
+
+                    <div class="work-process mb-5">
+                        <div class="work-process-icon"><span><i class="fa-solid fa-unlock text-primary"></i></span>
+                        </div>
+                        <div class="work-process-caption">
+                            <h4>Create Account</h4>
+                            <p>Aliquam vestibulum cursus felis. In iaculis iaculis sapien ac condimentum. Vestibulum
+                                congue posuere lacus</p>
+                        </div>
+                    </div>
+
+                    <div class="work-process">
+                        <div class="work-process-icon"><span><i
+                                    class="fa-solid fa-user-clock text-primary"></i></span></div>
+                        <div class="work-process-caption">
+                            <h4>HIRE EMPLOYEE</h4>
+                            <p>Aliquam vestibulum cursus felis. In iaculis iaculis sapien ac condimentum. Vestibulum
+                                congue posuere lacus</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12 order-xl-2 order-lg-3 order-md-3">
+                    <div class="eslio-pincc m-auto">
+                        <img src="{{ URL::asset('assets/img/wp-iphone.png') }}" class="img-fluid" alt="">
+                    </div>
+                </div>
+
+                <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12 order-xl-3 order-lg-2 order-md-2">
+                    <div class="work-process mb-5">
+                        <div class="work-process-icon"><span><i
+                                    class="fa-solid fa-laptop-file text-primary"></i></span></div>
+                        <div class="work-process-caption">
+                            <h4>START WORK</h4>
+                            <p>Aliquam vestibulum cursus felis. In iaculis iaculis sapien ac condimentum. Vestibulum
+                                congue posuere lacus</p>
+                        </div>
+                    </div>
+
+                    <div class="work-process mb-5">
+                        <div class="work-process-icon"><span><i
+                                    class="fa-solid fa-business-time text-primary"></i></span></div>
+                        <div class="work-process-caption">
+                            <h4>Submit Bid</h4>
+                            <p>Aliquam vestibulum cursus felis. In iaculis iaculis sapien ac condimentum. Vestibulum
+                                congue posuere lacus</p>
+                        </div>
+                    </div>
+
+                    <div class="work-process mb-5">
+                        <div class="work-process-icon"><span><i
+                                    class="fa-solid fa-sack-dollar text-primary"></i></span></div>
+                        <div class="work-process-caption">
+                            <h4>PAY MONEY</h4>
+                            <p>Aliquam vestibulum cursus felis. In iaculis iaculis sapien ac condimentum. Vestibulum
+                                congue posuere lacus</p>
+                        </div>
+                    </div>
+
+                    <div class="work-process">
+                        <div class="work-process-icon"><span><i
+                                    class="fa-regular fa-face-laugh-wink text-primary"></i></span></div>
+                        <div class="work-process-caption">
+                            <h4>HAPPY USER</h4>
+                            <p>Aliquam vestibulum cursus felis. In iaculis iaculis sapien ac condimentum. Vestibulum
+                                congue posuere lacus</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+    <!-- ============================ Top Features & Process End ================================== -->
+
+    <!-- ============================ Video Help Start ================================== -->
+    <section class="bg-cover" style="background:#17ac6a url(assets/img/video-bg.jpg)no-repeat;" data-overlay="4">
+        <div class="ht-200"></div>
+        <div class="container">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-xl-12 col-lg-12">
+
+                    <div class="overlio-vedio-box">
+                        <a href="#" class="play-video-btn text-primary"><i class="fa-solid fa-play"></i></a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="ht-200"></div>
+    </section>
+    <!-- ============================ Video Help End ================================== -->
+
+    <!-- ============================ Good Reviews By Customers ================================== -->
+    <section>
+        <div class="container">
+
+            <div class="row justify-content-center">
+                <div class="col-lg-7 col-md-10 text-center">
+                    <div class="sec-heading center">
+                        <h2>Good Reviews By Customers</h2>
+                        <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium
+                            voluptatum deleniti atque corrupti quos dolores</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row justify-content-center gx-4 gy-4">
+
+                <!-- Single Review -->
+                <div class="col-xl-4 col-lg-4 col-md-6">
+                    <div class="jobstock-reviews-box">
+                        <div class="jobstock-reviews-desc">
+                            <h6 class="review-title-yui">"The best useful website"</h6>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                incididunt ut labore et dolore magna aliqua. Ut enim ad minim.</p>
+                        </div>
+                        <div class="jobstock-reviews-flex">
+                            <div class="jobstock-reviews-thumb">
+                                <div class="jobstock-reviews-figure"><img src="{{ URL::asset('assets/img/team-1.jpg') }}"
+                                        class="img-fluid circle" alt=""></div>
+                            </div>
+                            <div class="jobstock-reviews-caption">
+                                <div class="jobstock-reviews-title">
+                                    <h4>Lucia E. Nugent</h4>
+                                </div>
+                                <div class="jobstock-reviews-designation"><span>CEO of Climber</span></div>
+                                <div class="jobstock-reviews-rates">
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star deactive"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Single Review -->
+                <div class="col-xl-4 col-lg-4 col-md-6">
+                    <div class="jobstock-reviews-box">
+                        <div class="jobstock-reviews-desc">
+                            <h6 class="review-title-yui">"Ranking is the #1"</h6>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                incididunt ut labore et dolore magna aliqua. Ut enim ad minim.</p>
+                        </div>
+                        <div class="jobstock-reviews-flex">
+                            <div class="jobstock-reviews-thumb">
+                                <div class="jobstock-reviews-figure"><img src="{{ URL::asset('assets/img/team-2.jpg') }}"
+                                        class="img-fluid circle" alt=""></div>
+                            </div>
+                            <div class="jobstock-reviews-caption">
+                                <div class="jobstock-reviews-title">
+                                    <h4>Brenda R. Smith</h4>
+                                </div>
+                                <div class="jobstock-reviews-designation"><span>Founder of Yeloower</span></div>
+                                <div class="jobstock-reviews-rates">
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Single Review -->
+                <div class="col-xl-4 col-lg-4 col-md-6">
+                    <div class="jobstock-reviews-box">
+                        <div class="jobstock-reviews-desc">
+                            <h6 class="review-title-yui">"The website is eco friendly"</h6>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                incididunt ut labore et dolore magna aliqua. Ut enim ad minim.</p>
+                        </div>
+                        <div class="jobstock-reviews-flex">
+                            <div class="jobstock-reviews-thumb">
+                                <div class="jobstock-reviews-figure"><img src="{{ URL::asset('assets/img/team-3.jpg') }}"
+                                        class="img-fluid circle" alt=""></div>
+                            </div>
+                            <div class="jobstock-reviews-caption">
+                                <div class="jobstock-reviews-title">
+                                    <h4>Brian B. Wilkerson</h4>
+                                </div>
+                                <div class="jobstock-reviews-designation"><span>CEO of Mark Soft</span></div>
+                                <div class="jobstock-reviews-rates">
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Single Review -->
+                <div class="col-xl-4 col-lg-4 col-md-6">
+                    <div class="jobstock-reviews-box">
+                        <div class="jobstock-reviews-desc">
+                            <h6 class="review-title-yui">"100% save and secure website"</h6>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                incididunt ut labore et dolore magna aliqua. Ut enim ad minim.</p>
+                        </div>
+                        <div class="jobstock-reviews-flex">
+                            <div class="jobstock-reviews-thumb">
+                                <div class="jobstock-reviews-figure"><img src="{{ URL::asset('assets/img/team-4.jpg') }}"
+                                        class="img-fluid circle" alt=""></div>
+                            </div>
+                            <div class="jobstock-reviews-caption">
+                                <div class="jobstock-reviews-title">
+                                    <h4>Miguel L. Benbow</h4>
+                                </div>
+                                <div class="jobstock-reviews-designation"><span>Founder of Mitche LTD</span></div>
+                                <div class="jobstock-reviews-rates">
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star deactive"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Single Review -->
+                <div class="col-xl-4 col-lg-4 col-md-6">
+                    <div class="jobstock-reviews-box">
+                        <div class="jobstock-reviews-desc">
+                            <h6 class="review-title-yui">"Very developer friendly website"</h6>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                incididunt ut labore et dolore magna aliqua. Ut enim ad minim.</p>
+                        </div>
+                        <div class="jobstock-reviews-flex">
+                            <div class="jobstock-reviews-thumb">
+                                <div class="jobstock-reviews-figure"><img src="{{ URL::asset('assets/img/team-5.jpg') }}"
+                                        class="img-fluid circle" alt=""></div>
+                            </div>
+                            <div class="jobstock-reviews-caption">
+                                <div class="jobstock-reviews-title">
+                                    <h4>Hilda A. Sheppard</h4>
+                                </div>
+                                <div class="jobstock-reviews-designation"><span>CEO of Doodle</span></div>
+                                <div class="jobstock-reviews-rates">
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                    <i class="fa-solid fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+    <!-- ============================ Good Reviews By Customers ================================== -->
 @endsection

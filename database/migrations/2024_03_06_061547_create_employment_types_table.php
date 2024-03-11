@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('employment_types', function (Blueprint $table) {
             $table->id();
             $table->string('employment_type');
+            $table->string('slug')->unique()->nullable();
+            $table->tinyText('remarks')->nullable();
             $table->timestamps();
         });
     }

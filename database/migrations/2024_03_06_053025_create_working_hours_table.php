@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('hour_range')->unique();
             $table->integer('status')->default(0);
+            $table->string('slug')->unique()->nullable();
+            $table->tinyText('remarks')->nullable();
             $table->timestamps();
         });
     }

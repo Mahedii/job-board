@@ -16,7 +16,8 @@ return new class extends Migration
             $table->string('jobseeker_name');
             $table->string('jobseeker_mail');
             $table->string('jobseeker_password');
-            $table->integer('jobseeker_gender');
+            $table->unsignedBigInteger('jobseeker_gender_id')->nullable();
+            $table->foreign('jobseeker_gender_id')->references('id')->on('genders')->onDelete('set null');
             $table->text('jobseeker_address');
             $table->string('jobseeker_image');
             $table->string('jobseeker_custom_resume');

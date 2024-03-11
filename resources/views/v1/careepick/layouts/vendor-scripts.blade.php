@@ -1,14 +1,16 @@
-<!-- Jquery js-->
+<!-- ============================================================== -->
+<!-- All Jquery -->
+<!-- ============================================================== -->
 <script src="{{ URL::asset('assets/js/jquery.min.js') }}"></script>
-<script src="{{ URL::asset('assets/plugins/bootstrap/js/bootstrap.min.js') }}"></script>
-<script src="{{ URL::asset('assets/plugins/bootstrap/js/bootsnav.js') }}"></script>
-<script src="{{ URL::asset('assets/js/viewportchecker.js') }}"></script>
+<script src="{{ URL::asset('assets/js/popper.min.js') }}"></script>
+<script src="{{ URL::asset('assets/js/bootstrap.min.js') }}"></script>
+<script src="{{ URL::asset('assets/js/rangeslider.js') }}"></script>
+<script src="{{ URL::asset('assets/js/jquery.nice-select.min.js') }}"></script>
 <script src="{{ URL::asset('assets/js/slick.js') }}"></script>
-<script src="{{ URL::asset('assets/plugins/bootstrap/js/wysihtml5-0.3.0.js') }}"></script>
-<script src="{{ URL::asset('assets/plugins/bootstrap/js/bootstrap-wysihtml5.js') }}"></script>
-<script src="{{ URL::asset('assets/plugins/aos-master/aos.js') }}"></script>
-<script src="{{ URL::asset('assets/plugins/nice-select/js/jquery.nice-select.min.js') }}"></script>
+<script src="{{ URL::asset('assets/js/counterup.min.js') }}"></script>
+
 <script src="{{ URL::asset('assets/js/custom.js') }}"></script>
+<script src="assets/js/cl-switch.js') }}"></script>
 <script>
 	$(window).load(function() {
 	  $(".page_preloader").fadeOut("slow");;

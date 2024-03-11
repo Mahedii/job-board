@@ -1,4 +1,4 @@
-INSERT INTO days (day_number, day_name)
+INSERT INTO days (`day_number`, `day_name`)
 VALUES
 (1, 'Sunday'),
 (2, 'Monday'),

@@ -15,6 +15,10 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('job_seeker_id');
             $table->foreign('job_seeker_id')->references('id')->on('job_seekers')->onDelete('cascade');
+            $table->string('certification_name');
+            $table->string('certification_institution');
+            $table->string('certified_month');
+            $table->string('certified_year');
             $table->string('slug')->unique()->nullable();
             $table->text('remarks')->nullable();
             $table->timestamps();
