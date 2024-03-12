@@ -24,6 +24,21 @@ Route::get('/signout', [AuthController::class, 'signOut'])->name('logout');
 Route::get('/auth', [AuthController::class, 'loginPage'])->name('loginPage');
 Route::get('/dashboard', [AuthController::class, 'dashboard'])->middleware(['auth'])->name('dashboard');
 
+Route::controller(AuthController::class)->group(function () {
+    Route::prefix('job-seeker')->group(function () {
+        Route::get('/registration-page', 'jsRegistrationPage')->name('js-registration-page');
+        Route::post('/post-registration', 'jsPostRegistration')->name('js-register.post');
+        Route::get('/account/verify/{token}', 'jsVerifyAccount')->name('js-user.verify');
+
+        Route::group(['middleware' => ['auth', 'is_verify_email']], function () {
+            Route::get('dashboard', 'dashboard')->name('dashboard');
+        });
+    });
+    Route::prefix('job-provider')->group(function () {
+        Route::get('/registration-page', 'jpRegistrationPage')->name('jp-registration-page');
+    });
+});
+
 Route::get('/register-company', [EmployerController::class, 'createCompany'])->name('register-company');
 
 Route::controller(SocialLoginController::class)->group(function () {

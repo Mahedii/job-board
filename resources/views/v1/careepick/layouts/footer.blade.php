@@ -306,10 +306,10 @@
                             <div class="vesh-detail-bloc-body pt-3">
                                 <ul class="nav nav-pills mb-3 justify-content-center" id="pills-tab" role="tablist">
                                     <li class="nav-item">
-                                        <a class="nav-link active" href="#" id="job-seeker-signup-tab" data-bs-toggle="pill" data-bs-target="#jobseekersignup" type="button" role="tab" aria-controls="jobseekersignup" aria-selected="true">Job Seeker</a>
+                                        <a class="nav-link active" href="{{ route('js-registration-page') }}" >Job Seeker</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="#" id="job-provider-signup-tab" data-bs-toggle="pill" data-bs-target="#jobprovidersignup" type="button" role="tab" aria-controls="jobprovidersignup" aria-selected="false" tabindex="-1">Job Provider</a>
+                                        <a class="nav-link" href="{{ route('jp-registration-page') }}" >Job Provider</a>
                                     </li>
                                 </ul>
                                 {{-- <div class="tab-content" id="pills-tabContent">
