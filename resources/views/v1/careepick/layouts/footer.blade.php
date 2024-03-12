@@ -36,7 +36,7 @@
 
                 <div class="col-lg-3 col-md-4">
                     <div class="footer-widget">
-                        <img src="assets/img/logo-light.png" class="img-footer" alt="">
+                        <img src="{{ URL::asset('assets/img/logo-light.png') }}" class="img-footer" alt="">
                         <div class="footer-add">
                             <p>Collins Street West, Victoria Near Bank Road<br>Australia QHR12456.</p>
                         </div>
@@ -97,9 +97,9 @@
                     <div class="footer-widget">
                         <h4 class="widget-title">Download Apps</h4>
                         <div class="app-wrap">
-                            <p><a href="JavaScript:Void(0);"><img src="assets/img/google-app.png" class="img-fluid"
+                            <p><a href="JavaScript:Void(0);"><img src="{{ URL::asset('assets/img/google-app.png') }}" class="img-fluid"
                                         alt=""></a></p>
-                            <p><a href="JavaScript:Void(0);"><img src="assets/img/ios-app.png" class="img-fluid"
+                            <p><a href="JavaScript:Void(0);"><img src="{{ URL::asset('assets/img/ios-app.png') }}" class="img-fluid"
                                         alt=""></a></p>
                         </div>
                     </div>
@@ -171,7 +171,7 @@
         <div class="modal-content" id="loginmodal">
             <span class="mod-close" data-bs-dismiss="modal" aria-hidden="true"><i class="fas fa-close"></i></span>
             <div class="modal-header">
-                <div class="mdl-thumb"><img src="assets/img/ico.png" class="img-fluid" width="70"
+                <div class="mdl-thumb"><img src="{{ URL::asset('assets/img/ico.png') }}" class="img-fluid" width="70"
                         alt=""></div>
                 {{-- <div class="mdl-title">
                     <h4 class="modal-header-title">Hello, Again</h4>
@@ -292,10 +292,10 @@
         <div class="modal-content" id="registermodal">
             <span class="mod-close" data-bs-dismiss="modal" aria-hidden="true"><i class="fas fa-close"></i></span>
             <div class="modal-header">
-                <div class="mdl-thumb"><img src="assets/img/ico.png" class="img-fluid" width="70"
+                <div class="mdl-thumb"><img src="{{ URL::asset('assets/img/ico.png') }}" class="img-fluid" width="70"
                         alt=""></div>
                 <div class="">
-                    <h4 class="modal-header-title">Hello, Again</h4>
+                    <h4 class="modal-header-title">Create an account</h4>
                 </div>
             </div>
             <div class="modal-body">
@@ -306,13 +306,13 @@
                             <div class="vesh-detail-bloc-body pt-3">
                                 <ul class="nav nav-pills mb-3 justify-content-center" id="pills-tab" role="tablist">
                                     <li class="nav-item">
-                                        <button class="nav-link active" id="job-seeker-signup-tab" data-bs-toggle="pill" data-bs-target="#jobseekersignup" type="button" role="tab" aria-controls="jobseekersignup" aria-selected="true">Job Seeker</button>
+                                        <a class="nav-link active" href="#" id="job-seeker-signup-tab" data-bs-toggle="pill" data-bs-target="#jobseekersignup" type="button" role="tab" aria-controls="jobseekersignup" aria-selected="true">Job Seeker</a>
                                     </li>
                                     <li class="nav-item">
-                                        <button class="nav-link" id="job-provider-signup-tab" data-bs-toggle="pill" data-bs-target="#jobprovidersignup" type="button" role="tab" aria-controls="jobprovidersignup" aria-selected="false" tabindex="-1">Job Provider</button>
+                                        <a class="nav-link" href="#" id="job-provider-signup-tab" data-bs-toggle="pill" data-bs-target="#jobprovidersignup" type="button" role="tab" aria-controls="jobprovidersignup" aria-selected="false" tabindex="-1">Job Provider</a>
                                     </li>
                                 </ul>
-                                <div class="tab-content" id="pills-tabContent">
+                                {{-- <div class="tab-content" id="pills-tabContent">
                                     <div class="tab-pane fade show active" id="jobseekersignup" role="tabpanel" aria-labelledby="job-seeker-signup-tab" tabindex="0">
                                         <div class="row gx-3 gy-4">
                                             <div class="modal-login-form">
@@ -320,6 +320,16 @@
                                                     <div class="form-floating mb-4">
                                                         <input type="email" class="form-control" placeholder="name@example.com">
                                                         <label>Email</label>
+                                                    </div>
+
+                                                    <div class="form-floating mb-4">
+                                                        <input type="number" class="form-control" placeholder="01*********">
+                                                        <label>Mobile</label>
+                                                    </div>
+
+                                                    <div class="form-floating mb-4">
+                                                        <input type="radio" class="form-control">
+                                                        <label>Gender</label>
                                                     </div>
 
                                                     <div class="form-floating mb-4">
@@ -390,15 +400,12 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                     </div>
 
                 </div>
-            </div>
-            <div class="modal-footer">
-                <p>Don't have an account yet?<a href="signup.html" class="text-primary font--bold ms-1">Sign Up</a></p>
             </div>
         </div>
     </div>

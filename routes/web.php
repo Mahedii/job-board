@@ -38,6 +38,7 @@ Route::get('/', function () {
 Route::controller(EmployerController::class)->group(function () {
     Route::prefix('employer')->group(function () {
         Route::get('/', 'employer')->name('employer');
+        Route::get('/list', 'employerList')->name('employer-list');
         Route::get('/detail', 'employerDetail')->name('employer-detail');
         Route::get('/create-company', 'createCompany')->name('create-company');
         Route::get('/manage-resume', 'manageResume')->name('manage-resume');

@@ -23,6 +23,16 @@ class EmployerController extends Controller
      *
      * @return view
      */
+    public function employerList(): view
+    {
+        return view('v1.careepick.pages.common.employer-list');
+    }
+
+    /**
+     * redirect to home page with required data
+     *
+     * @return view
+     */
     public function employerDetail(): view
     {
         return view('v1.careepick.pages.common.employer-detail');
