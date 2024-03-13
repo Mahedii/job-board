@@ -26,6 +26,7 @@ Route::get('/dashboard', [AuthController::class, 'dashboard'])->middleware(['aut
 
 Route::controller(AuthController::class)->group(function () {
     Route::prefix('job-seeker')->group(function () {
+        Route::post('/signin', 'jsSignin')->name('js-signin');
         Route::get('/registration-page', 'jsRegistrationPage')->name('js-registration-page');
         Route::post('/post-registration', 'jsPostRegistration')->name('js-register.post');
         Route::get('/account/verify/{token}', 'jsVerifyAccount')->name('js-user.verify');
