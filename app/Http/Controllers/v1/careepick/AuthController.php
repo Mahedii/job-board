@@ -2,15 +2,21 @@
 
 namespace App\Http\Controllers\v1\careepick;
 
+use Carbon\Carbon;
 use App\Models\User;
+use App\Mail\VerifyEmail;
 use Illuminate\View\View;
 use App\Models\UserVerify;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Tymon\JWTAuth\Facades\JWTAuth;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
-use App\Mail\VerifyEmail;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
+use Tymon\JWTAuth\Exceptions\JWTException;
 
 class AuthController extends Controller
 {
@@ -41,7 +47,7 @@ class AuthController extends Controller
         $data = $request->all();
         // dd($data);
 
-        $createUser = $this->create($data);
+        $createUser = $this->create($data, 1);
 
         $token = Str::random(64);
 
@@ -78,15 +84,17 @@ class AuthController extends Controller
 
         if (!is_null($verifyUser)) {
             $user = $verifyUser->user;
+            // dd($user);
 
-            if (!$user->is_email_verified) {
-                $verifyUser->user->is_email_verified = 1;
+            if (!$user->email_verified_at) {
+                $verifyUser->user->email_verified_at = Carbon::now()->getTimestamp();
                 $verifyUser->user->save();
                 $message = "Your e-mail is verified. You can now login.";
             } else {
                 $message = "Your e-mail is already verified. You can now login.";
             }
         }
+        dd($message);
 
         return redirect()->route('login')->with('message', $message);
     }
@@ -126,12 +134,101 @@ class AuthController extends Controller
      *
      * @return response()
      */
-    public function create(array $data)
+    public function create(array $data, int $userType)
     {
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => Hash::make($data['password'])
+            'password' => Hash::make($data['password']),
+            'user_type' => $userType
+        ]);
+    }
+
+    public function jsSignin(Request $request)
+    {
+        $validator = $request->validate([
+            'email' => 'required',
+            'password' => 'required',
+        ], [
+            'email.required' => 'Please Enter Your Email',
+            'password.required' => 'Please Enter Your password',
+        ]);
+
+        $credentials = $request->only('email', 'password');
+        // $token = auth()->attempt($credentials);
+
+        // if (!$token) {
+        //     return response()->json([
+        //         'message' => 'Unauthorized',
+        //     ], 401);
+        // }
+
+        try {
+            if (Auth::attempt($credentials)) {
+                // $token = auth()->user()->createToken('LaravelAuthApp')->accessToken;
+                // $user = Auth::user();
+                // $token = JWTAuth::fromUser($user);
+                $token = JWTAuth::attempt($credentials);
+                Log::debug($token);
+
+                $userType = auth()->user()->user_type;
+
+                if ($userType == 1) {
+                    return view('v1.careepick.dashboard.job-seeker.dashboard');
+                }
+
+                return $this->createNewToken($token);
+            }
+            return response()->json(['success' => false, 'message' => 'Login details are not valid'], 401);
+        } catch (JWTException $e) {
+            // Log::error($e);
+            Log::error($e->getMessage());
+            return response()->json(['success' => false, 'message' => 'Could not create token'], 500);
+        }
+    }
+
+    public function jsDetails()
+    {
+        return response()->json([
+            'success' => true,
+            'user' => Auth::user()
+        ]);
+    }
+
+    /**
+     * Get the token array structure.
+     *
+     * @param  string $token
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    protected function createNewToken($token)
+    {
+        return response()->json([
+            'success' => true,
+            'access_token' => $token,
+            'token_type' => 'bearer',
+            'expires_in' => auth('api')->factory()->getTTL(), // get the token expiration time from config/jwt.php
+            'user' => auth()->user()
+        ]);
+    }
+
+    public function jsDashboard()
+    {
+        if (Auth::check()) {
+            return view('/admin.dashboard');
+        }
+
+        return redirect()->route("signin-page")->withSuccess('You are not allowed to access');
+    }
+
+    public function jsSignOut()
+    {
+        Session::flush();
+        Auth::logout();
+
+        return response()->json([
+            'success' => true,
         ]);
     }
 }
