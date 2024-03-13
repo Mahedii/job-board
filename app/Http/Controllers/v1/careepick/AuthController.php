@@ -8,6 +8,7 @@ use App\Models\UserVerify;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Mail\VerifyEmail;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 
@@ -30,14 +31,16 @@ class AuthController extends Controller
      */
     public function jsPostRegistration(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:6',
-        ]);
+        // dd($request);
+        // $request->validate([
+        //     'name' => 'required',
+        //     'email' => 'required|email|unique:users',
+        //     'password' => 'required|min:6',
+        // ]);
 
         $data = $request->all();
-        dd($data);
+        // dd($data);
+
         $createUser = $this->create($data);
 
         $token = Str::random(64);
@@ -47,10 +50,17 @@ class AuthController extends Controller
             'token' => $token
         ]);
 
-        Mail::send('email.emailVerificationEmail', ['token' => $token], function ($message) use ($request) {
-            $message->to($request->email);
-            $message->subject('Email Verification Mail');
-        });
+        // Mail::send('v1.careepick.pages.auth.emailVerificationEmail', ['token' => $token], function ($message) use ($request) {
+        //     $message->to($request->email);
+        //     $message->subject('Email Verification Mail');
+        // });
+
+        $mailData = [
+            'token' => $token,
+        ];
+        Mail::to($request->email)->send(new VerifyEmail($mailData));
+
+        dd("Email is sent successfully.");
 
         return redirect("dashboard")->withSuccess('Great! You have Successfully loggedin');
     }
