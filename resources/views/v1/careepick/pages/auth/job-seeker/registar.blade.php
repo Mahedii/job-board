@@ -20,6 +20,12 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-12">
+                    @if(session('crudMsg'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <strong>{{ session('crudMsg') }}</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
                     <div class="vesh-detail-bloc">
                         <div class="vesh-detail-bloc-body pt-3">
                             <div class="row gx-3 gy-4">

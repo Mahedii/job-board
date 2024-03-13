@@ -66,9 +66,10 @@ class AuthController extends Controller
         ];
         Mail::to($request->email)->send(new VerifyEmail($mailData));
 
-        dd("Email is sent successfully.");
+        return Redirect()->back()->with('registrationMessage', 'A verification mail has been sent to your email address, please confirm your mail account.');
+        // dd("Email is sent successfully.");
 
-        return redirect("dashboard")->withSuccess('Great! You have Successfully loggedin');
+        // return redirect("dashboard")->withSuccess('Great! You have Successfully loggedin');
     }
 
     /**
@@ -92,11 +93,84 @@ class AuthController extends Controller
                 $message = "Your e-mail is verified. You can now login.";
             } else {
                 $message = "Your e-mail is already verified. You can now login.";
+                $user = User::where('id', $verifyUser->user_id)->first();
+                Auth::login($user);
+                return redirect()->route('js-dashboard')->with('message', "YO");
             }
         }
-        dd($message);
+        // dd($message);
 
-        return redirect()->route('login')->with('message', $message);
+        return redirect()->route('js-registration-page')->with('message', $message);
+    }
+
+    public function jsSignin(Request $request)
+    {
+        $validator = $request->validate([
+            'email' => 'required',
+            'password' => 'required',
+        ], [
+            'email.required' => 'Please Enter Your Email',
+            'password.required' => 'Please Enter Your password',
+        ]);
+
+        $credentials = $request->only('email', 'password');
+        // $token = auth()->attempt($credentials);
+
+        // if (!$token) {
+        //     return response()->json([
+        //         'message' => 'Unauthorized',
+        //     ], 401);
+        // }
+
+        try {
+            if (Auth::attempt($credentials)) {
+                // $token = auth()->user()->createToken('LaravelAuthApp')->accessToken;
+                // $user = Auth::user();
+                // $token = JWTAuth::fromUser($user);
+                // $token = JWTAuth::attempt($credentials);
+                // Log::debug($token);
+
+                $userType = auth()->user()->user_type;
+
+                if ($userType == 1) {
+                    return redirect()->route('js-dashboard')->with('message', "YO");
+                }
+
+                // return $this->createNewToken($token);
+            }
+            return response()->json(['success' => false, 'message' => 'Login details are not valid'], 401);
+        } catch (JWTException $e) {
+            // Log::error($e);
+            Log::error($e->getMessage());
+            return response()->json(['success' => false, 'message' => 'Could not create token'], 500);
+        }
+    }
+
+    public function jsDetails()
+    {
+        return response()->json([
+            'success' => true,
+            'user' => Auth::user()
+        ]);
+    }
+
+    public function jsDashboard()
+    {
+        if (Auth::check()) {
+            return view('v1.careepick.dashboard.job-seeker.dashboard');
+        }
+
+        return redirect()->route("signin-page")->withSuccess('You are not allowed to access');
+    }
+
+    public function jsSignOut()
+    {
+        Session::flush();
+        Auth::logout();
+
+        return response()->json([
+            'success' => true,
+        ]);
     }
 
     /**
@@ -144,57 +218,6 @@ class AuthController extends Controller
         ]);
     }
 
-    public function jsSignin(Request $request)
-    {
-        $validator = $request->validate([
-            'email' => 'required',
-            'password' => 'required',
-        ], [
-            'email.required' => 'Please Enter Your Email',
-            'password.required' => 'Please Enter Your password',
-        ]);
-
-        $credentials = $request->only('email', 'password');
-        // $token = auth()->attempt($credentials);
-
-        // if (!$token) {
-        //     return response()->json([
-        //         'message' => 'Unauthorized',
-        //     ], 401);
-        // }
-
-        try {
-            if (Auth::attempt($credentials)) {
-                // $token = auth()->user()->createToken('LaravelAuthApp')->accessToken;
-                // $user = Auth::user();
-                // $token = JWTAuth::fromUser($user);
-                $token = JWTAuth::attempt($credentials);
-                Log::debug($token);
-
-                $userType = auth()->user()->user_type;
-
-                if ($userType == 1) {
-                    return view('v1.careepick.dashboard.job-seeker.dashboard');
-                }
-
-                return $this->createNewToken($token);
-            }
-            return response()->json(['success' => false, 'message' => 'Login details are not valid'], 401);
-        } catch (JWTException $e) {
-            // Log::error($e);
-            Log::error($e->getMessage());
-            return response()->json(['success' => false, 'message' => 'Could not create token'], 500);
-        }
-    }
-
-    public function jsDetails()
-    {
-        return response()->json([
-            'success' => true,
-            'user' => Auth::user()
-        ]);
-    }
-
     /**
      * Get the token array structure.
      *
@@ -210,25 +233,6 @@ class AuthController extends Controller
             'token_type' => 'bearer',
             'expires_in' => auth('api')->factory()->getTTL(), // get the token expiration time from config/jwt.php
             'user' => auth()->user()
-        ]);
-    }
-
-    public function jsDashboard()
-    {
-        if (Auth::check()) {
-            return view('/admin.dashboard');
-        }
-
-        return redirect()->route("signin-page")->withSuccess('You are not allowed to access');
-    }
-
-    public function jsSignOut()
-    {
-        Session::flush();
-        Auth::logout();
-
-        return response()->json([
-            'success' => true,
         ]);
     }
 }

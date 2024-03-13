@@ -195,15 +195,15 @@
                                     <div class="tab-pane fade show active" id="signin" role="tabpanel" aria-labelledby="signin-tab" tabindex="0">
                                         <div class="row gx-3 gy-4">
                                             <div class="modal-login-form">
-                                                <form method="POST" action="{{ route('js-signin') }}" enctype="multipart/form-data">
+                                                <form method="POST" action="{{ route('js-signin') }}">
                                                     @csrf
                                                     <div class="form-floating mb-4">
-                                                        <input type="email" class="form-control" placeholder="name@example.com">
+                                                        <input type="email" class="form-control" name="email" placeholder="name@example.com">
                                                         <label>User Name</label>
                                                     </div>
 
                                                     <div class="form-floating mb-4">
-                                                        <input type="password" class="form-control" placeholder="Password">
+                                                        <input type="password" class="form-control" name="password" placeholder="Password">
                                                         <label>Password</label>
                                                     </div>
 

@@ -31,8 +31,10 @@ Route::controller(AuthController::class)->group(function () {
         Route::post('/post-registration', 'jsPostRegistration')->name('js-register.post');
         Route::get('/account/verify/{token}', 'jsVerifyAccount')->name('js-user.verify');
 
-        Route::group(['middleware' => ['auth', 'is_verify_email']], function () {
-            Route::get('dashboard', 'dashboard')->name('dashboard');
+        Route::middleware('auth')->group(function () {
+            Route::middleware('is_verify_email')->group(function () {
+                Route::get('/dashboard', 'jsDashboard')->name('js-dashboard');
+            });
         });
     });
     Route::prefix('job-provider')->group(function () {
