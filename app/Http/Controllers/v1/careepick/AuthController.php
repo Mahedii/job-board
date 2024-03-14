@@ -168,9 +168,7 @@ class AuthController extends Controller
         Session::flush();
         Auth::logout();
 
-        return response()->json([
-            'success' => true,
-        ]);
+        return redirect()->route("home");
     }
 
     /**
@@ -213,6 +211,7 @@ class AuthController extends Controller
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
+            'phone_no' => $data['phone_no'],
             'password' => Hash::make($data['password']),
             'user_type' => $userType
         ]);
@@ -231,7 +230,7 @@ class AuthController extends Controller
             'success' => true,
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth('api')->factory()->getTTL(), // get the token expiration time from config/jwt.php
+            // 'expires_in' => auth('api')->factory()->getTTL(), // get the token expiration time from config/jwt.php
             'user' => auth()->user()
         ]);
     }

@@ -30,6 +30,7 @@ Route::controller(AuthController::class)->group(function () {
         Route::get('/registration-page', 'jsRegistrationPage')->name('js-registration-page');
         Route::post('/post-registration', 'jsPostRegistration')->name('js-register.post');
         Route::get('/account/verify/{token}', 'jsVerifyAccount')->name('js-user.verify');
+        Route::get('/signout', 'jsSignOut')->name('js-signout');
 
         Route::middleware('auth')->group(function () {
             Route::middleware('is_verify_email')->group(function () {

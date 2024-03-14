@@ -1,34 +1,34 @@
-@extends('v1.careepick.dashboard.layouts.master')
+@extends('v1.careepick.dashboard.layouts.js-master')
 @section('content')
     <!-- Dashboard -->
     <div class="upper-title-box">
-        <h3>Howdy, Invision!</h3>
+        <h3>Howdy, Jerome!!</h3>
         <div class="text">Ready to jump back in?</div>
     </div>
     <div class="row">
-        <div class="ui-block col-xl-3 col-lg-6 col-md-6 col-sm-12">
+        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
             <div class="ui-item">
                 <div class="left">
                     <i class="icon flaticon-briefcase"></i>
                 </div>
                 <div class="right">
                     <h4>22</h4>
-                    <p>Posted Jobs</p>
+                    <p>Applied Jobs</p>
                 </div>
             </div>
         </div>
-        <div class="ui-block col-xl-3 col-lg-6 col-md-6 col-sm-12">
+        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
             <div class="ui-item ui-red">
                 <div class="left">
                     <i class="icon la la-file-invoice"></i>
                 </div>
                 <div class="right">
                     <h4>9382</h4>
-                    <p>Application</p>
+                    <p>Job Alerts</p>
                 </div>
             </div>
         </div>
-        <div class="ui-block col-xl-3 col-lg-6 col-md-6 col-sm-12">
+        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
             <div class="ui-item ui-yellow">
                 <div class="left">
                     <i class="icon la la-comment-o"></i>
@@ -39,7 +39,7 @@
                 </div>
             </div>
         </div>
-        <div class="ui-block col-xl-3 col-lg-6 col-md-6 col-sm-12">
+        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
             <div class="ui-item ui-green">
                 <div class="left">
                     <i class="icon la la-bookmark-o"></i>
@@ -55,7 +55,7 @@
     <div class="row">
 
 
-        <div class="col-xl-7 col-lg-12">
+        <div class="col-lg-7">
             <!-- Graph widget -->
             <div class="graph-widget ls-widget">
                 <div class="tabs-box">
@@ -80,7 +80,7 @@
             </div>
         </div>
 
-        <div class="col-xl-5 col-lg-12">
+        <div class="col-lg-5">
             <!-- Notification Widget -->
             <div class="notification-widget ls-widget">
                 <div class="widget-title">
@@ -112,216 +112,150 @@
             <!-- applicants Widget -->
             <div class="applicants-widget ls-widget">
                 <div class="widget-title">
-                    <h4>Recent Applicants</h4>
+                    <h4>Jobs Applied Recently</h4>
                 </div>
                 <div class="widget-content">
                     <div class="row">
-                        <!-- Candidate block three -->
-                        <div class="candidate-block-three col-lg-6 col-md-12 col-sm-12">
+                        <!-- Job Block -->
+                        <div class="job-block col-lg-6 col-md-12 col-sm-12">
                             <div class="inner-box">
                                 <div class="content">
-                                    <figure class="image"><img
-                                            src="{{ URL::asset('dashboard/assets/images/resource/candidate-1.png') }}"
-                                            alt="">
-                                    </figure>
-                                    <h4 class="name"><a href="#">Darlene Robertson</a></h4>
-                                    <ul class="candidate-info">
-                                        <li class="designation">UI Designer</li>
+                                    <span class="company-logo"><img
+                                            src="{{ URL::asset('dashboard/assets/images/resource/company-logo/1-1.png') }}" alt=""></span>
+                                    <h4><a href="#">Software Engineer (Android), Libraries</a></h4>
+                                    <ul class="job-info">
+                                        <li><span class="icon flaticon-briefcase"></span> Segment</li>
                                         <li><span class="icon flaticon-map-locator"></span> London, UK</li>
-                                        <li><span class="icon flaticon-money"></span> $99 / hour</li>
+                                        <li><span class="icon flaticon-clock-3"></span> 11 hours ago</li>
+                                        <li><span class="icon flaticon-money"></span> $35k - $45k</li>
                                     </ul>
-                                    <ul class="post-tags">
-                                        <li><a href="#">App</a></li>
-                                        <li><a href="#">Design</a></li>
-                                        <li><a href="#">Digital</a></li>
+                                    <ul class="job-other-info">
+                                        <li class="time">Full Time</li>
+                                        <li class="privacy">Private</li>
+                                        <li class="required">Urgent</li>
                                     </ul>
-                                </div>
-                                <div class="option-box">
-                                    <ul class="option-list">
-                                        <li><button data-text="View Aplication"><span class="la la-eye"></span></button>
-                                        </li>
-                                        <li><button data-text="Approve Aplication"><span
-                                                    class="la la-check"></span></button></li>
-                                        <li><button data-text="Reject Aplication"><span
-                                                    class="la la-times-circle"></span></button></li>
-                                        <li><button data-text="Delete Aplication"><span class="la la-trash"></span></button>
-                                        </li>
-                                    </ul>
+                                    <button class="bookmark-btn"><span
+                                            class="flaticon-bookmark"></span></button>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Candidate block three -->
-                        <div class="candidate-block-three col-lg-6 col-md-12 col-sm-12">
+                        <!-- Job Block -->
+                        <div class="job-block col-lg-6 col-md-12 col-sm-12">
                             <div class="inner-box">
                                 <div class="content">
-                                    <figure class="image"><img
-                                            src="{{ URL::asset('dashboard/assets/images/resource/candidate-2.png') }}"
-                                            alt="">
-                                    </figure>
-                                    <h4 class="name"><a href="#">Wade Warren</a></h4>
-                                    <ul class="candidate-info">
-                                        <li class="designation">UI Designer</li>
+                                    <span class="company-logo"><img
+                                            src="{{ URL::asset('dashboard/assets/images/resource/company-logo/1-2.png') }}" alt=""></span>
+                                    <h4><a href="#">Recruiting Coordinator</a></h4>
+                                    <ul class="job-info">
+                                        <li><span class="icon flaticon-briefcase"></span> Segment</li>
                                         <li><span class="icon flaticon-map-locator"></span> London, UK</li>
-                                        <li><span class="icon flaticon-money"></span> $99 / hour</li>
+                                        <li><span class="icon flaticon-clock-3"></span> 11 hours ago</li>
+                                        <li><span class="icon flaticon-money"></span> $35k - $45k</li>
                                     </ul>
-                                    <ul class="post-tags">
-                                        <li><a href="#">App</a></li>
-                                        <li><a href="#">Design</a></li>
-                                        <li><a href="#">Digital</a></li>
+                                    <ul class="job-other-info">
+                                        <li class="time">Full Time</li>
+                                        <li class="privacy">Private</li>
+                                        <li class="required">Urgent</li>
                                     </ul>
-                                </div>
-                                <div class="option-box">
-                                    <ul class="option-list">
-                                        <li><button data-text="View Aplication"><span class="la la-eye"></span></button>
-                                        </li>
-                                        <li><button data-text="Approve Aplication"><span
-                                                    class="la la-check"></span></button></li>
-                                        <li><button data-text="Reject Aplication"><span
-                                                    class="la la-times-circle"></span></button></li>
-                                        <li><button data-text="Delete Aplication"><span
-                                                    class="la la-trash"></span></button></li>
-                                    </ul>
+                                    <button class="bookmark-btn"><span
+                                            class="flaticon-bookmark"></span></button>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Candidate block three -->
-                        <div class="candidate-block-three col-lg-6 col-md-12 col-sm-12">
+                        <!-- Job Block -->
+                        <div class="job-block col-lg-6 col-md-12 col-sm-12">
                             <div class="inner-box">
                                 <div class="content">
-                                    <figure class="image"><img
-                                            src="{{ URL::asset('dashboard/assets/images/resource/candidate-3.png') }}"
-                                            alt="">
-                                    </figure>
-                                    <h4 class="name"><a href="#">Leslie Alexander</a></h4>
-                                    <ul class="candidate-info">
-                                        <li class="designation">UI Designer</li>
+                                    <span class="company-logo"><img
+                                            src="{{ URL::asset('dashboard/assets/images/resource/company-logo/1-3.png') }}" alt=""></span>
+                                    <h4><a href="#">Product Manager, Studio</a></h4>
+                                    <ul class="job-info">
+                                        <li><span class="icon flaticon-briefcase"></span> Segment</li>
                                         <li><span class="icon flaticon-map-locator"></span> London, UK</li>
-                                        <li><span class="icon flaticon-money"></span> $99 / hour</li>
+                                        <li><span class="icon flaticon-clock-3"></span> 11 hours ago</li>
+                                        <li><span class="icon flaticon-money"></span> $35k - $45k</li>
                                     </ul>
-                                    <ul class="post-tags">
-                                        <li><a href="#">App</a></li>
-                                        <li><a href="#">Design</a></li>
-                                        <li><a href="#">Digital</a></li>
+                                    <ul class="job-other-info">
+                                        <li class="time">Full Time</li>
+                                        <li class="privacy">Private</li>
+                                        <li class="required">Urgent</li>
                                     </ul>
-                                </div>
-                                <div class="option-box">
-                                    <ul class="option-list">
-                                        <li><button data-text="View Aplication"><span class="la la-eye"></span></button>
-                                        </li>
-                                        <li><button data-text="Approve Aplication"><span
-                                                    class="la la-check"></span></button></li>
-                                        <li><button data-text="Reject Aplication"><span
-                                                    class="la la-times-circle"></span></button></li>
-                                        <li><button data-text="Delete Aplication"><span
-                                                    class="la la-trash"></span></button></li>
-                                    </ul>
+                                    <button class="bookmark-btn"><span
+                                            class="flaticon-bookmark"></span></button>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Candidate block three -->
-                        <div class="candidate-block-three col-lg-6 col-md-12 col-sm-12">
+                        <!-- Job Block -->
+                        <div class="job-block col-lg-6 col-md-12 col-sm-12">
                             <div class="inner-box">
                                 <div class="content">
-                                    <figure class="image"><img
-                                            src="{{ URL::asset('dashboard/assets/images/resource/candidate-1.png') }}"
-                                            alt="">
-                                    </figure>
-                                    <h4 class="name"><a href="#">Darlene Robertson</a></h4>
-                                    <ul class="candidate-info">
-                                        <li class="designation">UI Designer</li>
+                                    <span class="company-logo"><img
+                                            src="{{ URL::asset('dashboard/assets/images/resource/company-logo/1-4.png') }}" alt=""></span>
+                                    <h4><a href="#">Senior Product Designer</a></h4>
+                                    <ul class="job-info">
+                                        <li><span class="icon flaticon-briefcase"></span> Segment</li>
                                         <li><span class="icon flaticon-map-locator"></span> London, UK</li>
-                                        <li><span class="icon flaticon-money"></span> $99 / hour</li>
+                                        <li><span class="icon flaticon-clock-3"></span> 11 hours ago</li>
+                                        <li><span class="icon flaticon-money"></span> $35k - $45k</li>
                                     </ul>
-                                    <ul class="post-tags">
-                                        <li><a href="#">App</a></li>
-                                        <li><a href="#">Design</a></li>
-                                        <li><a href="#">Digital</a></li>
+                                    <ul class="job-other-info">
+                                        <li class="time">Full Time</li>
+                                        <li class="privacy">Private</li>
+                                        <li class="required">Urgent</li>
                                     </ul>
-                                </div>
-                                <div class="option-box">
-                                    <ul class="option-list">
-                                        <li><button data-text="View Aplication"><span class="la la-eye"></span></button>
-                                        </li>
-                                        <li><button data-text="Approve Aplication"><span
-                                                    class="la la-check"></span></button></li>
-                                        <li><button data-text="Reject Aplication"><span
-                                                    class="la la-times-circle"></span></button></li>
-                                        <li><button data-text="Delete Aplication"><span
-                                                    class="la la-trash"></span></button></li>
-                                    </ul>
+                                    <button class="bookmark-btn"><span
+                                            class="flaticon-bookmark"></span></button>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Candidate block three -->
-                        <div class="candidate-block-three col-lg-6 col-md-12 col-sm-12">
+                        <!-- Job Block -->
+                        <div class="job-block col-lg-6 col-md-12 col-sm-12">
                             <div class="inner-box">
                                 <div class="content">
-                                    <figure class="image"><img
-                                            src="{{ URL::asset('dashboard/assets/images/resource/candidate-2.png') }}"
-                                            alt="">
-                                    </figure>
-                                    <h4 class="name"><a href="#">Wade Warren</a></h4>
-                                    <ul class="candidate-info">
-                                        <li class="designation">UI Designer</li>
+                                    <span class="company-logo"><img
+                                            src="{{ URL::asset('dashboard/assets/images/resource/company-logo/1-5.png') }}" alt=""></span>
+                                    <h4><a href="#">Senior Full Stack Engineer, Creator Success</a></h4>
+                                    <ul class="job-info">
+                                        <li><span class="icon flaticon-briefcase"></span> Segment</li>
                                         <li><span class="icon flaticon-map-locator"></span> London, UK</li>
-                                        <li><span class="icon flaticon-money"></span> $99 / hour</li>
+                                        <li><span class="icon flaticon-clock-3"></span> 11 hours ago</li>
+                                        <li><span class="icon flaticon-money"></span> $35k - $45k</li>
                                     </ul>
-                                    <ul class="post-tags">
-                                        <li><a href="#">App</a></li>
-                                        <li><a href="#">Design</a></li>
-                                        <li><a href="#">Digital</a></li>
+                                    <ul class="job-other-info">
+                                        <li class="time">Full Time</li>
+                                        <li class="privacy">Private</li>
+                                        <li class="required">Urgent</li>
                                     </ul>
-                                </div>
-                                <div class="option-box">
-                                    <ul class="option-list">
-                                        <li><button data-text="View Aplication"><span class="la la-eye"></span></button>
-                                        </li>
-                                        <li><button data-text="Approve Aplication"><span
-                                                    class="la la-check"></span></button></li>
-                                        <li><button data-text="Reject Aplication"><span
-                                                    class="la la-times-circle"></span></button></li>
-                                        <li><button data-text="Delete Aplication"><span
-                                                    class="la la-trash"></span></button></li>
-                                    </ul>
+                                    <button class="bookmark-btn"><span
+                                            class="flaticon-bookmark"></span></button>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Candidate block three -->
-                        <div class="candidate-block-three col-lg-6 col-md-12 col-sm-12">
+                        <!-- Job Block -->
+                        <div class="job-block col-lg-6 col-md-12 col-sm-12">
                             <div class="inner-box">
                                 <div class="content">
-                                    <figure class="image"><img
-                                            src="{{ URL::asset('dashboard/assets/images/resource/candidate-3.png') }}"
-                                            alt="">
-                                    </figure>
-                                    <h4 class="name"><a href="#">Leslie Alexander</a></h4>
-                                    <ul class="candidate-info">
-                                        <li class="designation">UI Designer</li>
+                                    <span class="company-logo"><img
+                                            src="{{ URL::asset('dashboard/assets/images/resource/company-logo/1-6.png') }}" alt=""></span>
+                                    <h4><a href="#">Software Engineer (Android), Libraries</a></h4>
+                                    <ul class="job-info">
+                                        <li><span class="icon flaticon-briefcase"></span> Segment</li>
                                         <li><span class="icon flaticon-map-locator"></span> London, UK</li>
-                                        <li><span class="icon flaticon-money"></span> $99 / hour</li>
+                                        <li><span class="icon flaticon-clock-3"></span> 11 hours ago</li>
+                                        <li><span class="icon flaticon-money"></span> $35k - $45k</li>
                                     </ul>
-                                    <ul class="post-tags">
-                                        <li><a href="#">App</a></li>
-                                        <li><a href="#">Design</a></li>
-                                        <li><a href="#">Digital</a></li>
+                                    <ul class="job-other-info">
+                                        <li class="time">Full Time</li>
+                                        <li class="privacy">Private</li>
+                                        <li class="required">Urgent</li>
                                     </ul>
-                                </div>
-                                <div class="option-box">
-                                    <ul class="option-list">
-                                        <li><button data-text="View Aplication"><span class="la la-eye"></span></button>
-                                        </li>
-                                        <li><button data-text="Approve Aplication"><span
-                                                    class="la la-check"></span></button></li>
-                                        <li><button data-text="Reject Aplication"><span
-                                                    class="la la-times-circle"></span></button></li>
-                                        <li><button data-text="Delete Aplication"><span
-                                                    class="la la-trash"></span></button></li>
-                                    </ul>
+                                    <button class="bookmark-btn"><span
+                                            class="flaticon-bookmark"></span></button>
                                 </div>
                             </div>
                         </div>
@@ -330,5 +264,4 @@
             </div>
         </div>
     </div>
-    <!-- End Dashboard -->
 @endsection

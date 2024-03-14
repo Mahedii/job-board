@@ -211,7 +211,7 @@
                         <li><a href="dashboard-resume-alerts.html"><i class="la la-bell"></i>Resume Alerts</a></li>
                         <li><a href="dashboard-change-password.html"><i class="la la-lock"></i>Change Password</a></li>
                         <li><a href="dashboard-company-profile.html"><i class="la la-user-alt"></i>View Profile</a></li>
-                        <li><a href="index.html"><i class="la la-sign-out"></i>Logout</a></li>
+                        <li><a href="{{ route('js-signout') }}"><i class="la la-sign-out"></i>Logout</a></li>
                         <li><a href="index.html"><i class="la la-trash"></i>Delete Profile</a></li>
                     </ul>
                 </div>
@@ -266,7 +266,7 @@
             <li><a href="dashboard-resume-alerts.html"><i class="la la-bell"></i>Resume Alerts</a></li>
             <li><a href="dashboard-change-password.html"><i class="la la-lock"></i>Change Password</a></li>
             <li><a href="dashboard-company-profile.html"><i class="la la-user-alt"></i>View Profile</a></li>
-            <li><a href="index.html"><i class="la la-sign-out"></i>Logout</a></li>
+            <li><a href="{{ route('js-signout') }}"><i class="la la-sign-out"></i>Logout</a></li>
             <li><a href="index.html"><i class="la la-trash"></i>Delete Profile</a></li>
         </ul>
     </div>

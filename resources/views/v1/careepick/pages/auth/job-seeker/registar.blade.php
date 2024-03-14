@@ -20,9 +20,9 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-12">
-                    @if(session('crudMsg'))
+                    @if(session('registrationMessage'))
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <strong>{{ session('crudMsg') }}</strong>
+                            <strong>{{ session('registrationMessage') }}</strong>
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     @endif
@@ -53,23 +53,23 @@
                                                         <input name="phone_no" type="text"
                                                             class="form-control" placeholder="">
                                                     </div>
-                                                    <div class="mb-4 col-md-4 col-sm-6 col-xs-12 m-clear">
+                                                    {{-- <div class="mb-4 col-md-4 col-sm-6 col-xs-12 m-clear">
                                                         <label>Gender <span class="text-danger">*</span></label>
                                                         <select name="gender" class="wide form-control">
                                                             <option data-display="Select Gender">Male</option>
                                                             <option value="1">Female</option>
                                                             <option value="2">Others</option>
                                                         </select>
-                                                    </div>
+                                                    </div> --}}
                                                     <div class="mb-4 col-md-6 col-sm-6 col-xs-12">
                                                         <label>Password <span class="text-danger">*</span></label>
                                                         <input name="password" type="password"
                                                             class="form-control company_password" placeholder="">
                                                     </div>
-                                                    <div class="mb-4 col-md-6 col-sm-6 col-xs-12">
+                                                    {{-- <div class="mb-4 col-md-6 col-sm-6 col-xs-12">
                                                         <label>Confirm Password <span class="text-danger">*</span></label>
                                                         <input type="password" class="form-control confirm_company_password" placeholder="">
-                                                    </div>
+                                                    </div> --}}
                                                 </div>
                                             </div>
                                         </div>
