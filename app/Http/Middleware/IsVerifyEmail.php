@@ -22,8 +22,8 @@ class IsVerifyEmail
         if (Auth::user()->email_verified_at === null) {
             auth()->logout();
             Log::error("Email is not verified");
-            return redirect()->route('home')
-                    ->with('message', 'You need to confirm your account. We have sent you an activation code, please check your email.');
+            return redirect()->route('js-signin-page')
+                    ->with('signinErrorMessage', 'You need to confirm your account. We have sent you an activation link, please check your email.');
         }
 
         return $next($request);

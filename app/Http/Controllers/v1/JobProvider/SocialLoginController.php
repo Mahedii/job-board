@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\v1\employer;
+namespace App\Http\Controllers\v1\JobProvider;
 
 use Exception;
 use App\Http\Controllers\Controller;

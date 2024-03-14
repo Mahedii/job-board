@@ -1,17 +1,17 @@
 <script src="{{ URL::asset('dashboard/assets/js/jquery.js') }}"></script>
-<script src="{{ URL::asset('dashboard/assets/js/popper.min.js') }}"></script>
+{{-- <script src="{{ URL::asset('dashboard/assets/js/popper.min.js') }}"></script> --}}
 <script src="{{ URL::asset('dashboard/assets/js/chosen.min.js') }}"></script>
-<script src="{{ URL::asset('dashboard/assets/js/bootstrap.min.js') }}"></script>
-<script src="{{ URL::asset('dashboard/assets/js/jquery-ui.min.js') }}"></script>
-<script src="{{ URL::asset('dashboard/assets/js/jquery.fancybox.js') }}"></script>
-<script src="{{ URL::asset('dashboard/assets/js/jquery.modal.min.js') }}"></script>
-<script src="{{ URL::asset('dashboard/assets/js/mmenu.polyfills.js') }}"></script>
+{{-- <script src="{{ URL::asset('dashboard/assets/js/bootstrap.min.js') }}"></script> --}}
+{{-- <script src="{{ URL::asset('dashboard/assets/js/jquery-ui.min.js') }}"></script> --}}
+{{-- <script src="{{ URL::asset('dashboard/assets/js/jquery.fancybox.js') }}"></script> --}}
+{{-- <script src="{{ URL::asset('dashboard/assets/js/jquery.modal.min.js') }}"></script> --}}
+{{-- <script src="{{ URL::asset('dashboard/assets/js/mmenu.polyfills.js') }}"></script> --}}
 <script src="{{ URL::asset('dashboard/assets/js/mmenu.js') }}"></script>
 <script src="{{ URL::asset('dashboard/assets/js/appear.js') }}"></script>
-<script src="{{ URL::asset('dashboard/assets/js/ScrollMagic.min.js') }}"></script>
+{{-- <script src="{{ URL::asset('dashboard/assets/js/ScrollMagic.min.js') }}"></script> --}}
 <script src="{{ URL::asset('dashboard/assets/js/rellax.min.js') }}"></script>
-<script src="{{ URL::asset('dashboard/assets/js/owl.js') }}"></script>
-<script src="{{ URL::asset('dashboard/assets/js/wow.js') }}"></script>
+{{-- <script src="{{ URL::asset('dashboard/assets/js/owl.js') }}"></script> --}}
+{{-- <script src="{{ URL::asset('dashboard/assets/js/wow.js') }}"></script> --}}
 <script src="{{ URL::asset('dashboard/assets/js/script.js') }}"></script>
 
 <!-- Chart.js // documentation: http://www.chartjs.org/docs/latest/ -->

@@ -202,7 +202,7 @@
                     <ul class="dropdown-menu">
                         <li class="active"><a href="candidate-dashboard.html"> <i class="la la-home"></i>Dashboard</a></li>
                         <li><a href="candidate-dashboard-profile.html"><i class="la la-user-tie"></i>My Profile</a></li>
-                        <li><a href="candidate-dashboard-resume.html"><i class="la la-file-invoice"></i>My Resume</a></li>
+                        <li><a href="{{ route('resume-builder-page') }}"><i class="la la-file-invoice"></i>My Resume</a></li>
                         <li><a href="candidate-dashboard-applied-job.html"><i class="la la-briefcase"></i>Applied Jobs </a></li>
                         <li><a href="candidate-dashboard-job-alerts.html"><i class="la la-bell"></i>Job Alerts</a></li>
                         <li><a href="candidate-dashboard-shortlisted-resume.html"><i class="la la-bookmark-o"></i>Shortlisted Jobs</a></li>
@@ -257,7 +257,7 @@
         <ul class="navigation">
             <li class="active"><a href="candidate-dashboard.html"> <i class="la la-home"></i>Dashboard</a></li>
             <li><a href="candidate-dashboard-profile.html"><i class="la la-user-tie"></i>My Profile</a></li>
-            <li><a href="candidate-dashboard-resume.html"><i class="la la-file-invoice"></i>My Resume</a></li>
+            <li><a href="{{ route('resume-builder-page') }}"><i class="la la-file-invoice"></i>My Resume</a></li>
             <li><a href="candidate-dashboard-applied-job.html"><i class="la la-briefcase"></i>Applied Jobs </a></li>
             <li><a href="candidate-dashboard-job-alerts.html"><i class="la la-bell"></i>Job Alerts</a></li>
             <li><a href="candidate-dashboard-shortlisted-resume.html"><i class="la la-bookmark-o"></i>Shortlisted Jobs</a></li>

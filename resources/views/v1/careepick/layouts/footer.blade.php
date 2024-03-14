@@ -171,11 +171,10 @@
         <div class="modal-content" id="loginmodal">
             <span class="mod-close" data-bs-dismiss="modal" aria-hidden="true"><i class="fas fa-close"></i></span>
             <div class="modal-header">
-                <div class="mdl-thumb"><img src="{{ URL::asset('assets/img/ico.png') }}" class="img-fluid" width="70"
-                        alt=""></div>
-                {{-- <div class="mdl-title">
-                    <h4 class="modal-header-title">Hello, Again</h4>
-                </div> --}}
+                <div class="mdl-thumb"><img src="{{ URL::asset('assets/img/ico.png') }}" class="img-fluid" width="70" alt=""></div>
+                <div class="">
+                    <h4 class="modal-header-title">Signin to your account</h4>
+                </div>
             </div>
             <div class="modal-body">
                 <div class="row justify-content-center">
@@ -185,13 +184,14 @@
                             <div class="vesh-detail-bloc-body pt-3">
                                 <ul class="nav nav-pills mb-3 justify-content-center" id="pills-tab" role="tablist">
                                     <li class="nav-item">
-                                        <button class="nav-link active" id="signin-tab" data-bs-toggle="pill" data-bs-target="#signin" type="button" role="tab" aria-controls="signin" aria-selected="true">Job Seeker</button>
+                                        <a href="{{ route('js-signin-page') }}" class="nav-link active">Job Seeker</a>
                                     </li>
                                     <li class="nav-item">
-                                        <button class="nav-link" id="signup-tab" data-bs-toggle="pill" data-bs-target="#signup" type="button" role="tab" aria-controls="signup" aria-selected="false" tabindex="-1">Job Provider</button>
+                                        <a class="nav-link" href="{{ route('js-signin-page') }}" >Job Provider</a>
+                                        {{-- <button class="nav-link" id="signup-tab" data-bs-toggle="pill" data-bs-target="#signup" type="button" role="tab" aria-controls="signup" aria-selected="false" tabindex="-1">Job Provider</button> --}}
                                     </li>
                                 </ul>
-                                <div class="tab-content" id="pills-tabContent">
+                                {{-- <div class="tab-content" id="pills-tabContent">
                                     <div class="tab-pane fade show active" id="signin" role="tabpanel" aria-labelledby="signin-tab" tabindex="0">
                                         <div class="row gx-3 gy-4">
                                             <div class="modal-login-form">
@@ -270,16 +270,16 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                     </div>
 
                 </div>
             </div>
-            <div class="modal-footer">
+            {{-- <div class="modal-footer">
                 <p>Don't have an account yet?<a href="signup.html" class="text-primary font--bold ms-1">Sign Up</a></p>
-            </div>
+            </div> --}}
         </div>
     </div>
 </div>

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\v1\careepick;
 
-use Hash;
-use Session;
+// use Hash;
+// use Session;
 // use Validator;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -11,6 +11,8 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use Tymon\JWTAuth\Exceptions\JWTException;
 // use Illuminate\Support\Facades\Validator;
 // use Stevebauman\Location\Facades\Location;

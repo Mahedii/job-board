@@ -1,12 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\v1\auth\AuthController;
 use App\Http\Controllers\v1\careepick\JobController;
-use App\Http\Controllers\v1\careepick\AuthController;
 use App\Http\Controllers\v1\careepick\ContactController;
 use App\Http\Controllers\v1\careepick\EmployeeController;
 use App\Http\Controllers\v1\careepick\EmployerController;
 use App\Http\Controllers\v1\employer\SocialLoginController;
+use App\Http\Controllers\v1\JobSeeker\ResumeBuilderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,9 +25,10 @@ Route::get('/signout', [AuthController::class, 'signOut'])->name('logout');
 Route::get('/auth', [AuthController::class, 'loginPage'])->name('loginPage');
 Route::get('/dashboard', [AuthController::class, 'dashboard'])->middleware(['auth'])->name('dashboard');
 
-Route::controller(AuthController::class)->group(function () {
-    Route::prefix('job-seeker')->group(function () {
+Route::prefix('job-seeker')->group(function () {
+    Route::controller(AuthController::class)->group(function () {
         Route::post('/signin', 'jsSignin')->name('js-signin');
+        Route::get('/sign-page', 'jsSigninPage')->name('js-signin-page');
         Route::get('/registration-page', 'jsRegistrationPage')->name('js-registration-page');
         Route::post('/post-registration', 'jsPostRegistration')->name('js-register.post');
         Route::get('/account/verify/{token}', 'jsVerifyAccount')->name('js-user.verify');
@@ -34,21 +36,34 @@ Route::controller(AuthController::class)->group(function () {
 
         Route::middleware('auth')->group(function () {
             Route::middleware('is_verify_email')->group(function () {
-                Route::get('/dashboard', 'jsDashboard')->name('js-dashboard');
+                Route::prefix('/dashboard')->group(function () {
+                    Route::get('/', 'jsDashboard')->name('js-dashboard');
+                });
             });
         });
     });
-    Route::prefix('job-provider')->group(function () {
+
+    Route::middleware('auth')->group(function () {
+        Route::middleware('is_verify_email')->group(function () {
+            Route::controller(ResumeBuilderController::class)->group(function () {
+                Route::get('/my-resume', 'myResumePage')->name('resume-builder-page');
+            });
+        });
+    });
+});
+
+Route::prefix('job-provider')->group(function () {
+    Route::controller(AuthController::class)->group(function () {
         Route::get('/registration-page', 'jpRegistrationPage')->name('jp-registration-page');
     });
 });
 
 Route::get('/register-company', [EmployerController::class, 'createCompany'])->name('register-company');
 
-Route::controller(SocialLoginController::class)->group(function () {
-    Route::get('authorized/{platform}', 'redirectTo')->name('social.auth.redirectTo');
-    Route::get('authorized/{platform}/callback', 'handleCallback')->name('social.auth.handleCallback');
-});
+// Route::controller(SocialLoginController::class)->group(function () {
+//     Route::get('authorized/{platform}', 'redirectTo')->name('social.auth.redirectTo');
+//     Route::get('authorized/{platform}/callback', 'handleCallback')->name('social.auth.handleCallback');
+// });
 
 Route::get('/', function () {
     return view('v1.careepick.pages.common.home');
