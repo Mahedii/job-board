@@ -101,6 +101,9 @@ class AuthController extends Controller
                 $verifyUser->user->email_verified_at = Carbon::now()->getTimestamp();
                 $verifyUser->user->save();
                 $message = "Your e-mail is verified. You can now login.";
+                $user = User::where('id', $verifyUser->user_id)->first();
+                Auth::login($user);
+                return redirect()->route('js-dashboard')->with('message', "YO");
             } else {
                 $message = "Your e-mail is already verified. You can now login.";
                 $user = User::where('id', $verifyUser->user_id)->first();
