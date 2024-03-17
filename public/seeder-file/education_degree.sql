@@ -56,7 +56,7 @@ INSERT INTO education_degree_titles (`education_level_id`, `degree_full_form`, `
 (6, 'Bachelor of Technology', 'B.Tech.'),
 (6, 'Bachelor of Nursing', 'B.N.'),
 (6, 'Bachelor of Business Administration', 'BBA'),
-(6, 'Bachelor of Business Studies (BBS)', 'BBS')
+(6, 'Bachelor of Business Studies (BBS)', 'BBS'),
 (6, 'Bachelor of Fine Arts', 'B.F.A'),
 (6, 'Bachelor of Computer Science', 'BSC'),
 (6, 'Bachelor of Public Administration', 'B.P.A.'),
@@ -144,7 +144,7 @@ INSERT INTO education_degree_titles (`education_level_id`, `degree_full_form`, `
 (7, 'Masters in Computer Application (MCA)', 'MCA'),
 (7, 'Executive Master of Business Administration (EMBA)', 'EMBA'),
 (7, 'Fellowship of the College of Physicians and Surgeons (FCPS)', 'FCPS'),
-(7, 'Kamil (Madrasah)'),
+(7, 'Kamil (Madrasah)', ''),
 (7, 'Masters in Bank Management (MBM)', 'MBM'),
 (7, 'Masters in Information Systems Security (MISS)', 'MISS'),
 (7, 'Master of Information & Communication Technology (MICT)', 'MICT'),

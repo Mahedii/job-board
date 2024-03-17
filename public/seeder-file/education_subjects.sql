@@ -1,4 +1,4 @@
-INSERT INTO subjects (`education_level_id`, `subject_name`, `degree_level`) VALUES
+INSERT INTO education_subjects (`education_level_id`, `subject_name`, `degree_level`) VALUES
 (3, 'Science', 'Secondary'),
 (3, 'Arts', 'Secondary'),
 (3, 'Commerce', 'Secondary'),

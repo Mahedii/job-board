@@ -9,6 +9,7 @@ use Illuminate\View\View;
 use App\Models\UserVerify;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
@@ -17,6 +18,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Tymon\JWTAuth\Exceptions\JWTException;
+use App\Models\v1\careepick\JobSeeker\JobSeeker;
 
 class AuthController extends Controller
 {
@@ -223,13 +225,39 @@ class AuthController extends Controller
      */
     public function create(array $data, int $userType)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'phone_no' => $data['phone_no'],
-            'password' => Hash::make($data['password']),
-            'user_type' => $userType
-        ]);
+        try {
+            $user = null;
+
+            DB::transaction(function () use ($data, $userType) {
+                // First query: Create a new user
+                $user = User::create([
+                    'name' => $data['name'],
+                    'email' => $data['email'],
+                    'phone_no' => $data['phone_no'],
+                    'password' => Hash::make($data['password']),
+                    'user_type' => $userType
+                ]);
+
+                // Second query: Create a new job seeker
+                JobSeeker::create([
+                    'user_id' => $user->id,
+                    'jobseeker_name' => $data['name'],
+                    'jobseeker_mail' => $data['email'],
+                    'jobseeker_password' => Hash::make($data['password']),
+                    'jobseeker_phone_no_1' => $data['phone_no'],
+                ]);
+            });
+
+            // Both queries were successful
+            // Commit the transaction
+            DB::commit();
+
+            return $user;
+        } catch (\Exception $e) {
+            // Something went wrong
+            // Roll back the transaction
+            DB::rollBack();
+        }
     }
 
     /**

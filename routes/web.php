@@ -47,6 +47,8 @@ Route::prefix('job-seeker')->group(function () {
         Route::middleware('is_verify_email')->group(function () {
             Route::controller(ResumeBuilderController::class)->group(function () {
                 Route::get('/my-resume', 'myResumePage')->name('resume-builder-page');
+                Route::post('/education/fetch-values', 'fetchDegreeTitleByEducationLevel')->name('fetch-values');
+                Route::post('/education/add', 'addEducation')->name('js-add-education');
             });
         });
     });

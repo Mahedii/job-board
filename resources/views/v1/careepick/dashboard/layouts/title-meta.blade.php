@@ -5,7 +5,8 @@
 <meta content="Mahadi" name="author" />
 <!-- Responsive -->
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="csrf_token" content="{!! csrf_token() !!}" />
+{{-- <meta name="csrf_token" content="{{ csrf_token() }}" /> --}}
+<meta name="csrf-token" content="{{ csrf_token() }}">
 
 <!-- Favicon Icon -->
 <link rel="shortcut icon" href="{{ URL::asset('dashboard/assets/images/favicon.png')}}" type="image/x-icon">

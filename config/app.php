@@ -163,6 +163,10 @@ return [
         // Intervention\Image\ImageServiceProvider::class,
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
         /*
+         * Custom Service Providers...
+         */
+        App\Providers\JobSeekerServiceProvider::class,
+        /*
          * Application Service Providers...
          */
         App\Providers\AppServiceProvider::class,

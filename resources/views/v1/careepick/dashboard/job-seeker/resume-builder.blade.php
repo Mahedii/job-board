@@ -51,6 +51,12 @@
                                 </div>
 
                                 <div class="form-group col-lg-12 col-md-12">
+                                    @if(session('add-education-message'))
+                                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                            <strong>{{ session('add-education-message') }}</strong>
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                        </div>
+                                    @endif
                                     <!-- Resume / Education -->
                                     <div class="resume-outer">
                                         <div class="upper-title">
@@ -60,28 +66,37 @@
                                                 Education</a>
                                         </div>
                                         <!-- Resume BLock -->
-                                        <div class="resume-block">
-                                            <div class="inner">
-                                                <span class="name">M</span>
-                                                <div class="title-box">
-                                                    <div class="info-box">
-                                                        <h3>Bachlors in Fine Arts</h3>
-                                                        <span>Modern College</span>
-                                                    </div>
-                                                    <div class="edit-box">
-                                                        <span class="year">2012 - 2014</span>
-                                                        <div class="edit-btns">
-                                                            <button><span class="la la-pencil"></span></button>
-                                                            <button><span class="la la-trash"></span></button>
+                                        @foreach($jobSeekerEducationsData as $key => $educationsData)
+                                            <div class="resume-block">
+                                                <div class="inner" style="padding-bottom: 0px">
+                                                    <span class="name">{{ $educationsData->educationLevel->level_icon }}</span>
+                                                    <div class="title-box">
+                                                        <div class="info-box">
+                                                            <h3>{{ $educationsData->educationLevel->level_name }} in {{ $educationsData->educationSubject->subject_name }}</h3>
+                                                            <p style="margin-bottom: 0px">{{ $educationsData->institute_name }}, {{ $educationsData->educationDegreeTitle->degree_initial_form }}</p>
+                                                            @if($educationsData->cgpa != null && $educationsData->education_institute_type_id == 4)
+                                                                <p>CGPA: {{ $educationsData->cgpa }}/{{ $educationsData->scale }}</p>
+                                                            @elseif($educationsData->cgpa != null)
+                                                                <p>GPA: {{ $educationsData->cgpa }}/{{ $educationsData->scale }}</p>
+                                                            @elseif($educationsData->marks != null)
+                                                                <p>Marks: {{ $educationsData->marks }}%</p>
+                                                            @endif
+                                                        </div>
+                                                        <div class="edit-box">
+                                                            <span class="year">@if($educationsData->duration != null) {{ $educationsData->year_of_passing - $educationsData->duration}} -@endif {{ $educationsData->year_of_passing }}</span>
+                                                            <div class="edit-btns">
+                                                                {{-- <button><span class="la la-pencil"></span></button> --}}
+                                                                <button><span class="la la-trash"></span></button>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="text">Lorem ipsum dolor sit amet, consectetur
-                                                    adipiscing elit. Proin a ipsum tellus. Interdum et
-                                                    malesuada fames ac ante<br> ipsum primis in faucibus.
+                                                    {{-- <div class="text">Lorem ipsum dolor sit amet, consectetur
+                                                        adipiscing elit. Proin a ipsum tellus. Interdum et
+                                                        malesuada fames ac ante<br> ipsum primis in faucibus.
+                                                    </div> --}}
                                                 </div>
                                             </div>
-                                        </div>
+                                        @endforeach
 
                                         <!-- Resume BLock -->
                                         <div class="resume-block">
@@ -263,53 +278,160 @@
         <!-- Log In Modal -->
         <div class="modal fade" id="addEducation" tabindex="-1" role="dialog" aria-labelledby="addEducationModal"
             aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered login-pop-form" role="document">
+            <div class="modal-dialog modal-lg modal-dialog-centered login-pop-form" role="document">
                 <div class="modal-content" id="loginmodal">
                     <div class="modal-header">
                         <h4 class="modal-title" id="exampleModalLabel">Education</h4>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <div class="row justify-content-center gx-3 gy-4">
-                            <form method="POST" action="{{ route('js-register.post') }}" enctype="multipart/form-data">
-                                @csrf
-                                <div class="form-group col-lg-6 col-md-12 mb-4">
-                                    <label class="py-2">Skills </label>
-                                    <select data-placeholder="Categories" class="chosen-select multiple" multiple
-                                        tabindex="4">
-                                        <option value="Banking">Banking</option>
-                                        <option value="Digital&Creative">Digital & Creative</option>
-                                        <option value="Retail">Retail</option>
-                                        <option value="Human Resources">Human Resources</option>
-                                        <option value="Management">Management</option>
-                                    </select>
-                                    <select class="js-example-basic-single" name="state">
-                                        <option value="AL">Alabama</option>
-                                          ...
-                                        <option value="WY">Wyoming</option>
-                                      </select>
-                                </div>
-                                <div class="form-group">
-                                    <button type="submit"
-                                        class="btn btn-primary full-width font--bold btn-lg">Login</button>
-                                </div>
-                            </form>
+                        <div class="row justify-content-center">
+                            <div class="col-lg-12">
+                                <form method="POST" action="{{ route('js-add-education') }}"
+                                    enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="row gx-3 gy-4">
+                                        <div class="form-group col-lg-6 col-md-12 mb-4">
+                                            <label class="py-2">Level of Education </label>
+                                            <select id="education-level-select" name="education_level" data-placeholder="Education Level" class="form-control chosen-select">
+                                                <option value="">Select Level</option>
+                                                @foreach ($educationLevelsData as $key => $educationLevel)
+                                                    <option value="{{ $educationLevel->id }}">{{ $educationLevel->level_name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group col-lg-6 col-md-12 mb-4" id="education-degree-title-select-wrapper">
+                                            <label class="py-2">Exam/Degree Title </label>
+                                            <select id="education-degree-title-select" name="exam_degree_title" data-placeholder="Degree Title" class="form-control chosen-select">
+                                                <option value="">Select Degree</option>
+                                                @foreach ($educationDegreeTitleData as $key => $educationDegreeTitle)
+                                                    <option value="{{ $educationDegreeTitle->id }}">{{ $educationDegreeTitle->degree_full_form }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group col-lg-6 col-md-12 mb-4" id="education-degree-title-input-wrapper" style="display: none;">
+                                            <label class="py-2">Exam/Degree Title</label>
+                                            <input type="text" id="education-degree-title-input" name="exam_degree_title_1" class="form-control" placeholder="Enter Degree Title">
+                                        </div>
+
+                                        <div id="major-subject-dropdown" class="form-group col-lg-6 col-md-12 mb-4">
+                                            <label class="py-2">Concentration/Major/Group </label>
+                                            <select name="major_subject" data-placeholder="Major Subject" class="form-control chosen-select">
+                                                <option value="">Select Subject</option>
+                                                @foreach ($educationSubjectsData as $key => $educationSubject)
+                                                    <option value="{{ $educationSubject->id }}">{{ $educationSubject->subject_name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
+                                        <div id="education-board-dropdown" class="form-group col-lg-6 col-md-12 mb-4 hide">
+                                            <label class="py-2">Board </label>
+                                            <select name="education_board" data-placeholder="Education Board" class="form-control chosen-select">
+                                                <option value="">Select Education Board</option>
+                                                <option value="Dhaka">Dhaka</option>
+                                                <option value="Barishal">Barishal</option>
+                                                <option value="Chattogram">Chattogram</option>
+                                                <option value="Cumilla">Cumilla</option>
+                                                <option value="Dinajpur">Dinajpur</option>
+                                                <option value="Jashore">Jashore</option>
+                                                <option value="Mymensingh">Mymensingh</option>
+                                                <option value="Rajshahi">Rajshahi</option>
+                                                <option value="Sylhet">Sylhet</option>
+                                                <option value="Madrasah">Madrasah</option>
+                                                <option value="Technical">Technical</option>
+                                                <option value="BOU">BOU</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group col-lg-6 col-md-12 mb-4">
+                                            <label class="py-2">Institute Type </label>
+                                            <select id="institution-type" name="institution_type" data-placeholder="Institute Type" class="form-control chosen-select">
+                                                <option value="">Select Institute Type</option>
+                                                <option value="1">School</option>
+                                                <option value="2">College</option>
+                                                <option value="3">Madrasha</option>
+                                                <option value="4">University</option>
+                                            </select>
+                                        </div>
+
+                                        <div id="institute-name" class="form-group col-lg-6 col-md-12 mb-4">
+                                            <label class="py-2">Institute Name </label>
+                                            {{-- <select data-placeholder="Institute Name" class="chosen-select">
+                                                <option>Select Institute</option>
+                                                <option value="-1">Others</option>
+                                                @foreach ($educationLevelsData as $key => $educationLevel)
+                                                    <option value="{{ $educationLevel->id }}">
+                                                        {{ $educationLevel->level_name }}</option>
+                                                @endforeach
+                                            </select> --}}
+                                            <input type="text" id="institute-name-input" name="institution_name" class="form-control" placeholder="Type Institute Name">
+                                            <div id="institute-name-dropdown" class="autocomplete-items"></div>
+                                        </div>
+
+                                        <div class="form-group col-lg-6 col-md-12 mb-4">
+                                            <label class="py-2">Result </label>
+                                            <select id="result-type-select" name="result_type" data-placeholder="Result Type" class="form-control chosen-select">
+                                                <option value="">Select Result Type</option>
+                                                @foreach ($educationResultTypeData as $key => $educationResultType)
+                                                    <option value="{{ $educationResultType->id }}">
+                                                        {{ $educationResultType->result_type }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
+                                        <div id="marks-input" class="form-group col-lg-6 col-md-12 mb-4 hide">
+                                            <label class="py-2">Marks (%)</label>
+                                            <input name="exam_marks" type="text" class="form-control" placeholder="">
+                                        </div>
+
+                                        <div id="cgpa-input" class="form-group col-lg-6 col-md-12 mb-4 hide">
+                                            <label class="py-2">CGPA </label>
+                                            <input name="exam_cgpa" type="text" class="form-control" placeholder="">
+                                        </div>
+
+                                        <div id="scale-input" class="form-group col-lg-6 col-md-12 mb-4 hide">
+                                            <label class="py-2">Scale </label>
+                                            <input name="grade_scale" type="text" class="form-control" placeholder="">
+                                        </div>
+
+                                        <div id="graduation-duration-input" class="hide form-group col-lg-6 col-md-12 mb-4 hide">
+                                            <label class="py-2">Duration </label>
+                                            <input name="graduation_duration" type="number" class="form-control" placeholder="">
+                                        </div>
+
+                                        <div class="form-group col-lg-6 col-md-12 mb-4">
+                                            <label class="py-2">Year of Passing </label>
+                                            <select name="exam_passing_year" data-placeholder="Passing Year" class="form-control chosen-select">
+                                                <option value="">Select Year</option>
+                                                @foreach ($yearsData as $key => $year)
+                                                    <option value="{{ $year->year }}">
+                                                        {{ $year->year }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
+                                        {{-- <div class="form-group col-lg-6 col-md-12 mb-4">
+                                            <label class="py-2">Achievement </label>
+                                            <input name="exam_achievement" type="text" class="form-control" placeholder="">
+                                        </div> --}}
+
+                                        <div class="form-group mt-3">
+                                            <button type="submit"
+                                                class="btn btn-primary full-width font--bold btn-md">Save</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <!-- End Modal -->
-
-        {{-- <script src="{{ URL::asset('/dashboard/assets/js/select2.init.js') }}"></script> --}}
-
-        <script type="text/javascript">
-            $(document).ready(function() {
-                // alert("YI");
-                $('.js-example-basic-single').select2();
-            });
-        </script>
-
+        {{-- // var schoolAndCollegeData = {!! json_encode($schoolAndCollegeData) !!}; --}}
 
     </div>
+    @include('v1.careepick.dashboard.job-seeker.ajax.resume-builder.education')
 @endsection
