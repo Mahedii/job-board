@@ -48,7 +48,12 @@ Route::prefix('job-seeker')->group(function () {
             Route::controller(ResumeBuilderController::class)->group(function () {
                 Route::get('/my-resume', 'myResumePage')->name('resume-builder-page');
                 Route::post('/education/fetch-values', 'fetchDegreeTitleByEducationLevel')->name('fetch-values');
+                Route::post('/general-information/add', 'addGeneralInfo')->name('js-add-general-info');
                 Route::post('/education/add', 'addEducation')->name('js-add-education');
+                Route::post('/work-experience/add', 'addWorkExperience')->name('js-add-work-experience');
+                Route::post('/certification/add', 'addCertification')->name('js-add-certification');
+                Route::post('/publications/add', 'addPublications')->name('js-add-publications');
+                Route::post('/langugaes/add', 'addLangugaes')->name('js-add-langugaes');
             });
         });
     });

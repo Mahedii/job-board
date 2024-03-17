@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('certification_name');
             $table->string('certification_institution');
             $table->string('certified_month');
-            $table->string('certified_year');
+            $table->integer('certified_year');
             $table->string('slug')->unique()->nullable();
             $table->text('remarks')->nullable();
             $table->timestamps();

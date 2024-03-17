@@ -15,7 +15,7 @@
                     </div>
 
                     <div class="widget-content">
-                        <form class="default-form">
+                        <form class="default-form" method="POST" action="{{ route('js-add-general-info') }}" enctype="multipart/form-data">
                             <div class="row">
                                 {{-- <div class="form-group col-lg-6 col-md-12">
                                     <label>Select Your CV</label>
@@ -23,245 +23,94 @@
                                         <option>My CV</option>
                                     </select>
                                 </div> --}}
-                                <div class="form-group col-lg-6 col-md-6 col-sm-12">
-                                    <label>Full Name</label>
-                                    <input type="text" name="name" placeholder="Mr. X" />
-                                </div>
-
-                                <div class="form-group col-lg-6 col-md-6 col-sm-12">
-                                    <label>Email</label>
-                                    <input type="email" name="email" placeholder="xx@xx.xx" />
-                                </div>
-
-                                <div class="form-group col-lg-6 col-md-6 col-sm-12">
-                                    <label>Phone</label>
-                                    <input type="text" name="phone_no" placeholder="01*********" />
-                                </div>
-
-                                <div class="form-group col-lg-6 col-md-6 col-sm-12">
-                                    <label>Address</label>
-                                    <input type="text" name="address" placeholder="Ex: Dhaka, Bangladesh" />
-                                </div>
-
-                                {{-- About Yourself --}}
                                 <div class="form-group col-lg-12 col-md-12">
-                                    <label>Career Summary</label>
-                                    <textarea name="career_summary"
-                                        placeholder="Spent several years working on sheep on Wall Street. Had moderate success investing in Yugo's on Wall Street. Managed a small team buying and selling Pogo sticks for farmers. Spent several years licensing licorice in West Palm Beach, FL. Developed several new methods for working it banjos in the aftermarket. Spent a weekend importing banjos in West Palm Beach, FL.In this position, the Software Engineer collaborates with Evention's Development team to continuously enhance our current software solutions as well as create new solutions to eliminate the back-office operations and management challenges present"></textarea>
-                                </div>
-
-                                <div class="form-group col-lg-12 col-md-12">
-                                    @if(session('add-education-message'))
-                                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                            <strong>{{ session('add-education-message') }}</strong>
-                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                                        </div>
-                                    @endif
-                                    <!-- Resume / Education -->
-                                    <div class="resume-outer">
-                                        <div class="upper-title">
-                                            <h4>Education</h4>
-                                            <a href="JavaScript:Void(0);" class="add-info-btn" data-bs-toggle="modal"
-                                                data-bs-target="#addEducation"><span class="icon flaticon-plus"></span> Add
-                                                Education</a>
-                                        </div>
-                                        <!-- Resume BLock -->
-                                        @foreach($jobSeekerEducationsData as $key => $educationsData)
-                                            <div class="resume-block">
-                                                <div class="inner" style="padding-bottom: 0px">
-                                                    <span class="name">{{ $educationsData->educationLevel->level_icon }}</span>
-                                                    <div class="title-box">
-                                                        <div class="info-box">
-                                                            <h3>{{ $educationsData->educationLevel->level_name }} in {{ $educationsData->educationSubject->subject_name }}</h3>
-                                                            <p style="margin-bottom: 0px">{{ $educationsData->institute_name }}, {{ $educationsData->educationDegreeTitle->degree_initial_form }}</p>
-                                                            @if($educationsData->cgpa != null && $educationsData->education_institute_type_id == 4)
-                                                                <p>CGPA: {{ $educationsData->cgpa }}/{{ $educationsData->scale }}</p>
-                                                            @elseif($educationsData->cgpa != null)
-                                                                <p>GPA: {{ $educationsData->cgpa }}/{{ $educationsData->scale }}</p>
-                                                            @elseif($educationsData->marks != null)
-                                                                <p>Marks: {{ $educationsData->marks }}%</p>
-                                                            @endif
-                                                        </div>
-                                                        <div class="edit-box">
-                                                            <span class="year">@if($educationsData->duration != null) {{ $educationsData->year_of_passing - $educationsData->duration}} -@endif {{ $educationsData->year_of_passing }}</span>
-                                                            <div class="edit-btns">
-                                                                {{-- <button><span class="la la-pencil"></span></button> --}}
-                                                                <button><span class="la la-trash"></span></button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    {{-- <div class="text">Lorem ipsum dolor sit amet, consectetur
-                                                        adipiscing elit. Proin a ipsum tellus. Interdum et
-                                                        malesuada fames ac ante<br> ipsum primis in faucibus.
-                                                    </div> --}}
-                                                </div>
-                                            </div>
-                                        @endforeach
-
-                                        <!-- Resume BLock -->
-                                        <div class="resume-block">
-                                            <div class="inner">
-                                                <span class="name">H</span>
-                                                <div class="title-box">
-                                                    <div class="info-box">
-                                                        <h3>Computer Science</h3>
-                                                        <span>Harvard University</span>
-                                                    </div>
-                                                    <div class="edit-box">
-                                                        <span class="year">2008 - 2012</span>
-                                                        <div class="edit-btns">
-                                                            <button><span class="la la-pencil"></span></button>
-                                                            <button><span class="la la-trash"></span></button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="text">Lorem ipsum dolor sit amet, consectetur
-                                                    adipiscing elit. Proin a ipsum tellus. Interdum et
-                                                    malesuada fames ac ante<br> ipsum primis in faucibus.
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!-- Resume / Work & Experience -->
-                                    <div class="resume-outer theme-blue">
-                                        <div class="upper-title">
-                                            <h4>Work & Experience</h4>
-                                            <button class="add-info-btn"><span class="icon flaticon-plus"></span> Add
-                                                Work</button>
-                                        </div>
-                                        <!-- Resume BLock -->
-                                        <div class="resume-block">
-                                            <div class="inner">
-                                                <span class="name">S</span>
-                                                <div class="title-box">
-                                                    <div class="info-box">
-                                                        <h3>Product Designer</h3>
-                                                        <span>Spotify Inc.</span>
-                                                    </div>
-                                                    <div class="edit-box">
-                                                        <span class="year">2012 - 2014</span>
-                                                        <div class="edit-btns">
-                                                            <button><span class="la la-pencil"></span></button>
-                                                            <button><span class="la la-trash"></span></button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="text">Lorem ipsum dolor sit amet, consectetur
-                                                    adipiscing elit. Proin a ipsum tellus. Interdum et
-                                                    malesuada fames ac ante<br> ipsum primis in faucibus.
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!-- Resume BLock -->
-                                        <div class="resume-block">
-                                            <div class="inner">
-                                                <span class="name">D</span>
-                                                <div class="title-box">
-                                                    <div class="info-box">
-                                                        <h3>Sr UX Engineer</h3>
-                                                        <span>Dropbox Inc.</span>
-                                                    </div>
-                                                    <div class="edit-box">
-                                                        <span class="year">2012 - 2014</span>
-                                                        <div class="edit-btns">
-                                                            <button><span class="la la-pencil"></span></button>
-                                                            <button><span class="la la-trash"></span></button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="text">Lorem ipsum dolor sit amet, consectetur
-                                                    adipiscing elit. Proin a ipsum tellus. Interdum et
-                                                    malesuada fames ac ante<br> ipsum primis in faucibus.
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-group col-lg-6 col-md-12">
                                     <div class="uploading-outer">
                                         <div class="uploadButton">
-                                            <input class="uploadButton-input" type="file" name="attachments[]"
-                                                accept="image/*, application/pdf" id="upload" multiple />
+                                            <input class="uploadButton-input" type="file" name="jobseeker_image"
+                                                accept="image/*" id="upload" />
                                             <label class="uploadButton-button ripple-effect" for="upload">Add
-                                                Portfolio</label>
+                                                Image</label>
                                             <span class="uploadButton-file-name"></span>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="form-group col-lg-12 col-md-12">
-                                    <!-- Resume / Awards -->
-                                    <div class="resume-outer theme-yellow">
-                                        <div class="upper-title">
-                                            <h4>Awards</h4>
-                                            <button class="add-info-btn"><span class="icon flaticon-plus"></span>
-                                                Awards</button>
-                                        </div>
-                                        <!-- Resume BLock -->
-                                        <div class="resume-block">
-                                            <div class="inner">
-                                                <span class="name"></span>
-                                                <div class="title-box">
-                                                    <div class="info-box">
-                                                        <h3>Perfect Attendance Programs</h3>
-                                                        <span></span>
-                                                    </div>
-                                                    <div class="edit-box">
-                                                        <span class="year">2012 - 2014</span>
-                                                        <div class="edit-btns">
-                                                            <button><span class="la la-pencil"></span></button>
-                                                            <button><span class="la la-trash"></span></button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="text">Lorem ipsum dolor sit amet, consectetur
-                                                    adipiscing elit. Proin a ipsum tellus. Interdum et
-                                                    malesuada fames ac ante<br> ipsum primis in faucibus.
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                        <!-- Resume BLock -->
-                                        <div class="resume-block">
-                                            <div class="inner">
-                                                <span class="name"></span>
-                                                <div class="title-box">
-                                                    <div class="info-box">
-                                                        <h3>Top Performer Recognition</h3>
-                                                        <span></span>
-                                                    </div>
-                                                    <div class="edit-box">
-                                                        <span class="year">2012 - 2014</span>
-                                                        <div class="edit-btns">
-                                                            <button><span class="la la-pencil"></span></button>
-                                                            <button><span class="la la-trash"></span></button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="text">Lorem ipsum dolor sit amet, consectetur
-                                                    adipiscing elit. Proin a ipsum tellus. Interdum et
-                                                    malesuada fames ac ante<br> ipsum primis in faucibus.
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                                    <label>Full Name <span class="text-danger">*</span></label>
+                                    <input type="text" name="jobseeker_name" placeholder="Mr. X" />
                                 </div>
 
-                                <!-- Search Select -->
-                                <div class="form-group col-lg-6 col-md-12">
-                                    <label>Skills </label>
-                                    <select data-placeholder="Categories" class="chosen-select multiple" multiple
-                                        tabindex="4">
-                                        <option value="Banking">Banking</option>
-                                        <option value="Digital&Creative">Digital & Creative</option>
-                                        <option value="Retail">Retail</option>
-                                        <option value="Human Resources">Human Resources</option>
-                                        <option value="Management">Management</option>
+                                <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                                    <label>Email <span class="text-danger">*</span></label>
+                                    <input type="email" name="jobseeker_mail" placeholder="xx@xx.xx" />
+                                </div>
+
+                                <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                                    <label>Date of Birth <span class="text-danger">*</span></label>
+                                    <input type="date" name="jobseeker_dob" class="form-control input-custom-style" placeholder="MM/DD/YYYY">
+                                </div>
+
+                                <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                                    <label>Religion <span class="text-danger">*</span></label>
+                                    <select id="" name="jobseeker_religion" class="form-control chosen-select">
+                                        <option value="-1">Select Religion</option>
+                                        <option value="Buddhism">Buddhism</option>
+                                        <option value="Christianity">Christianity</option>
+                                        <option value="Hinduism">Hinduism</option>
+                                        <option value="Islam">Islam</option>
+                                        <option value="Jainism">Jainism</option>
+                                        <option value="Judaism">Judaism</option>
+                                        <option value="Sikhism">Sikhism</option>
+                                        <option value="Others">Others</option>
                                     </select>
+                                </div>
+
+                                <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                                    <label>Gender <span class="text-danger">*</span></label>
+                                    <select id="" name="jobseeker_gender" class="form-control chosen-select">
+                                        <option value="-1">Select Gender</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                        <option value="Others">Others</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                                    <label>Marital Status <span class="text-danger">*</span></label>
+                                    <select id="" name="jobseeker_marital_status" class="form-control chosen-select">
+                                        <option value="-1">Select Status</option>
+                                        <option value="Married">Married</option>
+                                        <option value="Unmarried">Unmarried</option>
+                                        <option value="Single">Single</option>
+                                        <option value="Divorced">Divorced</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                                    <label>Primary Mobile <span class="text-danger">*</span></label>
+                                    <input type="text" name="jobseeker_phone_no_1" placeholder="01*********" />
+                                </div>
+
+                                <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                                    <label>Secondary Mobile</label>
+                                    <input type="text" name="jobseeker_phone_no_2" placeholder="01*********" />
+                                </div>
+
+                                <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                                    <label>National Id</label>
+                                    <input type="text" name="jobseeker_nid_no" placeholder="" />
+                                </div>
+
+                                <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                                    <label>Address <span class="text-danger">*</span></label>
+                                    <input type="text" name="jobseeker_address" placeholder="Ex: Dhaka, Bangladesh" />
+                                </div>
+
+                                {{-- About Yourself --}}
+                                <div class="form-group col-lg-12 col-md-12">
+                                    <label>Career Summary <span class="text-danger">*</span></label>
+                                    <textarea name="jobseeker_career_summary"
+                                        placeholder="Spent several years working on sheep on Wall Street"></textarea>
                                 </div>
 
                                 <!-- Input -->
@@ -275,7 +124,292 @@
             </div>
         </div>
 
-        <!-- Log In Modal -->
+        <div class="col-lg-12">
+            <!-- Ls widget -->
+            <div class="ls-widget">
+                <div class="tabs-box">
+                    <div class="widget-title">
+                        <h4></h4>
+                    </div>
+
+                    <div class="widget-content">
+                        <div class="row">
+                            <!-- Resume / Work & Experience -->
+                            <div class="form-group col-lg-12 col-md-12">
+                                @if(session('add-education-message'))
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                        <strong>{{ session('add-education-message') }}</strong>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                @endif
+                                <div class="resume-outer theme-blue">
+                                    @if(session('add-work-xp-message'))
+                                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                            <strong>{{ session('add-work-xp-message') }}</strong>
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                        </div>
+                                    @endif
+                                    <div class="upper-title">
+                                        <h4>Work & Experience</h4>
+                                        <a href="JavaScript:Void(0);" class="add-info-btn" data-bs-toggle="modal"
+                                            data-bs-target="#addWorkExperience"><span class="icon flaticon-plus"></span> Add
+                                            Work</a>
+                                    </div>
+                                    <!-- Resume BLock -->
+                                    @foreach($jobSeekerExperiencesData as $key => $workXpData)
+                                        <div class="resume-block">
+                                            <div class="inner">
+                                                <span class="name">{{ ++$key }}</span>
+                                                <div class="title-box">
+                                                    <div class="info-box">
+                                                        <h3>{{ $workXpData->designation }}</h3>
+                                                        <span>{{ $workXpData->organization_name }}</span>
+                                                    </div>
+                                                    <div class="edit-box">
+                                                        <span class="year">{{ $workXpData->workingTime }}</span>
+                                                        <div class="edit-btns">
+                                                            {{-- <button><span class="la la-pencil"></span></button> --}}
+                                                            <button><span class="la la-trash"></span></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="text">
+                                                    {{ $workXpData->responsibilities }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+
+                            <!-- Resume / Education -->
+                            <div class="form-group col-lg-12 col-md-12">
+                                @if(session('add-education-message'))
+                                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                        <strong>{{ session('add-education-message') }}</strong>
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                    </div>
+                                @endif
+                                <div class="resume-outer">
+                                    <div class="upper-title">
+                                        <h4>Education</h4>
+                                        <a href="JavaScript:Void(0);" class="add-info-btn" data-bs-toggle="modal"
+                                            data-bs-target="#addEducation"><span class="icon flaticon-plus"></span> Add
+                                            Education</a>
+                                    </div>
+                                    <!-- Resume BLock -->
+                                    @foreach($jobSeekerEducationsData as $key => $educationsData)
+                                        <div class="resume-block">
+                                            <div class="inner" style="padding-bottom: 0px">
+                                                <span class="name">{{ $educationsData->educationLevel->level_icon }}</span>
+                                                <div class="title-box">
+                                                    <div class="info-box">
+                                                        <h3>{{ $educationsData->educationLevel->level_name }} in {{ $educationsData->educationSubject->subject_name }}</h3>
+                                                        <p style="margin-bottom: 0px">{{ $educationsData->institute_name }}, {{ $educationsData->educationDegreeTitle->degree_initial_form }}</p>
+                                                        @if($educationsData->cgpa != null && $educationsData->education_institute_type_id == 4)
+                                                            <p>CGPA: {{ $educationsData->cgpa }}/{{ $educationsData->scale }}</p>
+                                                        @elseif($educationsData->cgpa != null)
+                                                            <p>GPA: {{ $educationsData->cgpa }}/{{ $educationsData->scale }}</p>
+                                                        @elseif($educationsData->marks != null)
+                                                            <p>Marks: {{ $educationsData->marks }}%</p>
+                                                        @endif
+                                                    </div>
+                                                    <div class="edit-box">
+                                                        <span class="year">@if($educationsData->duration != null) {{ $educationsData->year_of_passing - $educationsData->duration}} -@endif {{ $educationsData->year_of_passing }}</span>
+                                                        <div class="edit-btns">
+                                                            {{-- <button><span class="la la-pencil"></span></button> --}}
+                                                            <button><span class="la la-trash"></span></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                {{-- <div class="text">Lorem ipsum dolor sit amet, consectetur
+                                                    adipiscing elit. Proin a ipsum tellus. Interdum et
+                                                    malesuada fames ac ante<br> ipsum primis in faucibus.
+                                                </div> --}}
+                                            </div>
+                                        </div>
+                                    @endforeach
+
+                                    <!-- Resume BLock -->
+                                    <div class="resume-block">
+                                        <div class="inner">
+                                            <span class="name">H</span>
+                                            <div class="title-box">
+                                                <div class="info-box">
+                                                    <h3>Computer Science</h3>
+                                                    <span>Harvard University</span>
+                                                </div>
+                                                <div class="edit-box">
+                                                    <span class="year">2008 - 2012</span>
+                                                    <div class="edit-btns">
+                                                        <button><span class="la la-pencil"></span></button>
+                                                        <button><span class="la la-trash"></span></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="text">Lorem ipsum dolor sit amet, consectetur
+                                                adipiscing elit. Proin a ipsum tellus. Interdum et
+                                                malesuada fames ac ante<br> ipsum primis in faucibus.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {{-- <div class="form-group col-lg-6 col-md-12">
+                                <div class="uploading-outer">
+                                    <div class="uploadButton">
+                                        <input class="uploadButton-input" type="file" name="attachments[]"
+                                            accept="image/*, application/pdf" id="upload" multiple />
+                                        <label class="uploadButton-button ripple-effect" for="upload">Add
+                                            Portfolio</label>
+                                        <span class="uploadButton-file-name"></span>
+                                    </div>
+                                </div>
+                            </div> --}}
+
+                            <!-- Resume / Certifications -->
+                            <div class="form-group col-lg-12 col-md-12">
+                                <!-- Resume / Certifications -->
+                                <div class="resume-outer theme-yellow">
+                                    @if(session('add-certification-message'))
+                                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                            <strong>{{ session('add-certification-message') }}</strong>
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                        </div>
+                                    @endif
+                                    <div class="upper-title">
+                                        <h4>Certifications</h4>
+                                        <a href="JavaScript:Void(0);" class="add-info-btn" data-bs-toggle="modal"
+                                            data-bs-target="#addCertification"><span class="icon flaticon-plus"></span>
+                                            Certifications</a>
+                                    </div>
+                                    <!-- Resume BLock -->
+                                    @foreach($jobSeekerCertificationData as $key => $certificationData)
+                                        <div class="resume-block">
+                                            <div class="inner">
+                                                <span class="name">{{ ++$key }}</span>
+                                                <div class="title-box">
+                                                    <div class="info-box">
+                                                        <h3>{{ $certificationData->certification_name }}</h3>
+                                                        <span>{{ $certificationData->certification_institution }}</span>
+                                                        <span></span>
+                                                    </div>
+                                                    <div class="edit-box">
+                                                        <span class="year">{{ $certificationData->certified_month }} , {{ $certificationData->certified_year }}</span>
+                                                        <div class="edit-btns">
+                                                            {{-- <button><span class="la la-pencil"></span></button> --}}
+                                                            <button><span class="la la-trash"></span></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+
+                            <!-- Resume / Research Papers -->
+                            <div class="form-group col-lg-12 col-md-12">
+                                <div class="resume-outer theme-yellow">
+                                    @if(session('add-publications-message'))
+                                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                            <strong>{{ session('add-publications-message') }}</strong>
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                        </div>
+                                    @endif
+                                    <div class="upper-title">
+                                        <h4>Research paper/Publications</h4>
+                                        <a href="JavaScript:Void(0);" class="add-info-btn" data-bs-toggle="modal"
+                                            data-bs-target="#addResearchPapers"><span class="icon flaticon-plus"></span>
+                                            Research paper/Publications</a>
+                                    </div>
+                                    <!-- Resume BLock -->
+                                    @foreach($jobSeekerResearchPapersData as $key => $publicationData)
+                                        <div class="resume-block">
+                                            <div class="inner">
+                                                <span class="name">{{ ++$key }}</span>
+                                                <div class="title-box">
+                                                    <div class="info-box">
+                                                        <h3>{{ $publicationData->research_paper_subject }}</h3>
+                                                        @if($publicationData->research_paper_url != null)
+                                                            <span>Publication link: {{ $publicationData->certification_institution }}</span>
+                                                        @endif
+                                                        <span></span>
+                                                    </div>
+                                                    <div class="edit-box">
+                                                        <span class="year">{{ $publicationData->certified_month }} , {{ $certificationData->certified_year }}</span>
+                                                        <div class="edit-btns">
+                                                            {{-- <button><span class="la la-pencil"></span></button> --}}
+                                                            <button><span class="la la-trash"></span></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="text">
+                                                    {{ $publicationData->research_paper_summary }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+
+                            <!-- Resume / Language Proficiency -->
+                            <div class="form-group col-lg-12 col-md-12">
+                                <div class="resume-outer theme-yellow">
+                                    @if(session('add-languages-message'))
+                                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                            <strong>{{ session('add-languages-message') }}</strong>
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                        </div>
+                                    @endif
+                                    <div class="upper-title">
+                                        <h4>Language Proficiency</h4>
+                                        <a href="JavaScript:Void(0);" class="add-info-btn" data-bs-toggle="modal"
+                                            data-bs-target="#addLanguage"><span class="icon flaticon-plus"></span>
+                                            Language Proficiency</a>
+                                    </div>
+                                    <!-- Resume BLock -->
+                                    @foreach($jobSeekerLanguagesData as $key => $languageData)
+                                        <div class="resume-block">
+                                            <div class="inner">
+                                                <span class="name">{{ ++$key }}</span>
+                                                <div class="title-box">
+                                                    <div class="info-box">
+                                                        <h3>{{ $languageData->language->language_name }} - {{ $languageData->proficiency }}</h3>
+                                                    </div>
+                                                    <div class="edit-box">
+                                                        <div class="edit-btns">
+                                                            {{-- <button><span class="la la-pencil"></span></button> --}}
+                                                            <button><span class="la la-trash"></span></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+
+                            <!-- Search Select -->
+                            <div class="form-group col-lg-6 col-md-12">
+                                <label>Skills </label>
+                                <select data-placeholder="Categories" class="chosen-select multiple" multiple
+                                    tabindex="4">
+                                    <option value="Banking">Banking</option>
+                                    <option value="Digital&Creative">Digital & Creative</option>
+                                    <option value="Retail">Retail</option>
+                                    <option value="Human Resources">Human Resources</option>
+                                    <option value="Management">Management</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Education Modal -->
         <div class="modal fade" id="addEducation" tabindex="-1" role="dialog" aria-labelledby="addEducationModal"
             aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered login-pop-form" role="document">
@@ -292,7 +426,7 @@
                                     @csrf
                                     <div class="row gx-3 gy-4">
                                         <div class="form-group col-lg-6 col-md-12 mb-4">
-                                            <label class="py-2">Level of Education </label>
+                                            <label class="py-2">Level of Education <span class="text-danger">*</span></label>
                                             <select id="education-level-select" name="education_level" data-placeholder="Education Level" class="form-control chosen-select">
                                                 <option value="">Select Level</option>
                                                 @foreach ($educationLevelsData as $key => $educationLevel)
@@ -302,7 +436,7 @@
                                         </div>
 
                                         <div class="form-group col-lg-6 col-md-12 mb-4" id="education-degree-title-select-wrapper">
-                                            <label class="py-2">Exam/Degree Title </label>
+                                            <label class="py-2">Exam/Degree Title <span class="text-danger">*</span></label>
                                             <select id="education-degree-title-select" name="exam_degree_title" data-placeholder="Degree Title" class="form-control chosen-select">
                                                 <option value="">Select Degree</option>
                                                 @foreach ($educationDegreeTitleData as $key => $educationDegreeTitle)
@@ -312,12 +446,12 @@
                                         </div>
 
                                         <div class="form-group col-lg-6 col-md-12 mb-4" id="education-degree-title-input-wrapper" style="display: none;">
-                                            <label class="py-2">Exam/Degree Title</label>
+                                            <label class="py-2">Exam/Degree Title <span class="text-danger">*</span></label>
                                             <input type="text" id="education-degree-title-input" name="exam_degree_title_1" class="form-control" placeholder="Enter Degree Title">
                                         </div>
 
                                         <div id="major-subject-dropdown" class="form-group col-lg-6 col-md-12 mb-4">
-                                            <label class="py-2">Concentration/Major/Group </label>
+                                            <label class="py-2">Concentration/Major/Group <span class="text-danger">*</span></label>
                                             <select name="major_subject" data-placeholder="Major Subject" class="form-control chosen-select">
                                                 <option value="">Select Subject</option>
                                                 @foreach ($educationSubjectsData as $key => $educationSubject)
@@ -327,7 +461,7 @@
                                         </div>
 
                                         <div id="education-board-dropdown" class="form-group col-lg-6 col-md-12 mb-4 hide">
-                                            <label class="py-2">Board </label>
+                                            <label class="py-2">Board <span class="text-danger">*</span></label>
                                             <select name="education_board" data-placeholder="Education Board" class="form-control chosen-select">
                                                 <option value="">Select Education Board</option>
                                                 <option value="Dhaka">Dhaka</option>
@@ -346,7 +480,7 @@
                                         </div>
 
                                         <div class="form-group col-lg-6 col-md-12 mb-4">
-                                            <label class="py-2">Institute Type </label>
+                                            <label class="py-2">Institute Type <span class="text-danger">*</span></label>
                                             <select id="institution-type" name="institution_type" data-placeholder="Institute Type" class="form-control chosen-select">
                                                 <option value="">Select Institute Type</option>
                                                 <option value="1">School</option>
@@ -357,7 +491,7 @@
                                         </div>
 
                                         <div id="institute-name" class="form-group col-lg-6 col-md-12 mb-4">
-                                            <label class="py-2">Institute Name </label>
+                                            <label class="py-2">Institute Name <span class="text-danger">*</span></label>
                                             {{-- <select data-placeholder="Institute Name" class="chosen-select">
                                                 <option>Select Institute</option>
                                                 <option value="-1">Others</option>
@@ -366,12 +500,12 @@
                                                         {{ $educationLevel->level_name }}</option>
                                                 @endforeach
                                             </select> --}}
-                                            <input type="text" id="institute-name-input" name="institution_name" class="form-control" placeholder="Type Institute Name">
+                                            <input type="text" id="institute-name-input" name="institution_name" class="form-control input-custom-style" placeholder="Type Institute Name">
                                             <div id="institute-name-dropdown" class="autocomplete-items"></div>
                                         </div>
 
                                         <div class="form-group col-lg-6 col-md-12 mb-4">
-                                            <label class="py-2">Result </label>
+                                            <label class="py-2">Result <span class="text-danger">*</span></label>
                                             <select id="result-type-select" name="result_type" data-placeholder="Result Type" class="form-control chosen-select">
                                                 <option value="">Select Result Type</option>
                                                 @foreach ($educationResultTypeData as $key => $educationResultType)
@@ -382,27 +516,27 @@
                                         </div>
 
                                         <div id="marks-input" class="form-group col-lg-6 col-md-12 mb-4 hide">
-                                            <label class="py-2">Marks (%)</label>
+                                            <label class="py-2">Marks (%) <span class="text-danger">*</span></label>
                                             <input name="exam_marks" type="text" class="form-control" placeholder="">
                                         </div>
 
                                         <div id="cgpa-input" class="form-group col-lg-6 col-md-12 mb-4 hide">
-                                            <label class="py-2">CGPA </label>
+                                            <label class="py-2">CGPA <span class="text-danger">*</span></label>
                                             <input name="exam_cgpa" type="text" class="form-control" placeholder="">
                                         </div>
 
                                         <div id="scale-input" class="form-group col-lg-6 col-md-12 mb-4 hide">
-                                            <label class="py-2">Scale </label>
+                                            <label class="py-2">Scale <span class="text-danger">*</span></label>
                                             <input name="grade_scale" type="text" class="form-control" placeholder="">
                                         </div>
 
                                         <div id="graduation-duration-input" class="hide form-group col-lg-6 col-md-12 mb-4 hide">
-                                            <label class="py-2">Duration </label>
+                                            <label class="py-2">Duration <span class="text-danger">*</span></label>
                                             <input name="graduation_duration" type="number" class="form-control" placeholder="">
                                         </div>
 
                                         <div class="form-group col-lg-6 col-md-12 mb-4">
-                                            <label class="py-2">Year of Passing </label>
+                                            <label class="py-2">Year of Passing <span class="text-danger">*</span></label>
                                             <select name="exam_passing_year" data-placeholder="Passing Year" class="form-control chosen-select">
                                                 <option value="">Select Year</option>
                                                 @foreach ($yearsData as $key => $year)
@@ -429,9 +563,276 @@
                 </div>
             </div>
         </div>
-        <!-- End Modal -->
+        <!-- End Education Modal -->
+
+        <!-- Work Experience Modal -->
+        <div class="modal fade" id="addWorkExperience" tabindex="-1" role="dialog" aria-labelledby="addWorkExperienceModal"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered login-pop-form" role="document">
+                <div class="modal-content" id="loginmodal">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="exampleModalLabel">Work Experience</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-12">
+                                <form method="POST" action="{{ route('js-add-work-experience') }}"
+                                    enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="row gx-3 gy-4">
+                                        <div class="form-group col-lg-6 col-md-12 mb-4">
+                                            <label class="py-2">Company Name <span class="text-danger">*</span></label>
+                                            <input type="text" name="organization_name" class="form-control input-custom-style"/>
+                                        </div>
+
+                                        <div class="form-group col-lg-6 col-md-12 mb-4">
+                                            <label class="py-2">Designation <span class="text-danger">*</span></label>
+                                            <input type="text" name="designation" class="form-control input-custom-style"/>
+                                        </div>
+
+                                        <div class="form-group col-lg-12 col-md-12 mb-4">
+                                            <label class="py-2">Responsibilities </label>
+                                            <textarea name="working_responsibilities" class="form-control input-custom-style" placeholder="Spent several years working on sheep on Wall Street..."></textarea>
+                                        </div>
+
+                                        <div id="major-subject-dropdown" class="form-group col-lg-3 col-md-3 mb-4">
+                                            <label class="py-2">From Month <span class="text-danger">*</span></label>
+                                            <select name="from_month" class="form-control chosen-select">
+                                                <option value="">Select Month</option>
+                                                @foreach ($monthsData as $key => $month)
+                                                    <option value="{{ $month->month_name }}">
+                                                        {{ $month->month_name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
+                                        <div id="" class="form-group col-lg-3 col-md-3 mb-4">
+                                            <label class="py-2">From Year <span class="text-danger">*</span></label>
+                                            <select name="from_year" class="form-control chosen-select">
+                                                <option value="">Select Year</option>
+                                                @foreach ($yearsData as $key => $year)
+                                                    <option value="{{ $year->year }}">
+                                                        {{ $year->year }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
+                                        <div id="" class="form-group col-lg-3 col-md-3 mb-4">
+                                            <label class="py-2">To Month <span class="text-danger">*</span></label>
+                                            <select id="to-month" name="to_month" class="form-control chosen-select">
+                                                <option value="">Select Month</option>
+                                                @foreach ($monthsData as $key => $month)
+                                                    <option value="{{ $month->month_name }}">
+                                                        {{ $month->month_name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group col-lg-3 col-md-3 mb-4">
+                                            <label class="py-2">To Year <span class="text-danger">*</span></label>
+                                            <select id="to-year" name="to_year" class="form-control chosen-select">
+                                                <option value="">Select Year</option>
+                                                @foreach ($yearsData as $key => $year)
+                                                    <option value="{{ $year->year }}">
+                                                        {{ $year->year }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group col-lg-3 col-md-3 mb-4">
+                                            <input name="currently_working" type="checkbox" id="currently-working" value="0" class="form-check-input">
+                                            <label class="form-check-label" for="formCheck1">
+                                                Currently Working
+                                            </label>
+                                        </div>
+
+                                        <div class="form-group mt-3">
+                                            <button type="submit" class="btn btn-primary full-width font--bold btn-md">Save</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Work Experience Modal -->
+
+        <!-- Certification Modal -->
+        <div class="modal fade" id="addCertification" tabindex="-1" role="dialog" aria-labelledby="addCertificationModal"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered login-pop-form" role="document">
+                <div class="modal-content" id="loginmodal">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="exampleModalLabel">Certification</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-12">
+                                <form method="POST" action="{{ route('js-add-certification') }}"
+                                    enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="row gx-3 gy-4">
+                                        <div class="form-group col-lg-6 col-md-12 mb-4">
+                                            <label class="py-2">Certification <span class="text-danger">*</span></label>
+                                            <input type="text" name="certification_name" class="form-control input-custom-style"/>
+                                        </div>
+
+                                        <div class="form-group col-lg-6 col-md-12 mb-4">
+                                            <label class="py-2">Institute <span class="text-danger">*</span></label>
+                                            <input type="text" name="certification_institution" class="form-control input-custom-style"/>
+                                        </div>
+
+                                        <div id="major-subject-dropdown" class="form-group col-lg-3 col-md-3 mb-4">
+                                            <label class="py-2">Certified Month <span class="text-danger">*</span></label>
+                                            <select name="certified_month" class="form-control chosen-select">
+                                                <option value="">Select Month</option>
+                                                @foreach ($monthsData as $key => $month)
+                                                    <option value="{{ $month->month_name }}">
+                                                        {{ $month->month_name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
+                                        <div id="" class="form-group col-lg-3 col-md-3 mb-4">
+                                            <label class="py-2">Certified Year <span class="text-danger">*</span></label>
+                                            <select name="certified_year" class="form-control chosen-select">
+                                                <option value="">Select Year</option>
+                                                @foreach ($yearsData as $key => $year)
+                                                    <option value="{{ $year->year }}">
+                                                        {{ $year->year }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group mt-3">
+                                            <button type="submit" class="btn btn-primary full-width font--bold btn-md">Save</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Certification Modal -->
+
+        <!-- Research Papers Modal -->
+        <div class="modal fade" id="addResearchPapers" tabindex="-1" role="dialog" aria-labelledby="addResearchPapersModal" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered login-pop-form" role="document">
+                <div class="modal-content" id="loginmodal">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="exampleModalLabel">Research paper/Publications</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-12">
+                                <form method="POST" action="{{ route('js-add-publications') }}"
+                                    enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="row gx-3 gy-4">
+                                        <div class="form-group col-lg-6 col-md-12 mb-4">
+                                            <label class="py-2">Subject <span class="text-danger">*</span></label>
+                                            <input type="text" name="research_paper_subject" class="form-control input-custom-style"/>
+                                        </div>
+
+                                        <div class="form-group col-lg-6 col-md-12 mb-4">
+                                            <label class="py-2">Publication Link </label>
+                                            <input type="text" name="research_paper_url" class="form-control input-custom-style"/>
+                                        </div>
+
+                                        <div class="form-group col-lg-12 col-md-12 mb-4">
+                                            <label class="py-2">Description <span class="text-danger">*</span></label>
+                                            <textarea name="research_paper_summary" class="form-control input-custom-style"></textarea>
+                                        </div>
+
+                                        <div class="form-group mt-3">
+                                            <button type="submit" class="btn btn-primary full-width font--bold btn-md">Save</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Research Papers Modal -->
+
+        <!-- Langugae Modal -->
+        <div class="modal fade" id="addLanguage" tabindex="-1" role="dialog" aria-labelledby="addLanguageModal" aria-hidden="true">
+            <div class="modal-dialog modal-lg modal-dialog-centered login-pop-form" role="document">
+                <div class="modal-content" id="loginmodal">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="exampleModalLabel">Language Proficiency</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-12">
+                                <form method="POST" action="{{ route('js-add-langugaes') }}"
+                                    enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="row gx-3 gy-4">
+                                        <div class="form-group col-lg-6 col-md-12 mb-4">
+                                            <label class="py-2">Langugae <span class="text-danger">*</span></label>
+                                            <select name="language_id" class="form-control chosen-select">
+                                                <option value="">Select Language</option>
+                                                @foreach ($languagesData as $key => $language)
+                                                    <option value="{{ $language->id }}">
+                                                        {{ $language->language_name }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group col-lg-6 col-md-6 mb-4">
+                                            <label class="py-2">Proficiency <span class="text-danger">*</span></label>
+                                            <select name="proficiency" class="form-control chosen-select">
+                                                <option value="">Select Language Proficiency</option>
+                                                <option value="Fluent">Fluent</option>
+                                                <option value="Native">Native</option>
+                                                <option value="Highly Skilled">Highly Skilled</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group mt-3">
+                                            <button type="submit" class="btn btn-primary full-width font--bold btn-md">Save</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Language Modal -->
+
         {{-- // var schoolAndCollegeData = {!! json_encode($schoolAndCollegeData) !!}; --}}
 
     </div>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(document).on('change', '#currently-working', function() {
+                var isChecked = this.checked;
+                // var value = isChecked ? this.value : '';
+                const toMonth = document.getElementById('to-month');
+                const toYear = document.getElementById('to-year');
+                if (isChecked) {
+                    $("#currently-working").val(1);
+                    toMonth.disabled = isChecked;
+                    toYear.disabled = isChecked;
+                } else {
+                    toMonth.disabled = false;
+                    toYear.disabled = false;
+                }
+            });
+        });
+    </script>
     @include('v1.careepick.dashboard.job-seeker.ajax.resume-builder.education')
 @endsection
