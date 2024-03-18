@@ -15,7 +15,6 @@ class SchoolAndCollege extends Model
 
         self::chunk(100, function ($schoolAndColleges) use (&$processedData) {
             foreach ($schoolAndColleges as $schoolAndCollege) {
-
                 $processedData[] = [
                     'id' => $schoolAndCollege->id,
                     'institute_name' => $schoolAndCollege->institute_name,
@@ -52,7 +51,6 @@ class SchoolAndCollege extends Model
 
         self::where('institute_type', 'Madrasha')->chunk(100, function ($schoolAndColleges) use (&$processedData) {
             foreach ($schoolAndColleges as $schoolAndCollege) {
-
                 $processedData[] = [
                     'id' => $schoolAndCollege->id,
                     'institute_name' => $schoolAndCollege->institute_name,
@@ -71,7 +69,6 @@ class SchoolAndCollege extends Model
 
         self::whereIn('institute_type', ['School', 'School and College'])->chunk(100, function ($schoolAndColleges) use (&$processedData) {
             foreach ($schoolAndColleges as $schoolAndCollege) {
-
                 $processedData[] = [
                     'id' => $schoolAndCollege->id,
                     'institute_name' => $schoolAndCollege->institute_name,
@@ -90,7 +87,6 @@ class SchoolAndCollege extends Model
 
         self::where('institute_type', 'College')->chunk(100, function ($schoolAndColleges) use (&$processedData) {
             foreach ($schoolAndColleges as $schoolAndCollege) {
-
                 $processedData[] = [
                     'id' => $schoolAndCollege->id,
                     'institute_name' => $schoolAndCollege->institute_name,

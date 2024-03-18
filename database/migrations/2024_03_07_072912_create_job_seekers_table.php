@@ -18,11 +18,11 @@ return new class extends Migration
             $table->string('jobseeker_name');
             $table->string('jobseeker_mail');
             $table->string('jobseeker_password');
-            $table->string('jobseeker_dob');
-            $table->string('jobseeker_marital_status');
-            $table->string('jobseeker_religion');
+            $table->string('jobseeker_dob')->nullable();
+            $table->string('jobseeker_marital_status')->nullable();
+            $table->string('jobseeker_religion')->nullable();
             $table->string('jobseeker_nid_no')->nullable();
-            $table->string('jobseeker_gender');
+            $table->string('jobseeker_gender')->nullable();
             // $table->unsignedBigInteger('jobseeker_gender_id')->nullable();
             // $table->foreign('jobseeker_gender_id')->references('id')->on('genders')->onDelete('set null');
             $table->text('jobseeker_address')->nullable();

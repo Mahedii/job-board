@@ -8,4 +8,22 @@ use Illuminate\Database\Eloquent\Model;
 class Skills extends Model
 {
     use HasFactory;
+
+    public static function getAllData()
+    {
+        $processedData = [];
+
+        self::chunk(100, function ($skills) use (&$processedData) {
+            foreach ($skills as $skill) {
+                $processedData[] = [
+                    'id' => $skill->id,
+                    'skill_name' => $skill->skill_name,
+                    'job_category_id' => $skill->job_category_id,
+                    'slug' => $skill->slug,
+                ];
+            }
+        });
+
+        return $processedData;
+    }
 }

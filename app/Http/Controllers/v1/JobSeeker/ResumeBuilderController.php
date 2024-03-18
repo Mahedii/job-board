@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers\v1\JobSeeker;
 
+use File;
 use Exception;
 use Carbon\Carbon;
+// use Illuminate\Http\File;
 use Illuminate\View\View;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\v1\careepick\Year;
 use App\Models\v1\careepick\Month;
+use App\Models\v1\careepick\Skills;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -21,6 +24,7 @@ use App\Models\v1\careepick\EducationSubjects;
 use App\Models\v1\careepick\EducationResultType;
 use App\Models\v1\careepick\JobSeeker\JobSeeker;
 use App\Models\v1\careepick\EducationDegreeTitle;
+use App\Models\v1\careepick\JobSeeker\JobSeekerSkills;
 use App\Models\v1\careepick\JobSeeker\JobSeekerLanguages;
 use App\Models\v1\careepick\JobSeeker\JobSeekerEducations;
 use App\Models\v1\careepick\JobSeeker\JobSeekerExperiences;
@@ -44,6 +48,11 @@ class ResumeBuilderController extends Controller
         'December' => 12,
     ];
 
+    public function showResume()
+    {
+        return view('v1.careepick.dashboard.job-seeker.resume');
+    }
+
     /**
      * redirect to home page with required data
      *
@@ -61,12 +70,16 @@ class ResumeBuilderController extends Controller
         $yearsData = Year::select("*")->get();
         $monthsData = Month::select("*")->get();
         $languagesData = Languages::select("*")->get();
+        $skillsData = Skills::getAllData();
 
         $jobSeekerData = JobSeeker::select("*")->where('user_id', Auth::user()->id)->get();
         $jobSeekerData->transform(function ($jobSeeker) {
-            $jobSeeker->formatted_dob = Carbon::createFromFormat('m/d/Y', $jobSeeker->jobseeker_dob)->format('Y-m-d');
+            if ($jobSeeker->jobseeker_dob != null) {
+                $jobSeeker->formatted_dob = Carbon::createFromFormat('m/d/Y', $jobSeeker->jobseeker_dob)->format('Y-m-d');
+            }
             return $jobSeeker;
         });
+        $jobSeekerSkillsData = JobSeekerSkills::with(['skills'])->where('job_seeker_id', app('jobSeeker')->id)->get();
         $jobSeekerLanguagesData = JobSeekerLanguages::with(['language'])->where('job_seeker_id', app('jobSeeker')->id)->get();
         $jobSeekerResearchPapersData = JobSeekerResearchPapers::select("*")->where('job_seeker_id', app('jobSeeker')->id)->get();
         $jobSeekerCertificationData = JobSeekerCertifications::select("*")->where('job_seeker_id', app('jobSeeker')->id)->get();
@@ -101,11 +114,11 @@ class ResumeBuilderController extends Controller
 
             if ($item->school_name != null) {
                 $institute_name = $item->school_name;
-            } else if ($item->college_name != null) {
+            } elseif ($item->college_name != null) {
                 $institute_name = $item->college_name;
-            } else if ($item->madrasha_name != null) {
+            } elseif ($item->madrasha_name != null) {
                 $institute_name = $item->madrasha_name;
-            } else if ($item->university_name != null) {
+            } elseif ($item->university_name != null) {
                 $institute_name = $item->university_name;
             }
 
@@ -134,7 +147,7 @@ class ResumeBuilderController extends Controller
                 case 'Ph.D.':
                     $level_icon = 'Ph.D';
                     break;
-                // Add more cases as needed
+                    // Add more cases as needed
                 default:
                     $level_icon = '';
             }
@@ -158,18 +171,21 @@ class ResumeBuilderController extends Controller
             'yearsData' => $yearsData,
             'monthsData' => $monthsData,
             'languagesData' => $languagesData,
+            'skillsData' => $skillsData,
             'jobSeekerData' => $jobSeekerData,
             'jobSeekerEducationsData' => $jobSeekerEducationsData,
             'jobSeekerExperiencesData' => $jobSeekerExperiencesData,
             'jobSeekerCertificationData' => $jobSeekerCertificationData,
             'jobSeekerResearchPapersData' => $jobSeekerResearchPapersData,
             'jobSeekerLanguagesData' => $jobSeekerLanguagesData,
+            'jobSeekerSkillsData' => $jobSeekerSkillsData,
         ];
 
         return view('v1.careepick.dashboard.job-seeker.resume-builder', $data);
     }
 
-    private function calculateDuration($startMonth, $startYear, $endMonth, $endYear) {
+    private function calculateDuration($startMonth, $startYear, $endMonth, $endYear)
+    {
         // Convert month names to numeric values
         $startMonthNumeric = $this->months[$startMonth];
         $endMonthNumeric = $endMonth ? $this->months[$endMonth] : date('n'); // Use current month if endMonth is null
@@ -182,7 +198,7 @@ class ResumeBuilderController extends Controller
         $years = floor($totalMonths / 12);
         $months = $totalMonths % 12;
 
-        return $years . "y " . $months ."m";
+        return $years . "y " . $months . "m";
 
         return [
             'years' => $years,
@@ -192,13 +208,13 @@ class ResumeBuilderController extends Controller
 
     public function fetchDegreeTitleByEducationLevel(Request $request)
     {
-        try{
-            switch($request->requestedData) {
-                case('education-level-degree'):
+        try {
+            switch ($request->requestedData) {
+                case ('education-level-degree'):
                     $data = EducationDegreeTitle::where('education_level_id', $request->educationLevelId)->get();
                     $formattedResponse = $this->formatResponse($data);
                     break;
-                case('school-college-university'):
+                case ('school-college-university'):
                     if ($request->institutionType == "1") {
                         $data = SchoolAndCollege::getAllDataByInstitutionType('School', 'School and College');
                     } else if ($request->institutionType == "2") {
@@ -250,7 +266,132 @@ class ResumeBuilderController extends Controller
 
     public function addGeneralInfo(Request $request)
     {
-        //
+        try {
+            // dd($request);
+            // Get the JobSeeker instance
+            $jobSeeker = JobSeeker::findOrFail($request->input('jobseeker_id'));
+
+            // Get the old values
+            $oldValues = $jobSeeker->toArray();
+
+            // Get the new values from the request
+            $newValues = $request->only([
+                'jobseeker_name',
+                'jobseeker_mail',
+                'jobseeker_dob',
+                'jobseeker_religion',
+                'jobseeker_gender',
+                'jobseeker_marital_status',
+                'jobseeker_phone_no_1',
+                'jobseeker_phone_no_2',
+                'jobseeker_nid_no',
+                'jobseeker_address',
+                'jobseeker_career_summary'
+            ]);
+
+            // Compare old values with new values and update only the changed fields
+            foreach ($newValues as $key => $newValue) {
+                if ($newValue !== $oldValues[$key]) {
+                    $jobSeeker->$key = $newValue;
+                }
+            }
+
+            if ($request->hasfile('jobseeker_image')) {
+                $file = $request->jobseeker_image;
+                $filePath = $this->getPathForUploadedFile($file);
+                $jobSeeker->jobseeker_image = $filePath;
+            }
+
+            // Save the changes
+            $jobSeeker->save();
+
+            // Redirect back or wherever you want
+            return redirect()->back()->with('success', 'General info updated successfully');
+
+            $jobSeekerArray = [
+                'job_seeker_id' => app('jobSeeker')->id,
+                'organization_name' => $request->organization_name,
+                'designation' => $request->designation,
+                'responsibilities' => $request->working_responsibilities,
+                'start_month' => $request->from_month,
+                'start_year' => $request->from_year,
+            ];
+
+            if ($request->currently_working != 1) {
+                $jobSeekerArray['end_month'] = $request->to_month;
+                $jobSeekerArray['end_year'] = $request->to_year;
+            } else {
+                $jobSeekerArray['currently_working'] = "yes";
+            }
+
+            JobSeeker::create($jobSeekerArray);
+            return redirect()->back()->with('add-work-xp-message', "Work experience added successfully");
+        } catch (Exception $e) {
+            Log::error($e);
+        }
+    }
+
+    /**
+     * Get path for uploaded files
+     *
+     * @param string $tableSecretKey
+     * @param string $slug
+     * @param object $file
+     * @return string
+     */
+    private function getPathForUploadedFile(object $file): string
+    {
+        $fileExtension = $file->extension();
+        $fileExtension = strtolower($file->getClientOriginalExtension());
+        $fileName = "profile_image." . $fileExtension;
+
+        $path = public_path('dashboard/assets/images/job-seeker/' . app('jobSeeker')->id);
+
+        $this->createDirectory($path);
+
+        // ResizeImage::make($file)->resize(300, 200)->save(public_path($filePath));
+        if ($file->move($path, $fileName)) {
+            $filePath = 'dashboard/assets/images/job-seeker/' . app('jobSeeker')->id . '/' . $fileName;
+        }
+
+        return $filePath;
+    }
+
+    /**
+     * Create directory if not exist
+     *
+     * @param string $path
+     * @return void
+     */
+    private function createDirectory(string $path): void
+    {
+        if (!File::isDirectory($path)) {
+            File::makeDirectory($path, 0777, true, true);
+        }
+    }
+
+    public function addSkills(Request $request)
+    {
+        try {
+            // dd($request);
+            $request->validate([
+                'skill_id' => 'required|array',
+                'skill_id.*' => 'exists:skills,id', // Assuming 'skills' is the table name for skills
+                // Add other validation rules if needed
+            ]);
+
+            // Call the addSkills method to save the skills
+            JobSeekerSkills::addSkills([
+                'job_seeker_id' => app('jobSeeker')->id, // Assuming you're storing the job seeker ID in the session
+                'skill_id' => $request->skill_id,
+                // Add other attributes if needed
+            ]);
+
+            // Redirect back with a success message or any other response
+            return redirect()->back()->with('success', 'Skills added successfully.');
+        } catch (Exception $e) {
+            Log::error($e);
+        }
     }
 
     public function addWorkExperience(Request $request)

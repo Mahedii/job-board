@@ -47,6 +47,7 @@ Route::prefix('job-seeker')->group(function () {
         Route::middleware('is_verify_email')->group(function () {
             Route::controller(ResumeBuilderController::class)->group(function () {
                 Route::get('/my-resume', 'myResumePage')->name('resume-builder-page');
+                Route::get('/resume', 'showResume')->name('show-resume');
                 Route::post('/education/fetch-values', 'fetchDegreeTitleByEducationLevel')->name('fetch-values');
                 Route::post('/general-information/add', 'addGeneralInfo')->name('js-add-general-info');
                 Route::post('/education/add', 'addEducation')->name('js-add-education');
@@ -54,6 +55,7 @@ Route::prefix('job-seeker')->group(function () {
                 Route::post('/certification/add', 'addCertification')->name('js-add-certification');
                 Route::post('/publications/add', 'addPublications')->name('js-add-publications');
                 Route::post('/langugaes/add', 'addLangugaes')->name('js-add-langugaes');
+                Route::post('/skills/add', 'addSkills')->name('js-add-skills');
             });
         });
     });

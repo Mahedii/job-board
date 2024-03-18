@@ -1264,7 +1264,7 @@ INSERT INTO skills (`skill_name`, `job_category_id`) VALUES
 ('Electrical Power Distribution', 5),
 ('Seismic Design Codes', 5),
 ('Construction Materials', 5),
-('Sewer System Design', 5)
+('Sewer System Design', 5),
 ('Civil Engineering', 5),
 ('Electrical Engineering', 5),
 ('Building Design', 5),
@@ -9916,5 +9916,4 @@ INSERT INTO skills (`skill_name`, `job_category_id`) VALUES
 ('Occupational Health Conference Planning', 19),
 ('Occupational Health Journal Publication', 19),
 ('Occupational Health Education Program Development', 19),
-('Occupational Health and Safety Training Program Development', 19),
-
+('Occupational Health and Safety Training Program Development', 19);

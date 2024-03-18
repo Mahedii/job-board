@@ -1,4 +1,4 @@
-INSERT INTO `job_category` (`name`) VALUES
+INSERT INTO `job_categories` (`category_name`) VALUES
 ('Accounting/Finance'),
 ('Bank/ Non-Bank Fin. Institution'),
 ('Supply Chain/ Procurement'),

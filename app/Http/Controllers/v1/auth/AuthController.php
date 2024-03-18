@@ -22,6 +22,8 @@ use App\Models\v1\careepick\JobSeeker\JobSeeker;
 
 class AuthController extends Controller
 {
+    private $user = [];
+
     /**
      * redirect to home page with required data
      *
@@ -60,6 +62,7 @@ class AuthController extends Controller
         // dd($data);
 
         $createUser = $this->create($data, 1);
+        // dd($createUser);
 
         $token = Str::random(64);
 
@@ -230,7 +233,7 @@ class AuthController extends Controller
 
             DB::transaction(function () use ($data, $userType) {
                 // First query: Create a new user
-                $user = User::create([
+                $this->user = User::create([
                     'name' => $data['name'],
                     'email' => $data['email'],
                     'phone_no' => $data['phone_no'],
@@ -240,7 +243,7 @@ class AuthController extends Controller
 
                 // Second query: Create a new job seeker
                 JobSeeker::create([
-                    'user_id' => $user->id,
+                    'user_id' => $this->user->id,
                     'jobseeker_name' => $data['name'],
                     'jobseeker_mail' => $data['email'],
                     'jobseeker_password' => Hash::make($data['password']),
@@ -252,11 +255,12 @@ class AuthController extends Controller
             // Commit the transaction
             DB::commit();
 
-            return $user;
+            return $this->user;
         } catch (\Exception $e) {
             // Something went wrong
             // Roll back the transaction
             DB::rollBack();
+            Log::error($e);
         }
     }
 
