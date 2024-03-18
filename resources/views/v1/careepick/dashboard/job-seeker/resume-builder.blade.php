@@ -16,108 +16,111 @@
 
                     <div class="widget-content">
                         <form class="default-form" method="POST" action="{{ route('js-add-general-info') }}" enctype="multipart/form-data">
-                            <div class="row">
-                                {{-- <div class="form-group col-lg-6 col-md-12">
-                                    <label>Select Your CV</label>
-                                    <select class="chosen-select">
-                                        <option>My CV</option>
-                                    </select>
-                                </div> --}}
-                                <div class="form-group col-lg-12 col-md-12">
-                                    <div class="uploading-outer">
-                                        <div class="uploadButton">
-                                            <input class="uploadButton-input" type="file" name="jobseeker_image"
-                                                accept="image/*" id="upload" />
-                                            <label class="uploadButton-button ripple-effect" for="upload">Add
-                                                Image</label>
-                                            <span class="uploadButton-file-name"></span>
+                            @foreach($jobSeekerData as $key=> $jsData)
+                                <div class="row">
+                                    {{-- <div class="form-group col-lg-6 col-md-12">
+                                        <label>Select Your CV</label>
+                                        <select class="chosen-select">
+                                            <option>My CV</option>
+                                        </select>
+                                    </div> --}}
+                                    <div class="form-group col-lg-12 col-md-12">
+                                        <div class="uploading-outer">
+                                            <div class="uploadButton">
+                                                <input class="uploadButton-input" type="file" name="jobseeker_image"
+                                                    accept="image/*" id="upload" />
+                                                <label class="uploadButton-button ripple-effect" for="upload">Add
+                                                    Image</label>
+                                                <span class="uploadButton-file-name"></span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div class="form-group col-lg-6 col-md-6 col-sm-12">
-                                    <label>Full Name <span class="text-danger">*</span></label>
-                                    <input type="text" name="jobseeker_name" placeholder="Mr. X" />
-                                </div>
+                                    <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                                        <label>Full Name <span class="text-danger">*</span></label>
+                                        <input type="text" name="jobseeker_name" value="{{ $jsData->jobseeker_name }}" placeholder="Mr. X" />
+                                    </div>
 
-                                <div class="form-group col-lg-6 col-md-6 col-sm-12">
-                                    <label>Email <span class="text-danger">*</span></label>
-                                    <input type="email" name="jobseeker_mail" placeholder="xx@xx.xx" />
-                                </div>
+                                    <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                                        <label>Email <span class="text-danger">*</span></label>
+                                        <input type="email" name="jobseeker_mail" value="{{ $jsData->jobseeker_mail }}" placeholder="xx@xx.xx" />
+                                    </div>
 
-                                <div class="form-group col-lg-6 col-md-6 col-sm-12">
-                                    <label>Date of Birth <span class="text-danger">*</span></label>
-                                    <input type="date" name="jobseeker_dob" class="form-control input-custom-style" placeholder="MM/DD/YYYY">
-                                </div>
+                                    <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                                        <label>Date of Birth <span class="text-danger">*</span></label>
+                                        <input type="date" name="jobseeker_dob" value="{{ $jsData->formatted_dob }}" class="form-control input-custom-style" placeholder="MM/DD/YYYY">
+                                    </div>
 
-                                <div class="form-group col-lg-6 col-md-6 col-sm-12">
-                                    <label>Religion <span class="text-danger">*</span></label>
-                                    <select id="" name="jobseeker_religion" class="form-control chosen-select">
-                                        <option value="-1">Select Religion</option>
-                                        <option value="Buddhism">Buddhism</option>
-                                        <option value="Christianity">Christianity</option>
-                                        <option value="Hinduism">Hinduism</option>
-                                        <option value="Islam">Islam</option>
-                                        <option value="Jainism">Jainism</option>
-                                        <option value="Judaism">Judaism</option>
-                                        <option value="Sikhism">Sikhism</option>
-                                        <option value="Others">Others</option>
-                                    </select>
-                                </div>
+                                    <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                                        <label>Religion <span class="text-danger">*</span></label>
+                                        <select id="" name="jobseeker_religion" class="form-control chosen-select">
+                                            <option value="-1">Select Religion</option>
+                                            <option value="Islam" {{ $jsData->jobseeker_religion == 'Islam' ? 'selected' : '' }}>Islam</option>
+                                            <option value="Buddhism" {{ $jsData->jobseeker_religion == 'Buddhism' ? 'selected' : '' }}>Buddhism</option>
+                                            <option value="Christianity" {{ $jsData->jobseeker_religion == 'Christianity' ? 'selected' : '' }}>Christianity</option>
+                                            <option value="Hinduism" {{ $jsData->jobseeker_religion == 'Hinduism' ? 'selected' : '' }}>Hinduism</option>
+                                            <option value="Jainism" {{ $jsData->jobseeker_religion == 'Jainism' ? 'selected' : '' }}>Jainism</option>
+                                            <option value="Judaism" {{ $jsData->jobseeker_religion == 'Judaism' ? 'selected' : '' }}>Judaism</option>
+                                            <option value="Sikhism" {{ $jsData->jobseeker_religion == 'Sikhism' ? 'selected' : '' }}>Sikhism</option>
+                                            <option value="Others" {{ $jsData->jobseeker_religion == 'Others' ? 'selected' : '' }}>Others</option>
+                                        </select>
+                                    </div>
 
-                                <div class="form-group col-lg-6 col-md-6 col-sm-12">
-                                    <label>Gender <span class="text-danger">*</span></label>
-                                    <select id="" name="jobseeker_gender" class="form-control chosen-select">
-                                        <option value="-1">Select Gender</option>
-                                        <option value="Male">Male</option>
-                                        <option value="Female">Female</option>
-                                        <option value="Others">Others</option>
-                                    </select>
-                                </div>
+                                    <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                                        <label>Gender <span class="text-danger">*</span></label>
+                                        <select id="" name="jobseeker_gender" class="form-control chosen-select">
+                                            <option value="-1">Select Gender</option>
+                                            <option value="Male" {{ $jsData->jobseeker_gender == 'Male' ? 'selected' : '' }}>Male</option>
+                                            <option value="Female" {{ $jsData->jobseeker_gender == 'Female' ? 'selected' : '' }}>Female</option>
+                                            <option value="Others" {{ $jsData->jobseeker_gender == 'Others' ? 'selected' : '' }}>Others</option>
+                                        </select>
+                                    </div>
 
-                                <div class="form-group col-lg-6 col-md-6 col-sm-12">
-                                    <label>Marital Status <span class="text-danger">*</span></label>
-                                    <select id="" name="jobseeker_marital_status" class="form-control chosen-select">
-                                        <option value="-1">Select Status</option>
-                                        <option value="Married">Married</option>
-                                        <option value="Unmarried">Unmarried</option>
-                                        <option value="Single">Single</option>
-                                        <option value="Divorced">Divorced</option>
-                                    </select>
-                                </div>
+                                    <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                                        <label>Marital Status <span class="text-danger">*</span></label>
+                                        <select id="" name="jobseeker_marital_status" class="form-control chosen-select">
+                                            <option value="-1">Select Status</option>
+                                            <option value="Married" {{ $jsData->jobseeker_marital_status == 'Married' ? 'selected' : '' }}>Married</option>
+                                            <option value="Unmarried" {{ $jsData->jobseeker_marital_status == 'Unmarried' ? 'selected' : '' }}>Unmarried</option>
+                                            <option value="Single" {{ $jsData->jobseeker_marital_status == 'Single' ? 'selected' : '' }}>Single</option>
+                                            <option value="Divorced" {{ $jsData->jobseeker_marital_status == 'Divorced' ? 'selected' : '' }}>Divorced</option>
+                                        </select>
+                                    </div>
 
-                                <div class="form-group col-lg-6 col-md-6 col-sm-12">
-                                    <label>Primary Mobile <span class="text-danger">*</span></label>
-                                    <input type="text" name="jobseeker_phone_no_1" placeholder="01*********" />
-                                </div>
+                                    <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                                        <label>Primary Mobile <span class="text-danger">*</span></label>
+                                        <input type="text" name="jobseeker_phone_no_1" value="{{ $jsData->jobseeker_phone_no_1 }}" placeholder="01*********" />
+                                    </div>
 
-                                <div class="form-group col-lg-6 col-md-6 col-sm-12">
-                                    <label>Secondary Mobile</label>
-                                    <input type="text" name="jobseeker_phone_no_2" placeholder="01*********" />
-                                </div>
+                                    <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                                        <label>Secondary Mobile</label>
+                                        <input type="text" name="jobseeker_phone_no_2" value="{{ $jsData->jobseeker_phone_no_2 }}" placeholder="01*********" />
+                                    </div>
 
-                                <div class="form-group col-lg-6 col-md-6 col-sm-12">
-                                    <label>National Id</label>
-                                    <input type="text" name="jobseeker_nid_no" placeholder="" />
-                                </div>
+                                    <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                                        <label>National Id</label>
+                                        <input type="text" name="jobseeker_nid_no" value="{{ $jsData->jobseeker_nid_no }}" placeholder="" />
+                                    </div>
 
-                                <div class="form-group col-lg-6 col-md-6 col-sm-12">
-                                    <label>Address <span class="text-danger">*</span></label>
-                                    <input type="text" name="jobseeker_address" placeholder="Ex: Dhaka, Bangladesh" />
-                                </div>
+                                    <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                                        <label>Address <span class="text-danger">*</span></label>
+                                        <input type="text" name="jobseeker_address" value="{{ $jsData->jobseeker_address }}" placeholder="Ex: Dhaka, Bangladesh" />
+                                    </div>
 
-                                {{-- About Yourself --}}
-                                <div class="form-group col-lg-12 col-md-12">
-                                    <label>Career Summary <span class="text-danger">*</span></label>
-                                    <textarea name="jobseeker_career_summary"
-                                        placeholder="Spent several years working on sheep on Wall Street"></textarea>
-                                </div>
+                                    {{-- About Yourself --}}
+                                    <div class="form-group col-lg-12 col-md-12">
+                                        <label>Career Summary <span class="text-danger">*</span></label>
+                                        <textarea name="jobseeker_career_summary" placeholder="Spent several years working on sheep on Wall Street">
+                                            {{ $jsData->jobseeker_career_summary }}
+                                        </textarea>
+                                    </div>
 
-                                <!-- Input -->
-                                <div class="form-group col-lg-12 col-md-12">
-                                    <button class="theme-btn btn-style-one">Save</button>
+                                    <!-- Input -->
+                                    <div class="form-group col-lg-12 col-md-12">
+                                        <button class="theme-btn btn-style-one">Save</button>
+                                    </div>
                                 </div>
-                            </div>
+                            @endforeach
                         </form>
                     </div>
                 </div>
@@ -372,9 +375,9 @@
                                     <!-- Resume BLock -->
                                     @foreach($jobSeekerLanguagesData as $key => $languageData)
                                         <div class="resume-block">
-                                            <div class="inner">
-                                                <span class="name">{{ ++$key }}</span>
-                                                <div class="title-box">
+                                            <div class="inner" style="padding-bottom: 0px; padding-left: 20px;">
+                                                {{-- <span class="name">{{ ++$key }}</span> --}}
+                                                <div class="title-box" style="margin-bottom: 0px">
                                                     <div class="info-box">
                                                         <h3>{{ $languageData->language->language_name }} - {{ $languageData->proficiency }}</h3>
                                                     </div>

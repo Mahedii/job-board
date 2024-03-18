@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\v1\JobSeeker;
 
 use Exception;
+use Carbon\Carbon;
 use Illuminate\View\View;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -61,6 +62,11 @@ class ResumeBuilderController extends Controller
         $monthsData = Month::select("*")->get();
         $languagesData = Languages::select("*")->get();
 
+        $jobSeekerData = JobSeeker::select("*")->where('user_id', Auth::user()->id)->get();
+        $jobSeekerData->transform(function ($jobSeeker) {
+            $jobSeeker->formatted_dob = Carbon::createFromFormat('m/d/Y', $jobSeeker->jobseeker_dob)->format('Y-m-d');
+            return $jobSeeker;
+        });
         $jobSeekerLanguagesData = JobSeekerLanguages::with(['language'])->where('job_seeker_id', app('jobSeeker')->id)->get();
         $jobSeekerResearchPapersData = JobSeekerResearchPapers::select("*")->where('job_seeker_id', app('jobSeeker')->id)->get();
         $jobSeekerCertificationData = JobSeekerCertifications::select("*")->where('job_seeker_id', app('jobSeeker')->id)->get();
@@ -82,7 +88,6 @@ class ResumeBuilderController extends Controller
             return $item;
         });
 
-        // $jobSeekerEducationsData = JobSeekerEducations::select("*")->where('job_seeker_id', app('jobSeeker')->id)->get();
         $jobSeekerEducationsData = JobSeekerEducations::with([
             'educationLevel',
             'educationDegreeTitle',
@@ -153,6 +158,7 @@ class ResumeBuilderController extends Controller
             'yearsData' => $yearsData,
             'monthsData' => $monthsData,
             'languagesData' => $languagesData,
+            'jobSeekerData' => $jobSeekerData,
             'jobSeekerEducationsData' => $jobSeekerEducationsData,
             'jobSeekerExperiencesData' => $jobSeekerExperiencesData,
             'jobSeekerCertificationData' => $jobSeekerCertificationData,
