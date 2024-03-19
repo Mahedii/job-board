@@ -5,6 +5,7 @@ use App\Http\Controllers\v1\careepick\JobController;
 use App\Http\Controllers\v1\careepick\ContactController;
 use App\Http\Controllers\v1\careepick\EmployeeController;
 use App\Http\Controllers\v1\careepick\EmployerController;
+use App\Http\Controllers\v1\Ajax\ValidationDataController;
 use App\Http\Controllers\v1\employer\SocialLoginController;
 use App\Http\Controllers\v1\JobSeeker\ResumeBuilderController;
 use App\Http\Controllers\v1\JobSeeker\AuthController as JsAuthController;
@@ -25,6 +26,8 @@ use App\Http\Controllers\v1\JobProvider\AuthController as JpAuthController;
 // Route::get('/signout', [AuthController::class, 'signOut'])->name('logout');
 // Route::get('/auth', [AuthController::class, 'loginPage'])->name('loginPage');
 // Route::get('/dashboard', [AuthController::class, 'dashboard'])->middleware(['auth'])->name('dashboard');
+
+Route::post('/validate', ValidationDataController::class)->name('ajaxValidationData');
 
 Route::prefix('job-seeker')->group(function () {
     Route::controller(JsAuthController::class)->group(function () {
@@ -68,6 +71,7 @@ Route::prefix('job-provider')->group(function () {
         Route::get('/sign-page', 'jpSigninPage')->name('jp-signin-page');
         Route::get('/registration-page', 'jpRegistrationPage')->name('jp-registration-page');
         Route::post('/post-registration', 'jpPostRegistration')->name('jp-register.post');
+        Route::post('/data/validate', 'jpValidation')->name('jp-validate-data');
         Route::get('/account/verify/{token}', 'jpVerifyAccount')->name('jp-user.verify');
         Route::get('/signout', 'jsSignOut')->name('jp-signout');
     });
@@ -111,19 +115,19 @@ Route::controller(JobController::class)->group(function () {
     });
 });
 
-Route::controller(ContactController::class)->group(function () {
-    Route::prefix('contact')->group(function () {
-        Route::get('/', 'contact')->name('contact');
-    });
-});
+// Route::controller(ContactController::class)->group(function () {
+//     Route::prefix('contact')->group(function () {
+//         Route::get('/', 'contact')->name('contact');
+//     });
+// });
 
-Route::controller(AuthController::class)->group(function () {
-    Route::prefix('auth')->group(function () {
-        Route::get('/signin', 'signin')->name('signin');
-        Route::get('/signup', 'signup')->name('signup');
-        Route::get('/signout', 'signout')->name('signout');
-    });
-});
+// Route::controller(AuthController::class)->group(function () {
+//     Route::prefix('auth')->group(function () {
+//         Route::get('/signin', 'signin')->name('signin');
+//         Route::get('/signup', 'signup')->name('signup');
+//         Route::get('/signout', 'signout')->name('signout');
+//     });
+// });
 
 Route::get('404', function () {
     return view('careepick.pages.404');

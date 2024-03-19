@@ -2,10 +2,12 @@
 <!-- All Jquery -->
 <!-- ============================================================== -->
 <script src="{{ URL::asset('assets/js/jquery.min.js') }}"></script>
-<script src="{{ URL::asset('assets/js/popper.min.js') }}"></script>
-<script src="{{ URL::asset('assets/js/bootstrap.min.js') }}"></script>
+{{-- <script src="{{ URL::asset('assets/js/popper.min.js') }}"></script>
+<script src="{{ URL::asset('assets/js/bootstrap.min.js') }}"></script> --}}
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
 <script src="{{ URL::asset('assets/js/rangeslider.js') }}"></script>
-<script src="{{ URL::asset('assets/js/jquery.nice-select.min.js') }}"></script>
+{{-- <script src="{{ URL::asset('assets/js/jquery.nice-select.min.js') }}"></script> --}}
 <script src="{{ URL::asset('assets/js/slick.js') }}"></script>
 <script src="{{ URL::asset('assets/js/counterup.min.js') }}"></script>
 
