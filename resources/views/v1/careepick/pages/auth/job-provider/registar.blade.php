@@ -24,10 +24,10 @@
                         <div class="vesh-detail-bloc-body pt-3">
                             <div class="row gx-3 gy-4">
                                 <div class="modal-login-form">
-                                    <form>
+                                    <form method="POST" action="{{ route('jp-register.post') }}" enctype="multipart/form-data">
                                         {{-- Account Information --}}
                                         <div class="card card-h-100">
-                                            <div class="card-header">
+                                            <div class="card-header" style="border-bottom: none;">
                                                 <h3>Account Information</h4>
                                             </div>
                                             <div class="card-body">
@@ -53,7 +53,7 @@
 
                                         <!-- General Information -->
                                         <div class="card card-h-100">
-                                            <div class="card-header">
+                                            <div class="card-header" style="border-bottom: none;">
                                                 <h3>General Information</h4>
                                             </div>
                                             <div class="card-body">
@@ -124,7 +124,7 @@
 
                                         <!-- Company Contact Information -->
                                         <div class="card card-h-100">
-                                            <div class="card-header">
+                                            <div class="card-header" style="border-bottom: none;">
                                                 <h3>Company Contact Information</h4>
                                             </div>
                                             <div class="card-body">
@@ -188,7 +188,7 @@
 
                                         <!-- Social Accounts -->
                                         <div class="card card-h-100">
-                                            <div class="card-header">
+                                            <div class="card-header" style="border-bottom: none;">
                                                 <h3>Social Accounts</h4>
                                             </div>
                                             <div class="card-body">
@@ -215,7 +215,7 @@
 
                                         <!-- Company Official Documents -->
                                         <div class="card card-h-100">
-                                            <div class="card-header">
+                                            <div class="card-header" style="border-bottom: none;">
                                                 <h3>Company Official Documents</h4>
                                             </div>
                                             <div class="card-body">

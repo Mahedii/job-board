@@ -1,13 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\v1\auth\AuthController;
 use App\Http\Controllers\v1\careepick\JobController;
 use App\Http\Controllers\v1\careepick\ContactController;
 use App\Http\Controllers\v1\careepick\EmployeeController;
 use App\Http\Controllers\v1\careepick\EmployerController;
 use App\Http\Controllers\v1\employer\SocialLoginController;
 use App\Http\Controllers\v1\JobSeeker\ResumeBuilderController;
+use App\Http\Controllers\v1\JobSeeker\AuthController as JsAuthController;
+use App\Http\Controllers\v1\JobProvider\AuthController as JpAuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,13 +21,13 @@ use App\Http\Controllers\v1\JobSeeker\ResumeBuilderController;
 |
 */
 
-Route::post('/user-login', [AuthController::class, 'login'])->name('user.signin');
-Route::get('/signout', [AuthController::class, 'signOut'])->name('logout');
-Route::get('/auth', [AuthController::class, 'loginPage'])->name('loginPage');
-Route::get('/dashboard', [AuthController::class, 'dashboard'])->middleware(['auth'])->name('dashboard');
+// Route::post('/user-login', [AuthController::class, 'login'])->name('user.signin');
+// Route::get('/signout', [AuthController::class, 'signOut'])->name('logout');
+// Route::get('/auth', [AuthController::class, 'loginPage'])->name('loginPage');
+// Route::get('/dashboard', [AuthController::class, 'dashboard'])->middleware(['auth'])->name('dashboard');
 
 Route::prefix('job-seeker')->group(function () {
-    Route::controller(AuthController::class)->group(function () {
+    Route::controller(JsAuthController::class)->group(function () {
         Route::post('/signin', 'jsSignin')->name('js-signin');
         Route::get('/sign-page', 'jsSigninPage')->name('js-signin-page');
         Route::get('/registration-page', 'jsRegistrationPage')->name('js-registration-page');
@@ -62,8 +63,13 @@ Route::prefix('job-seeker')->group(function () {
 });
 
 Route::prefix('job-provider')->group(function () {
-    Route::controller(AuthController::class)->group(function () {
+    Route::controller(JpAuthController::class)->group(function () {
+        Route::post('/signin', 'jpSignin')->name('jp-signin');
+        Route::get('/sign-page', 'jpSigninPage')->name('jp-signin-page');
         Route::get('/registration-page', 'jpRegistrationPage')->name('jp-registration-page');
+        Route::post('/post-registration', 'jpPostRegistration')->name('jp-register.post');
+        Route::get('/account/verify/{token}', 'jpVerifyAccount')->name('jp-user.verify');
+        Route::get('/signout', 'jsSignOut')->name('jp-signout');
     });
 });
 
