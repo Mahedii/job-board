@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\v1\JobProvider;
 
+Use File;
 use Exception;
 use Carbon\Carbon;
 use App\Models\User;
@@ -76,72 +77,49 @@ class AuthController extends Controller
      */
     public function jpPostRegistration(Request $request)
     {
-        // dd($request);
-        $formRequest = new JobProviderRequest();
-        $requestData = $request->except('_token', 'method_type');
-        // Validate the incoming request with the rules defined in rulesForCreate() method
-        $validator = Validator::make($requestData, $formRequest->rulesForCreate(), $formRequest->messages());
-        // $validatedData = $formRequest->validate($request->rulesForCreate());
-        // $validatedData = $request->validate($request->rulesForCreate());
-        // $request->validate([
-        //     'name' => 'required',
-        //     'email' => 'required|email|unique:users',
-        //     'password' => 'required|min:6',
-        // ]);
+        try {
+            // dd($request);
+            $formRequest = new JobProviderRequest();
+            $requestData = $request->except('_token', 'method_type');
+            // Validate the incoming request with the rules defined in rulesForCreate() method
+            $validator = Validator::make($requestData, $formRequest->rulesForCreate(), $formRequest->messages());
 
-        // Check if validation fails
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
+            // Check if validation fails
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator)->withInput();
+            }
+
+            $data = $request->all();
+            // dd($data);
+
+            $createUser = $this->createUser($data, 1);
+            // dd($createUser);
+
+            $token = Str::random(64);
+
+            UserVerify::create([
+                'user_id' => $createUser->id,
+                'token' => $token
+            ]);
+
+            // Mail::send('v1.careepick.pages.auth.emailVerificationEmail', ['token' => $token], function ($message) use ($request) {
+            //     $message->to($request->email);
+            //     $message->subject('Email Verification Mail');
+            // });
+
+            // $mailData = [
+            //     'token' => $token,
+            // ];
+            // Mail::to($request->email)->send(new VerifyEmail($mailData));
+
+            return Redirect()->route('jp-signin-page')->with('registrationMessage', 'You have been registered, please signin to your account.');
+            return Redirect()->back()->with('registrationMessage', 'A verification mail has been sent to your email address, please confirm your mail account.');
+            // dd("Email is sent successfully.");
+
+            // return redirect("dashboard")->withSuccess('Great! You have Successfully loggedin');
+        } catch (\Exception $e) {
+            Log::error($e);
         }
-
-        // Extract and handle file inputs
-        $companyLogo = $request->file('company_logo');
-        $companyTradeLicenseDocument = $request->file('company_trade_license_document');
-
-        // Insert data into the Company model
-        $company = new Company();
-        $company->fill($requestData);
-
-        // Handle file uploads and store file paths in the database
-        if ($companyLogo) {
-            $company->company_logo = $companyLogo->store('company_logos', 'public');
-        }
-        if ($companyTradeLicenseDocument) {
-            $company->company_trade_license_document = $companyTradeLicenseDocument->store('company_trade_license_documents', 'public');
-        }
-
-        // Save the Company model instance
-        $company->save();
-
-        dd($company);
-
-        // $data = $request->all();
-        // dd($data);
-
-        // $createUser = $this->create($data, 1);
-        // dd($createUser);
-
-        // $token = Str::random(64);
-
-        // UserVerify::create([
-        //     'user_id' => $createUser->id,
-        //     'token' => $token
-        // ]);
-
-        // Mail::send('v1.careepick.pages.auth.emailVerificationEmail', ['token' => $token], function ($message) use ($request) {
-        //     $message->to($request->email);
-        //     $message->subject('Email Verification Mail');
-        // });
-
-        // $mailData = [
-        //     'token' => $token,
-        // ];
-        // Mail::to($request->email)->send(new VerifyEmail($mailData));
-
-        return Redirect()->back()->with('registrationMessage', 'A verification mail has been sent to your email address, please confirm your mail account.');
-        // dd("Email is sent successfully.");
-
-        // return redirect("dashboard")->withSuccess('Great! You have Successfully loggedin');
     }
 
     /**
@@ -321,7 +299,7 @@ class AuthController extends Controller
     public function jpDashboard()
     {
         if (Auth::check()) {
-            return view('v1.careepick.dashboard.job-seeker.dashboard');
+            return view('v1.careepick.dashboard.job-provider.dashboard');
         }
 
         return redirect()->route("signin-page")->withSuccess('You are not allowed to access');
@@ -340,29 +318,55 @@ class AuthController extends Controller
      *
      * @return response()
      */
-    public function create(array $data, int $userType)
+    public function createUser(array $data, int $userType)
     {
         try {
             $user = null;
 
             DB::transaction(function () use ($data, $userType) {
                 // First query: Create a new user
-                $this->user = Company::create([
-                    'name' => $data['name'],
-                    'email' => $data['email'],
-                    'phone_no' => $data['phone_no'],
-                    'password' => Hash::make($data['password']),
+                $this->user = User::create([
+                    'name' => $data['company_name'],
+                    'email' => $data['company_mail'],
+                    'phone_no' => $data['company_phone_no_1'],
+                    'password' => Hash::make($data['company_password']),
                     'user_type' => $userType
                 ]);
 
-                // Second query: Create a new job seeker
-                JobSeeker::create([
-                    'user_id' => $this->user->id,
-                    'jobseeker_name' => $data['name'],
-                    'jobseeker_mail' => $data['email'],
-                    'jobseeker_password' => Hash::make($data['password']),
-                    'jobseeker_phone_no_1' => $data['phone_no'],
-                ]);
+                // dd($this->user);
+                // dd($data);
+
+                $data['user_id'] = $this->user['id'];
+                $data['company_status'] = 2;
+                $data['slug'] = $this->generateSlug($data['company_name']);
+
+                unset($data['_token']);
+                unset($data['method_type']);
+                $data['company_password'] = Hash::make($data['company_password']);
+
+                if (array_key_exists('company_logo', $data)) {
+                    $file = $data['company_logo'];
+                    $filePath = $this->getPathForUploadedFile($file);
+                    $data['company_logo'] = $filePath;
+                }
+
+                if (array_key_exists('company_trade_license_document', $data)) {
+                    $file = $data['company_trade_license_document'];
+                    $filePath = $this->getPathForUploadedFile($file);
+                    $data['company_trade_license_document'] = $filePath;
+                }
+
+                // dd($data);
+
+                // Instantiate a new Company model
+                $company = new Company();
+
+                // Fill the model with data from the $data array
+                $company->fill($data);
+
+                // Save the model to persist the data in the database
+                $company->save();
+                // dd($company);
             });
 
             // Both queries were successful
@@ -371,10 +375,46 @@ class AuthController extends Controller
 
             return $this->user;
         } catch (\Exception $e) {
-            // Something went wrong
-            // Roll back the transaction
+            // Something went wrong, so Roll back the transaction
             DB::rollBack();
             Log::error($e);
+        }
+    }
+
+    /**
+     * Get path for uploaded files
+     *
+     * @param object $file
+     * @return string
+     */
+    private function getPathForUploadedFile(object $file): string
+    {
+        $fileExtension = $file->extension();
+        $fileExtension = strtolower($file->getClientOriginalExtension());
+        $fileName = "profile_image." . $fileExtension;
+
+        $path = public_path('dashboard/assets/images/job-provider/' . $this->user['id']);
+
+        $this->createDirectory($path);
+
+        // ResizeImage::make($file)->resize(300, 200)->save(public_path($filePath));
+        if ($file->move($path, $fileName)) {
+            $filePath = 'dashboard/assets/images/job-provider/' . $this->user['id'] . '/' . $fileName;
+        }
+
+        return $filePath;
+    }
+
+    /**
+     * Create directory if not exist
+     *
+     * @param string $path
+     * @return void
+     */
+    private function createDirectory(string $path): void
+    {
+        if (!File::isDirectory($path)) {
+            File::makeDirectory($path, 0777, true, true);
         }
     }
 
@@ -394,5 +434,30 @@ class AuthController extends Controller
             // 'expires_in' => auth('api')->factory()->getTTL(), // get the token expiration time from config/jwt.php
             'user' => auth()->user()
         ]);
+    }
+
+    /**
+     * Generate slug
+     *
+     * @param string $value
+     * @return string
+     */
+    private function generateSlug(string $value): string
+    {
+        $slug = Str::slug($value);
+        // dd($slug,"show");
+
+        if (Company::where('slug', Str::slug($value))->exists()) {
+            $original = $slug;
+
+            $count = 1;
+
+            while (Company::where('slug', $slug)->exists()) {
+                $slug = "{$original}-" . $count++;
+            }
+
+            return $slug;
+        }
+        return $slug;
     }
 }

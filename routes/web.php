@@ -68,12 +68,20 @@ Route::prefix('job-seeker')->group(function () {
 Route::prefix('job-provider')->group(function () {
     Route::controller(JpAuthController::class)->group(function () {
         Route::post('/signin', 'jpSignin')->name('jp-signin');
-        Route::get('/sign-page', 'jpSigninPage')->name('jp-signin-page');
+        Route::get('/signin-page', 'jpSigninPage')->name('jp-signin-page');
         Route::get('/registration-page', 'jpRegistrationPage')->name('jp-registration-page');
         Route::post('/post-registration', 'jpPostRegistration')->name('jp-register.post');
         Route::post('/data/validate', 'jpValidation')->name('jp-validate-data');
         Route::get('/account/verify/{token}', 'jpVerifyAccount')->name('jp-user.verify');
         Route::get('/signout', 'jsSignOut')->name('jp-signout');
+
+        Route::middleware('auth')->group(function () {
+            Route::middleware('is_verify_email')->group(function () {
+                Route::prefix('/dashboard')->group(function () {
+                    Route::get('/', 'jpDashboard')->name('jp-dashboard');
+                });
+            });
+        });
     });
 });
 

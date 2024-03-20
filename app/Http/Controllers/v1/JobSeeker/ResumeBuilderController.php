@@ -334,8 +334,6 @@ class ResumeBuilderController extends Controller
     /**
      * Get path for uploaded files
      *
-     * @param string $tableSecretKey
-     * @param string $slug
      * @param object $file
      * @return string
      */

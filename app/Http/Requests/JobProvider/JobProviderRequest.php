@@ -70,7 +70,7 @@ class JobProviderRequest extends FormRequest
             'company_facebook_url' => 'nullable|string',
             'company_glassdoor_url' => 'nullable|string',
             'company_size' => 'required',
-            'working_hour' => 'required',
+            'working_hour' => 'nullable',
             'company_tin_no' => 'required|string',
             'company_bin_no' => 'nullable|string',
             'company_trade_license_no' => 'required|string',

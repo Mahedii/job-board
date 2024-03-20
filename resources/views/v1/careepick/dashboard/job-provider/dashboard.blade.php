@@ -1,4 +1,4 @@
-@extends('v1.careepick.dashboard.layouts.master')
+@extends('v1.careepick.dashboard.layouts.jp-master')
 @section('content')
     <!-- Dashboard -->
     <div class="upper-title-box">

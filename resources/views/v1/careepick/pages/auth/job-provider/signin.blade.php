@@ -35,17 +35,23 @@
                                         aria-label="Close"></button>
                                 </div>
                             @endif
+                            @if(session('registrationMessage'))
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <strong>{{ session('registrationMessage') }}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                            @endif
                             <div class="row gx-3 gy-4">
                                 <div class="modal-login-form">
-                                    <form method="POST" action="{{ route('js-signin') }}">
+                                    <form method="POST" action="{{ route('jp-signin') }}">
                                         @csrf
                                         <div class="form-floating mb-4">
-                                            <input type="email" name="email" class="form-control" placeholder="name@example.com">
+                                            <input type="email" name="company_mail" class="form-control" placeholder="name@example.com">
                                             <label>User Name</label>
                                         </div>
 
                                         <div class="form-floating mb-4">
-                                            <input type="password" name="password" class="form-control" placeholder="Password">
+                                            <input type="password" name="company_password" class="form-control" placeholder="Password">
                                             <label>Password</label>
                                         </div>
 
