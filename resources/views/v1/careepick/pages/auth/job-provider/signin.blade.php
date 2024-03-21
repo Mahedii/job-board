@@ -46,13 +46,21 @@
                                     <form method="POST" action="{{ route('jp-signin') }}">
                                         @csrf
                                         <div class="form-floating mb-4">
-                                            <input type="email" name="company_mail" class="form-control" placeholder="name@example.com">
+                                            <input type="email" name="email" value="{{ old('email') }}" class="form-control @error('email') is-invalid @enderror" placeholder="name@example.com">
                                             <label>User Name</label>
+                                            @if ($errors->has('email'))
+                                                            <span
+                                                                class="text-danger">{{ $errors->first('email') }}</span>
+                                                        @endif
                                         </div>
 
                                         <div class="form-floating mb-4">
-                                            <input type="password" name="company_password" class="form-control" placeholder="Password">
+                                            <input type="password" name="password" value="{{ old('password') }}" class="form-control @error('password') is-invalid @enderror" placeholder="Password">
                                             <label>Password</label>
+                                            @if ($errors->has('password'))
+                                                            <span
+                                                                class="text-danger">{{ $errors->first('password') }}</span>
+                                                        @endif
                                         </div>
 
                                         <div class="form-group">

@@ -187,7 +187,7 @@
                                         <a href="{{ route('js-signin-page') }}" class="nav-link active">Job Seeker</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" href="{{ route('js-signin-page') }}" >Job Provider</a>
+                                        <a class="nav-link" href="{{ route('jp-signin-page') }}" >Job Provider</a>
                                         {{-- <button class="nav-link" id="signup-tab" data-bs-toggle="pill" data-bs-target="#signup" type="button" role="tab" aria-controls="signup" aria-selected="false" tabindex="-1">Job Provider</button> --}}
                                     </li>
                                 </ul>

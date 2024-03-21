@@ -202,7 +202,7 @@
                     <ul class="dropdown-menu">
                         <li class="active"><a href="dashboard.html"> <i class="la la-home"></i> Dashboard</a></li>
                         <li><a href="dashboard-company-profile.html"><i class="la la-user-tie"></i>Company Profile</a></li>
-                        <li><a href="dashboard-post-job.html"><i class="la la-paper-plane"></i>Post a New Job</a></li>
+                        <li><a href="{{ route('job-post-page') }}"><i class="la la-paper-plane"></i>Post a New Job</a></li>
                         <li><a href="dashboard-manage-job.html"><i class="la la-briefcase"></i> Manage Jobs </a></li>
                         <li><a href="dashboard-applicants.html"><i class="la la-file-invoice"></i> All Applicants</a></li>
                         <li><a href="dashboard-resumes.html"><i class="la la-bookmark-o"></i>Shortlisted Resumes</a></li>
@@ -257,7 +257,7 @@
         <ul class="navigation">
             <li class="active"><a href="dashboard.html"> <i class="la la-home"></i> Dashboard</a></li>
             <li><a href="dashboard-company-profile.html"><i class="la la-user-tie"></i>Company Profile</a></li>
-            <li><a href="dashboard-post-job.html"><i class="la la-paper-plane"></i>Post a New Job</a></li>
+            <li><a href="{{ route('job-post-page') }}"><i class="la la-paper-plane"></i>Post a New Job</a></li>
             <li><a href="dashboard-manage-job.html"><i class="la la-briefcase"></i> Manage Jobs </a></li>
             <li><a href="dashboard-applicants.html"><i class="la la-file-invoice"></i> All Applicants</a></li>
             <li><a href="dashboard-resumes.html"><i class="la la-bookmark-o"></i>Shortlisted Resumes</a></li>

@@ -180,7 +180,7 @@ class AuthController extends Controller
             return view('v1.careepick.dashboard.job-seeker.dashboard');
         }
 
-        return redirect()->route("signin-page")->withSuccess('You are not allowed to access');
+        return redirect()->route("js-signin-page")->withSuccess('You are not allowed to access');
     }
 
     public function jsSignOut()

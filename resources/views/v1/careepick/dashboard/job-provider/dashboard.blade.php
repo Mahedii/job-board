@@ -291,6 +291,10 @@
                             </div>
                         </div>
 
+                        <div id="editor">
+                            <p>This is some sample content.</p>
+                        </div>
+
                         <!-- Candidate block three -->
                         <div class="candidate-block-three col-lg-6 col-md-12 col-sm-12">
                             <div class="inner-box">

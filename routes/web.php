@@ -6,6 +6,7 @@ use App\Http\Controllers\v1\careepick\ContactController;
 use App\Http\Controllers\v1\careepick\EmployeeController;
 use App\Http\Controllers\v1\careepick\EmployerController;
 use App\Http\Controllers\v1\Ajax\ValidationDataController;
+use App\Http\Controllers\v1\JobProvider\JobPostController;
 use App\Http\Controllers\v1\employer\SocialLoginController;
 use App\Http\Controllers\v1\JobSeeker\ResumeBuilderController;
 use App\Http\Controllers\v1\JobSeeker\AuthController as JsAuthController;
@@ -80,6 +81,14 @@ Route::prefix('job-provider')->group(function () {
                 Route::prefix('/dashboard')->group(function () {
                     Route::get('/', 'jpDashboard')->name('jp-dashboard');
                 });
+            });
+        });
+    });
+
+    Route::middleware('auth')->group(function () {
+        Route::middleware('is_verify_email')->group(function () {
+            Route::controller(JobPostController::class)->group(function () {
+                Route::get('/job-post', 'jobPostPage')->name('job-post-page');
             });
         });
     });

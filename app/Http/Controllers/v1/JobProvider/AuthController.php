@@ -27,7 +27,6 @@ use App\Models\v1\careepick\EmployeeSize;
 use Illuminate\Support\Facades\Validator;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use App\Models\v1\careepick\EmploymentType;
-use App\Models\v1\careepick\JobSeeker\JobSeeker;
 use App\Http\Requests\JobProvider\JobProviderRequest;
 use App\Models\v1\careepick\Recruiter\Company;
 
@@ -67,7 +66,7 @@ class AuthController extends Controller
      */
     public function jpSigninPage(): view
     {
-        return view('v1.careepick.pages.auth.job-seeker.signin');
+        return view('v1.careepick.pages.auth.job-provider.signin');
     }
 
     /**
@@ -277,14 +276,14 @@ class AuthController extends Controller
                 if ($userType == 1) {
                     return redirect()->route('jp-dashboard')->with('message', "YO");
                 }
-
                 // return $this->createNewToken($token);
             }
+            return Redirect()->back()->with('signinErrorMessage', 'Incorrect username or password');
             return response()->json(['success' => false, 'message' => 'Login details are not valid'], 401);
         } catch (JWTException $e) {
             // Log::error($e);
             Log::error($e->getMessage());
-            return response()->json(['success' => false, 'message' => 'Could not create token'], 500);
+            // return response()->json(['success' => false, 'message' => 'Could not create token'], 500);
         }
     }
 
@@ -302,7 +301,7 @@ class AuthController extends Controller
             return view('v1.careepick.dashboard.job-provider.dashboard');
         }
 
-        return redirect()->route("signin-page")->withSuccess('You are not allowed to access');
+        return redirect()->route("jp-signin-page")->withSuccess('You are not allowed to access');
     }
 
     public function jpSignOut()
