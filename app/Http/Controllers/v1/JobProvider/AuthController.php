@@ -91,7 +91,7 @@ class AuthController extends Controller
             $data = $request->all();
             // dd($data);
 
-            $createUser = $this->createUser($data, 1);
+            $createUser = $this->createUser($data, 2);
             // dd($createUser);
 
             $token = Str::random(64);
@@ -273,7 +273,7 @@ class AuthController extends Controller
 
                 $userType = auth()->user()->user_type;
 
-                if ($userType == 1) {
+                if ($userType == 2) {
                     return redirect()->route('jp-dashboard')->with('message', "YO");
                 }
                 // return $this->createNewToken($token);

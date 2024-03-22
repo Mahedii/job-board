@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('job_required_skills', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('job_id')->nullable();
-            $table->foreign('job_id')->references('id')->on('jobs')->onDelete('cacscade');
+            $table->foreign('job_id')->references('id')->on('jobs')->onDelete('cascade');
             $table->unsignedBigInteger('skill_id')->nullable();
             $table->foreign('skill_id')->references('id')->on('skills')->onDelete('set null');
             $table->timestamps();

@@ -36,7 +36,7 @@ CREATE TABLE `bd_universities` (
 -- Dumping data for table `bd_universities`
 --
 
-INSERT INTO `bd_universities` (`id`, `name`, `type`) VALUES
+INSERT INTO `universities` (`id`, `name`, `type`) VALUES
 (1, 'University of Dhaka', 'Public'),
 (2, 'University of Rajshahi', 'Public'),
 (3, 'Bangladesh Agricultural University', 'Public'),

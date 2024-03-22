@@ -61,7 +61,7 @@ class AuthController extends Controller
         $data = $request->all();
         // dd($data);
 
-        $createUser = $this->create($data, 1);
+        $createUser = $this->createUser($data, 1);
         // dd($createUser);
 
         $token = Str::random(64);
@@ -196,7 +196,7 @@ class AuthController extends Controller
      *
      * @return response()
      */
-    public function create(array $data, int $userType)
+    public function createUser(array $data, int $userType)
     {
         try {
             $user = null;

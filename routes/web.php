@@ -89,6 +89,7 @@ Route::prefix('job-provider')->group(function () {
         Route::middleware('is_verify_email')->group(function () {
             Route::controller(JobPostController::class)->group(function () {
                 Route::get('/job-post', 'jobPostPage')->name('job-post-page');
+                Route::post('/job-post/add', 'addJobPost')->name('add-job-post');
             });
         });
     });

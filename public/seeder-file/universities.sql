@@ -5077,7 +5077,7 @@ INSERT INTO universities (`country_code`, `university_name`, `website_url`) VALU
 INSERT INTO universities (`country_code`, `university_name`, `website_url`) VALUES ("MD", "Moldova Cooperative Trade University", "http://www.uccm.md/");
 INSERT INTO universities (`country_code`, `university_name`, `website_url`) VALUES ("MD", "Moldova State Agricultural University", "http://www.uasm.md/");
 INSERT INTO universities (`country_code`, `university_name`, `website_url`) VALUES ("MD", "Moldova State University", "http://www.usm.md/");
-INSERT INTO universities (`country_code`, `university_name`, `website_url`) VALUES ("MD", "Moldova State University of Medicine and Pharmacy "N. Testemitsanu"", "http://www.usmf.md/");
+INSERT INTO universities (`country_code`, `university_name`, `website_url`) VALUES ("MD", "Moldova State University of Medicine and Pharmacy N. Testemitsanu", "http://www.usmf.md/");
 INSERT INTO universities (`country_code`, `university_name`, `website_url`) VALUES ("MD", "Moldova Technical University", "http://www.utm.md/");
 INSERT INTO universities (`country_code`, `university_name`, `website_url`) VALUES ("MD", "Pedagogical State University Ion Creanga", "http://upm.moldnet.md/");
 INSERT INTO universities (`country_code`, `university_name`, `website_url`) VALUES ("MD", "Tiraspol State University", "http://www.ust.md/");
@@ -6085,7 +6085,7 @@ INSERT INTO universities (`country_code`, `university_name`, `website_url`) VALU
 INSERT INTO universities (`country_code`, `university_name`, `website_url`) VALUES ("PL", "Fine Arts Academy in Poznan", "http://www.asp.poznan.pl/");
 INSERT INTO universities (`country_code`, `university_name`, `website_url`) VALUES ("PL", "Fine Arts Academy in Warsaw", "http://www.asp.waw.pl/");
 INSERT INTO universities (`country_code`, `university_name`, `website_url`) VALUES ("PL", "Fine Arts Academy in Wroclaw", "http://www.asp.wroc.pl/");
-INSERT INTO universities (`country_code`, `university_name`, `website_url`) VALUES ("PL", "Fine Arts Academy "Jan Matejko" in Cracow", "http://149.156.19.10/");
+INSERT INTO universities (`country_code`, `university_name`, `website_url`) VALUES ("PL", "Fine Arts Academy Jan Matejko in Cracow", "http://149.156.19.10/");
 INSERT INTO universities (`country_code`, `university_name`, `website_url`) VALUES ("PL", "Fine Arts Academy Wladyslaw Strzeminski in Lodz", "http://www.asp.lodz.pl/");
 INSERT INTO universities (`country_code`, `university_name`, `website_url`) VALUES ("PL", "French Institute of Management", "http://www.ifg.com.pl/");
 INSERT INTO universities (`country_code`, `university_name`, `website_url`) VALUES ("PL", "Gdansk Management College", "http://www.wsz.pl/");

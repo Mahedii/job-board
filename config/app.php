@@ -166,6 +166,7 @@ return [
          * Custom Service Providers...
          */
         App\Providers\JobSeekerServiceProvider::class,
+        App\Providers\JobProviderServiceProvider::class,
         /*
          * Application Service Providers...
          */
