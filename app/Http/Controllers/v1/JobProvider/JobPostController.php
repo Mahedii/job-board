@@ -122,6 +122,17 @@ class JobPostController extends Controller
     }
 
     /**
+     * redirect to home page with required data
+     *
+     * @return view
+     */
+    public function manageJobPostsPage(): view
+    {
+
+        return view('v1.careepick.dashboard.job-provider.manage-jobs');
+    }
+
+    /**
      * Generate slug
      *
      * @param string $value

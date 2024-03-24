@@ -91,6 +91,7 @@ Route::prefix('job-provider')->group(function () {
             Route::controller(JobPostController::class)->group(function () {
                 Route::get('/job-post', 'jobPostPage')->name('job-post-page');
                 Route::post('/job-post/add', 'addJobPost')->name('add-job-post');
+                Route::get('/manage-jobs', 'manageJobPostsPage')->name('manage-jobs');
             });
         });
     });
@@ -127,10 +128,11 @@ Route::controller(EmployeeController::class)->group(function () {
 
 Route::controller(JobController::class)->group(function () {
     Route::prefix('job')->group(function () {
-        Route::get('/', 'job')->name('browse-job');
+        Route::get('/', 'index')->name('browse-job');
         Route::get('/list/{id}', 'fetchJobByCategory')->name('fetch-job-by-category');
+        Route::get('/detail/{slug}', 'jobDetail')->name('job-detail');
         Route::get('/manage-job', 'manageJob')->name('manage-job');
-        Route::get('/job-detail', 'jobDetail')->name('job-detail');
+        Route::get('/job-detail', 'jobDetail')->name('job.detail');
         Route::get('/category', 'browseCategory')->name('browse-category');
     });
 });

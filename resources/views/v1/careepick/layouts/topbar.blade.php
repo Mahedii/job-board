@@ -41,7 +41,7 @@
                                     <li><a href="candidate-half-map-list.html">Candidate Half Map 02</a></li>
                                 </ul>
                             </li>
-                            <li><a href="{{ route('job-detail') }}">job Detail</a></li>
+                            <li><a href="#">job Detail</a></li>
                             <li><a href="JavaScript:Void(0);">Candidate Detail<span
                                         class="submenu-indicator"></span></a>
                                 <ul class="nav-dropdown nav-submenu">

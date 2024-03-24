@@ -75,15 +75,15 @@
                                                         <div class="inner_widget_link">
                                                             <ul class="no-ul-list filter-list">
                                                                 <li>
-                                                                    <input id="a1" class="form-check-input" name="ADA" type="checkbox" checked="">
+                                                                    <input id="a1" class="form-check-input" name="ADA" type="checkbox">
                                                                     <label for="a1" class="form-check-label">
                                                                         All Category (100)
                                                                     </label>
                                                                 </li>
                                                                 @foreach ($jobCategoryData as $key => $data)
                                                                     <li>
-                                                                        <input id="a1" class="form-check-input" name="ADA" type="checkbox" @if($data->isSelected) checked="" @endif>
-                                                                        <label for="a1" class="form-check-label">
+                                                                        <input id="category-{{ $data->id }}" class="form-check-input" name="category-{{ $data->id }}" type="checkbox" @if($data->isSelected) checked="" @endif>
+                                                                        <label for="category-{{ $data->id }}" class="form-check-label">
                                                                             {{ $data->category_name }} ({{ $data->jobs_count }})
                                                                         </label>
                                                                     </li>
@@ -534,632 +534,171 @@
                         </div>
                     </div>
 
-                    <!-- Start All List -->
-                    <div class="row justify-content-center gx-3 gy-4">
+                    @if($jobsData == null)
+                        <h3>Sorry, No jobs found.</h3>
+                    @else
+                        <!-- Start All List -->
+                        <div class="row justify-content-center gx-3 gy-4">
+                            @foreach($jobsData as $key => $data)
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-12">
+                                    <div class="jbs-grid-layout border">
 
-                        @foreach($jobsData as $key => $data)
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-12">
-                                <div class="jbs-grid-layout border">
-
-                                    {{-- <div class="right-tags-capt">
-                                        <span class="featured-text">Featured</span>
-                                        <span class="urgent">Urgent</span>
-                                    </div> --}}
-                                    <div class="jbs-grid-emp-head">
-                                        <div class="jbs-grid-emp-thumb">
-                                            <a href="job-detail.html">
-                                                <figure><img src="{{ URL::asset('assets/img/l-1.png') }}" class="img-fluid" alt="">
-                                                </figure>
+                                        {{-- <div class="right-tags-capt">
+                                            <span class="featured-text">Featured</span>
+                                            <span class="urgent">Urgent</span>
+                                        </div> --}}
+                                        <div class="jbs-grid-emp-head">
+                                            <div class="jbs-grid-emp-thumb">
+                                                <a href="{{ route('job-detail', ['slug' => $data['slug']]) }}">
+                                                    <figure><img src="{{ URL::asset('assets/img/l-1.png') }}" class="img-fluid" alt="">
+                                                    </figure>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="jbs-grid-job-caption">
+                                            <div class="jbs-job-employer-wrap"><span>{{ $data['company_name'] }}</span></div>
+                                            <div class="jbs-job-title-wrap">
+                                                <h4 class="my-2">
+                                                    <a href="{{ route('job-detail', ['slug' => $data['slug']]) }}" class="jbs-job-title">{{ $data['job_title'] }}</a>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                        <div class="jbs-grid-job-info-wrap">
+                                            <div class="jbs-grid-job-info">
+                                                <div class="jbs-grid-single-info">
+                                                    <span>
+                                                        <i class="fa-solid fa-user-group"></i>{{ $data['experience_range_name'] }}
+                                                    </span>
+                                                </div>
+                                                <div class="jbs-grid-single-info">
+                                                    <span>
+                                                        <i class="fa-regular fa-clock"></i>{{ $data['job_nature_name'] }}
+                                                    </span>
+                                                </div>
+                                                <div class="jbs-grid-single-info"><span><i
+                                                            class="fa-solid fa-location-dot"></i>{{ $data['job_location'] }}</span></div>
+                                            </div>
+                                        </div>
+                                        <div class="jbs-grid-job-description my-2">
+                                            <a href="{{ route('job-detail', ['slug' => $data['slug']]) }}" style="text-decoration:none; color:black">
+                                                <p>{{ Str::limit(strip_tags($data['responsibilities']), 200) }}</p>
                                             </a>
                                         </div>
+                                        <div class="jbs-grid-job-edrs">
+                                            <div class="jbs-grid-job-edrs-group">
+                                                @foreach($data["job_skills"] as $key1 => $skillData)
+                                                    <span>{{ $skillData }}</span>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                        <div class="jbs-grid-job-package-info">
+                                            <div class="jbs-grid-posted">
+                                                @if($data['salary'] != null)
+                                                    <span>Salary: Tk. {{ $data['job_title'] }}</span>
+                                                @else
+                                                    <span>Salary: {{ $data['salary_type_name'] }}</span>
+                                                @endif
+                                            </div>
+                                            <div class="jbs-grid-posted"><span>Deadline: {{ $data['deadline'] }}</span></div>
+                                        </div>
+                                        {{-- <div class="jbs-grid-job-apply-btns">
+                                            <div class="jbs-btn-groups">
+                                                <a href="{{ route('job-detail', ['slug' => $data['slug']]) }}" class="btn btn-md btn-light-primary px-4">View
+                                                    Detail</a>
+                                                <a href="JavaScript:Void(0);" class="btn btn-md btn-primary px-4">Quick Apply</a>
+                                            </div>
+                                        </div> --}}
+                                    </div>
+                                </div>
+                            @endforeach
+
+                            <!-- Single Item -->
+                            {{-- <div class="col-xl-6 col-lg-6 col-md-6 col-12">
+                                <div class="jbs-grid-layout border">
+                                    <div class="right-tags-capt">
+                                        <span class="featured-text">Featured</span>
+                                        <span class="urgent">Urgent</span>
+                                    </div>
+                                    <div class="jbs-grid-emp-head">
+                                        <div class="jbs-grid-emp-thumb"><a href="job-detail.html">
+                                                <figure><img src="{{ URL::asset('assets/img/l-2.png') }}" class="img-fluid" alt="">
+                                                </figure>
+                                            </a></div>
                                     </div>
                                     <div class="jbs-grid-job-caption">
-                                        <div class="jbs-job-employer-wrap"><span>{{ $data['company_name'] }}</span></div>
+                                        <div class="jbs-job-employer-wrap"><span>Google Inc.</span></div>
                                         <div class="jbs-job-title-wrap">
-                                            <h4 class="my-2">
-                                                <a href="job-detail.html" class="jbs-job-title">{{ $data['job_title'] }}</a>
+                                            <h4><a href="job-detail.html" class="jbs-job-title">Sr. Front-end Developer</a>
                                             </h4>
                                         </div>
                                     </div>
                                     <div class="jbs-grid-job-info-wrap">
                                         <div class="jbs-grid-job-info">
-                                            <div class="jbs-grid-single-info">
-                                                <span>
-                                                    <i class="fa-solid fa-user-group"></i>{{ $data['experience_range_name'] }}
-                                                </span>
-                                            </div>
-                                            <div class="jbs-grid-single-info">
-                                                <span>
-                                                    <i class="fa-regular fa-clock"></i>{{ $data['job_nature_name'] }}
-                                                </span>
-                                            </div>
+                                            <div class="jbs-grid-single-info"><span><i class="fa-solid fa-user-group"></i>1-2
+                                                    Year</span></div>
+                                            <div class="jbs-grid-single-info"><span><i class="fa-regular fa-clock"></i>Full
+                                                    Time</span></div>
                                             <div class="jbs-grid-single-info"><span><i
-                                                        class="fa-solid fa-location-dot"></i>{{ $data['job_location'] }}</span></div>
+                                                        class="fa-solid fa-location-dot"></i>London</span></div>
                                         </div>
                                     </div>
-                                    <div class="jbs-grid-job-description my-2">
-                                        <a href="job-detail.html" style="text-decoration:none; color:black">
-                                            <p>{{ Str::limit(strip_tags($data['responsibilities']), 200) }}</p>
-                                        </a>
+                                    <div class="jbs-grid-job-description">
+                                        <p>Consistently create well-designed, tested code using best practices for website
+                                            development, including mobile...</p>
                                     </div>
                                     <div class="jbs-grid-job-edrs">
                                         <div class="jbs-grid-job-edrs-group">
-                                            @foreach($data["job_skills"] as $key1 => $skillData)
-                                                <span>{{ $skillData }}</span>
-                                            @endforeach
+                                            <span>HTML</span>
+                                            <span>CSS3</span>
+                                            <span>Bootstrap</span>
+                                            <span>Redux</span>
                                         </div>
                                     </div>
                                     <div class="jbs-grid-job-package-info">
-                                        <div class="jbs-grid-posted">
-                                            @if($data['salary'] != null)
-                                                <span>Salary: Tk. {{ $data['job_title'] }}</span>
-                                            @else
-                                                <span>Salary: {{ $data['salary_type_name'] }}</span>
-                                            @endif
+                                        <div class="jbs-grid-package-title">
+                                            <h5>$370<span>\Year</span></h5>
                                         </div>
-                                        <div class="jbs-grid-posted"><span>Deadline: {{ $data['deadline'] }}</span></div>
+                                        <div class="jbs-grid-posted"><span>26 March 2023</span></div>
                                     </div>
-                                    {{-- <div class="jbs-grid-job-apply-btns">
+                                    <div class="jbs-grid-job-apply-btns">
                                         <div class="jbs-btn-groups">
                                             <a href="job-detail.html" class="btn btn-md btn-light-primary px-4">View
                                                 Detail</a>
                                             <a href="JavaScript:Void(0);" class="btn btn-md btn-primary px-4">Quick Apply</a>
                                         </div>
-                                    </div> --}}
+                                    </div>
                                 </div>
-                            </div>
-                        @endforeach
+                            </div> --}}
 
-                        <!-- Single Item -->
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-12">
-                            <div class="jbs-grid-layout border">
-                                <div class="right-tags-capt">
-                                    <span class="featured-text">Featured</span>
-                                    <span class="urgent">Urgent</span>
-                                </div>
-                                <div class="jbs-grid-emp-head">
-                                    <div class="jbs-grid-emp-thumb"><a href="job-detail.html">
-                                            <figure><img src="{{ URL::asset('assets/img/l-2.png') }}" class="img-fluid" alt="">
-                                            </figure>
-                                        </a></div>
-                                </div>
-                                <div class="jbs-grid-job-caption">
-                                    <div class="jbs-job-employer-wrap"><span>Google Inc.</span></div>
-                                    <div class="jbs-job-title-wrap">
-                                        <h4><a href="job-detail.html" class="jbs-job-title">Sr. Front-end Developer</a>
-                                        </h4>
-                                    </div>
-                                </div>
-                                <div class="jbs-grid-job-info-wrap">
-                                    <div class="jbs-grid-job-info">
-                                        <div class="jbs-grid-single-info"><span><i class="fa-solid fa-user-group"></i>1-2
-                                                Year</span></div>
-                                        <div class="jbs-grid-single-info"><span><i class="fa-regular fa-clock"></i>Full
-                                                Time</span></div>
-                                        <div class="jbs-grid-single-info"><span><i
-                                                    class="fa-solid fa-location-dot"></i>London</span></div>
-                                    </div>
-                                </div>
-                                <div class="jbs-grid-job-description">
-                                    <p>Consistently create well-designed, tested code using best practices for website
-                                        development, including mobile...</p>
-                                </div>
-                                <div class="jbs-grid-job-edrs">
-                                    <div class="jbs-grid-job-edrs-group">
-                                        <span>HTML</span>
-                                        <span>CSS3</span>
-                                        <span>Bootstrap</span>
-                                        <span>Redux</span>
-                                    </div>
-                                </div>
-                                <div class="jbs-grid-job-package-info">
-                                    <div class="jbs-grid-package-title">
-                                        <h5>$370<span>\Year</span></h5>
-                                    </div>
-                                    <div class="jbs-grid-posted"><span>26 March 2023</span></div>
-                                </div>
-                                <div class="jbs-grid-job-apply-btns">
-                                    <div class="jbs-btn-groups">
-                                        <a href="job-detail.html" class="btn btn-md btn-light-primary px-4">View
-                                            Detail</a>
-                                        <a href="JavaScript:Void(0);" class="btn btn-md btn-primary px-4">Quick Apply</a>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
 
-                        <!-- Single Item -->
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-12">
-                            <div class="jbs-grid-layout border">
-                                <div class="right-tags-capt">
-                                    <span class="featured-text">Featured</span>
-                                    <span class="urgent">Urgent</span>
-                                </div>
-                                <div class="jbs-grid-emp-head">
-                                    <div class="jbs-grid-emp-thumb"><a href="job-detail.html">
-                                            <figure><img src="{{ URL::asset('assets/img/l-3.png') }}" class="img-fluid" alt="">
-                                            </figure>
-                                        </a></div>
-                                </div>
-                                <div class="jbs-grid-job-caption">
-                                    <div class="jbs-job-employer-wrap"><span>Google Inc.</span></div>
-                                    <div class="jbs-job-title-wrap">
-                                        <h4><a href="job-detail.html" class="jbs-job-title">Sr. Front-end Developer</a>
-                                        </h4>
-                                    </div>
-                                </div>
-                                <div class="jbs-grid-job-info-wrap">
-                                    <div class="jbs-grid-job-info">
-                                        <div class="jbs-grid-single-info"><span><i class="fa-solid fa-user-group"></i>1-2
-                                                Year</span></div>
-                                        <div class="jbs-grid-single-info"><span><i class="fa-regular fa-clock"></i>Full
-                                                Time</span></div>
-                                        <div class="jbs-grid-single-info"><span><i
-                                                    class="fa-solid fa-location-dot"></i>London</span></div>
-                                    </div>
-                                </div>
-                                <div class="jbs-grid-job-description">
-                                    <p>Consistently create well-designed, tested code using best practices for website
-                                        development, including mobile...</p>
-                                </div>
-                                <div class="jbs-grid-job-edrs">
-                                    <div class="jbs-grid-job-edrs-group">
-                                        <span>HTML</span>
-                                        <span>CSS3</span>
-                                        <span>Bootstrap</span>
-                                        <span>Redux</span>
-                                    </div>
-                                </div>
-                                <div class="jbs-grid-job-package-info">
-                                    <div class="jbs-grid-package-title">
-                                        <h5>$370<span>\Year</span></h5>
-                                    </div>
-                                    <div class="jbs-grid-posted"><span>26 March 2023</span></div>
-                                </div>
-                                <div class="jbs-grid-job-apply-btns">
-                                    <div class="jbs-btn-groups">
-                                        <a href="job-detail.html" class="btn btn-md btn-light-primary px-4">View
-                                            Detail</a>
-                                        <a href="JavaScript:Void(0);" class="btn btn-md btn-primary px-4">Quick Apply</a>
-                                    </div>
-                                </div>
+                        <!-- Pagination -->
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <nav aria-label="Page navigation example">
+                                    <ul class="pagination">
+                                        <li class="page-item">
+                                            <a class="page-link" href="JavaScript:Void(0);" aria-label="Previous">
+                                                <span aria-hidden="true">&laquo;</span>
+                                            </a>
+                                        </li>
+                                        <li class="page-item"><a class="page-link" href="JavaScript:Void(0);">1</a></li>
+                                        <li class="page-item"><a class="page-link" href="JavaScript:Void(0);">2</a></li>
+                                        <li class="page-item active"><a class="page-link" href="JavaScript:Void(0);">3</a>
+                                        </li>
+                                        <li class="page-item"><a class="page-link" href="JavaScript:Void(0);">4</a></li>
+                                        <li class="page-item"><a class="page-link" href="JavaScript:Void(0);">5</a></li>
+                                        <li class="page-item"><a class="page-link" href="JavaScript:Void(0);">6</a></li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="JavaScript:Void(0);" aria-label="Next">
+                                                <span aria-hidden="true">&raquo;</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
                             </div>
                         </div>
-
-                        <!-- Single Item -->
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-12">
-                            <div class="jbs-grid-layout border">
-                                <div class="right-tags-capt">
-                                    <span class="featured-text">Featured</span>
-                                    <span class="urgent">Urgent</span>
-                                </div>
-                                <div class="jbs-grid-emp-head">
-                                    <div class="jbs-grid-emp-thumb"><a href="job-detail.html">
-                                            <figure><img src="{{ URL::asset('assets/img/l-4.png') }}" class="img-fluid" alt="">
-                                            </figure>
-                                        </a></div>
-                                </div>
-                                <div class="jbs-grid-job-caption">
-                                    <div class="jbs-job-employer-wrap"><span>Google Inc.</span></div>
-                                    <div class="jbs-job-title-wrap">
-                                        <h4><a href="job-detail.html" class="jbs-job-title">Sr. Front-end Developer</a>
-                                        </h4>
-                                    </div>
-                                </div>
-                                <div class="jbs-grid-job-info-wrap">
-                                    <div class="jbs-grid-job-info">
-                                        <div class="jbs-grid-single-info"><span><i class="fa-solid fa-user-group"></i>1-2
-                                                Year</span></div>
-                                        <div class="jbs-grid-single-info"><span><i class="fa-regular fa-clock"></i>Full
-                                                Time</span></div>
-                                        <div class="jbs-grid-single-info"><span><i
-                                                    class="fa-solid fa-location-dot"></i>London</span></div>
-                                    </div>
-                                </div>
-                                <div class="jbs-grid-job-description">
-                                    <p>Consistently create well-designed, tested code using best practices for website
-                                        development, including mobile...</p>
-                                </div>
-                                <div class="jbs-grid-job-edrs">
-                                    <div class="jbs-grid-job-edrs-group">
-                                        <span>HTML</span>
-                                        <span>CSS3</span>
-                                        <span>Bootstrap</span>
-                                        <span>Redux</span>
-                                    </div>
-                                </div>
-                                <div class="jbs-grid-job-package-info">
-                                    <div class="jbs-grid-package-title">
-                                        <h5>$370<span>\Year</span></h5>
-                                    </div>
-                                    <div class="jbs-grid-posted"><span>26 March 2023</span></div>
-                                </div>
-                                <div class="jbs-grid-job-apply-btns">
-                                    <div class="jbs-btn-groups">
-                                        <a href="job-detail.html" class="btn btn-md btn-light-primary px-4">View
-                                            Detail</a>
-                                        <a href="JavaScript:Void(0);" class="btn btn-md btn-primary px-4">Quick Apply</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Single Item -->
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-12">
-                            <div class="jbs-grid-layout border">
-                                <div class="right-tags-capt">
-                                    <span class="featured-text">Featured</span>
-                                    <span class="urgent">Urgent</span>
-                                </div>
-                                <div class="jbs-grid-emp-head">
-                                    <div class="jbs-grid-emp-thumb"><a href="job-detail.html">
-                                            <figure><img src="{{ URL::asset('assets/img/l-5.png') }}" class="img-fluid" alt="">
-                                            </figure>
-                                        </a></div>
-                                </div>
-                                <div class="jbs-grid-job-caption">
-                                    <div class="jbs-job-employer-wrap"><span>Google Inc.</span></div>
-                                    <div class="jbs-job-title-wrap">
-                                        <h4><a href="job-detail.html" class="jbs-job-title">Sr. Front-end Developer</a>
-                                        </h4>
-                                    </div>
-                                </div>
-                                <div class="jbs-grid-job-info-wrap">
-                                    <div class="jbs-grid-job-info">
-                                        <div class="jbs-grid-single-info"><span><i class="fa-solid fa-user-group"></i>1-2
-                                                Year</span></div>
-                                        <div class="jbs-grid-single-info"><span><i class="fa-regular fa-clock"></i>Full
-                                                Time</span></div>
-                                        <div class="jbs-grid-single-info"><span><i
-                                                    class="fa-solid fa-location-dot"></i>London</span></div>
-                                    </div>
-                                </div>
-                                <div class="jbs-grid-job-description">
-                                    <p>Consistently create well-designed, tested code using best practices for website
-                                        development, including mobile...</p>
-                                </div>
-                                <div class="jbs-grid-job-edrs">
-                                    <div class="jbs-grid-job-edrs-group">
-                                        <span>HTML</span>
-                                        <span>CSS3</span>
-                                        <span>Bootstrap</span>
-                                        <span>Redux</span>
-                                    </div>
-                                </div>
-                                <div class="jbs-grid-job-package-info">
-                                    <div class="jbs-grid-package-title">
-                                        <h5>$370<span>\Year</span></h5>
-                                    </div>
-                                    <div class="jbs-grid-posted"><span>26 March 2023</span></div>
-                                </div>
-                                <div class="jbs-grid-job-apply-btns">
-                                    <div class="jbs-btn-groups">
-                                        <a href="job-detail.html" class="btn btn-md btn-light-primary px-4">View
-                                            Detail</a>
-                                        <a href="JavaScript:Void(0);" class="btn btn-md btn-primary px-4">Quick Apply</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Single Item -->
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-12">
-                            <div class="jbs-grid-layout border">
-                                <div class="right-tags-capt">
-                                    <span class="featured-text">Featured</span>
-                                    <span class="urgent">Urgent</span>
-                                </div>
-                                <div class="jbs-grid-emp-head">
-                                    <div class="jbs-grid-emp-thumb"><a href="job-detail.html">
-                                            <figure><img src="{{ URL::asset('assets/img/l-6.png') }}" class="img-fluid" alt="">
-                                            </figure>
-                                        </a></div>
-                                </div>
-                                <div class="jbs-grid-job-caption">
-                                    <div class="jbs-job-employer-wrap"><span>Google Inc.</span></div>
-                                    <div class="jbs-job-title-wrap">
-                                        <h4><a href="job-detail.html" class="jbs-job-title">Sr. Front-end Developer</a>
-                                        </h4>
-                                    </div>
-                                </div>
-                                <div class="jbs-grid-job-info-wrap">
-                                    <div class="jbs-grid-job-info">
-                                        <div class="jbs-grid-single-info"><span><i class="fa-solid fa-user-group"></i>1-2
-                                                Year</span></div>
-                                        <div class="jbs-grid-single-info"><span><i class="fa-regular fa-clock"></i>Full
-                                                Time</span></div>
-                                        <div class="jbs-grid-single-info"><span><i
-                                                    class="fa-solid fa-location-dot"></i>London</span></div>
-                                    </div>
-                                </div>
-                                <div class="jbs-grid-job-description">
-                                    <p>Consistently create well-designed, tested code using best practices for website
-                                        development, including mobile...</p>
-                                </div>
-                                <div class="jbs-grid-job-edrs">
-                                    <div class="jbs-grid-job-edrs-group">
-                                        <span>HTML</span>
-                                        <span>CSS3</span>
-                                        <span>Bootstrap</span>
-                                        <span>Redux</span>
-                                    </div>
-                                </div>
-                                <div class="jbs-grid-job-package-info">
-                                    <div class="jbs-grid-package-title">
-                                        <h5>$370<span>\Year</span></h5>
-                                    </div>
-                                    <div class="jbs-grid-posted"><span>26 March 2023</span></div>
-                                </div>
-                                <div class="jbs-grid-job-apply-btns">
-                                    <div class="jbs-btn-groups">
-                                        <a href="job-detail.html" class="btn btn-md btn-light-primary px-4">View
-                                            Detail</a>
-                                        <a href="JavaScript:Void(0);" class="btn btn-md btn-primary px-4">Quick Apply</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Single Item -->
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-12">
-                            <div class="jbs-grid-layout border">
-                                <div class="right-tags-capt">
-                                    <span class="featured-text">Featured</span>
-                                    <span class="urgent">Urgent</span>
-                                </div>
-                                <div class="jbs-grid-emp-head">
-                                    <div class="jbs-grid-emp-thumb"><a href="job-detail.html">
-                                            <figure><img src="{{ URL::asset('assets/img/l-7.png') }}" class="img-fluid" alt="">
-                                            </figure>
-                                        </a></div>
-                                </div>
-                                <div class="jbs-grid-job-caption">
-                                    <div class="jbs-job-employer-wrap"><span>Google Inc.</span></div>
-                                    <div class="jbs-job-title-wrap">
-                                        <h4><a href="job-detail.html" class="jbs-job-title">Sr. Front-end Developer</a>
-                                        </h4>
-                                    </div>
-                                </div>
-                                <div class="jbs-grid-job-info-wrap">
-                                    <div class="jbs-grid-job-info">
-                                        <div class="jbs-grid-single-info"><span><i class="fa-solid fa-user-group"></i>1-2
-                                                Year</span></div>
-                                        <div class="jbs-grid-single-info"><span><i class="fa-regular fa-clock"></i>Full
-                                                Time</span></div>
-                                        <div class="jbs-grid-single-info"><span><i
-                                                    class="fa-solid fa-location-dot"></i>London</span></div>
-                                    </div>
-                                </div>
-                                <div class="jbs-grid-job-description">
-                                    <p>Consistently create well-designed, tested code using best practices for website
-                                        development, including mobile...</p>
-                                </div>
-                                <div class="jbs-grid-job-edrs">
-                                    <div class="jbs-grid-job-edrs-group">
-                                        <span>HTML</span>
-                                        <span>CSS3</span>
-                                        <span>Bootstrap</span>
-                                        <span>Redux</span>
-                                    </div>
-                                </div>
-                                <div class="jbs-grid-job-package-info">
-                                    <div class="jbs-grid-package-title">
-                                        <h5>$370<span>\Year</span></h5>
-                                    </div>
-                                    <div class="jbs-grid-posted"><span>26 March 2023</span></div>
-                                </div>
-                                <div class="jbs-grid-job-apply-btns">
-                                    <div class="jbs-btn-groups">
-                                        <a href="job-detail.html" class="btn btn-md btn-light-primary px-4">View
-                                            Detail</a>
-                                        <a href="JavaScript:Void(0);" class="btn btn-md btn-primary px-4">Quick Apply</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Single Item -->
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-12">
-                            <div class="jbs-grid-layout border">
-                                <div class="right-tags-capt">
-                                    <span class="featured-text">Featured</span>
-                                    <span class="urgent">Urgent</span>
-                                </div>
-                                <div class="jbs-grid-emp-head">
-                                    <div class="jbs-grid-emp-thumb"><a href="job-detail.html">
-                                            <figure><img src="{{ URL::asset('assets/img/l-8.png') }}" class="img-fluid" alt="">
-                                            </figure>
-                                        </a></div>
-                                </div>
-                                <div class="jbs-grid-job-caption">
-                                    <div class="jbs-job-employer-wrap"><span>Google Inc.</span></div>
-                                    <div class="jbs-job-title-wrap">
-                                        <h4><a href="job-detail.html" class="jbs-job-title">Sr. Front-end Developer</a>
-                                        </h4>
-                                    </div>
-                                </div>
-                                <div class="jbs-grid-job-info-wrap">
-                                    <div class="jbs-grid-job-info">
-                                        <div class="jbs-grid-single-info"><span><i class="fa-solid fa-user-group"></i>1-2
-                                                Year</span></div>
-                                        <div class="jbs-grid-single-info"><span><i class="fa-regular fa-clock"></i>Full
-                                                Time</span></div>
-                                        <div class="jbs-grid-single-info"><span><i
-                                                    class="fa-solid fa-location-dot"></i>London</span></div>
-                                    </div>
-                                </div>
-                                <div class="jbs-grid-job-description">
-                                    <p>Consistently create well-designed, tested code using best practices for website
-                                        development, including mobile...</p>
-                                </div>
-                                <div class="jbs-grid-job-edrs">
-                                    <div class="jbs-grid-job-edrs-group">
-                                        <span>HTML</span>
-                                        <span>CSS3</span>
-                                        <span>Bootstrap</span>
-                                        <span>Redux</span>
-                                    </div>
-                                </div>
-                                <div class="jbs-grid-job-package-info">
-                                    <div class="jbs-grid-package-title">
-                                        <h5>$370<span>\Year</span></h5>
-                                    </div>
-                                    <div class="jbs-grid-posted"><span>26 March 2023</span></div>
-                                </div>
-                                <div class="jbs-grid-job-apply-btns">
-                                    <div class="jbs-btn-groups">
-                                        <a href="job-detail.html" class="btn btn-md btn-light-primary px-4">View
-                                            Detail</a>
-                                        <a href="JavaScript:Void(0);" class="btn btn-md btn-primary px-4">Quick Apply</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Single Item -->
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-12">
-                            <div class="jbs-grid-layout border">
-                                <div class="right-tags-capt">
-                                    <span class="featured-text">Featured</span>
-                                    <span class="urgent">Urgent</span>
-                                </div>
-                                <div class="jbs-grid-emp-head">
-                                    <div class="jbs-grid-emp-thumb"><a href="job-detail.html">
-                                            <figure><img src="{{ URL::asset('assets/img/l-9.png') }}" class="img-fluid" alt="">
-                                            </figure>
-                                        </a></div>
-                                </div>
-                                <div class="jbs-grid-job-caption">
-                                    <div class="jbs-job-employer-wrap"><span>Google Inc.</span></div>
-                                    <div class="jbs-job-title-wrap">
-                                        <h4><a href="job-detail.html" class="jbs-job-title">Sr. Front-end Developer</a>
-                                        </h4>
-                                    </div>
-                                </div>
-                                <div class="jbs-grid-job-info-wrap">
-                                    <div class="jbs-grid-job-info">
-                                        <div class="jbs-grid-single-info"><span><i class="fa-solid fa-user-group"></i>1-2
-                                                Year</span></div>
-                                        <div class="jbs-grid-single-info"><span><i class="fa-regular fa-clock"></i>Full
-                                                Time</span></div>
-                                        <div class="jbs-grid-single-info"><span><i
-                                                    class="fa-solid fa-location-dot"></i>London</span></div>
-                                    </div>
-                                </div>
-                                <div class="jbs-grid-job-description">
-                                    <p>Consistently create well-designed, tested code using best practices for website
-                                        development, including mobile...</p>
-                                </div>
-                                <div class="jbs-grid-job-edrs">
-                                    <div class="jbs-grid-job-edrs-group">
-                                        <span>HTML</span>
-                                        <span>CSS3</span>
-                                        <span>Bootstrap</span>
-                                        <span>Redux</span>
-                                    </div>
-                                </div>
-                                <div class="jbs-grid-job-package-info">
-                                    <div class="jbs-grid-package-title">
-                                        <h5>$370<span>\Year</span></h5>
-                                    </div>
-                                    <div class="jbs-grid-posted"><span>26 March 2023</span></div>
-                                </div>
-                                <div class="jbs-grid-job-apply-btns">
-                                    <div class="jbs-btn-groups">
-                                        <a href="job-detail.html" class="btn btn-md btn-light-primary px-4">View
-                                            Detail</a>
-                                        <a href="JavaScript:Void(0);" class="btn btn-md btn-primary px-4">Quick Apply</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Single Item -->
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-12">
-                            <div class="jbs-grid-layout border">
-                                <div class="right-tags-capt">
-                                    <span class="featured-text">Featured</span>
-                                    <span class="urgent">Urgent</span>
-                                </div>
-                                <div class="jbs-grid-emp-head">
-                                    <div class="jbs-grid-emp-thumb"><a href="job-detail.html">
-                                            <figure><img src="{{ URL::asset('assets/img/l-10.png') }}" class="img-fluid" alt="">
-                                            </figure>
-                                        </a></div>
-                                </div>
-                                <div class="jbs-grid-job-caption">
-                                    <div class="jbs-job-employer-wrap"><span>Google Inc.</span></div>
-                                    <div class="jbs-job-title-wrap">
-                                        <h4><a href="job-detail.html" class="jbs-job-title">Sr. Front-end Developer</a>
-                                        </h4>
-                                    </div>
-                                </div>
-                                <div class="jbs-grid-job-info-wrap">
-                                    <div class="jbs-grid-job-info">
-                                        <div class="jbs-grid-single-info"><span><i class="fa-solid fa-user-group"></i>1-2
-                                                Year</span></div>
-                                        <div class="jbs-grid-single-info"><span><i class="fa-regular fa-clock"></i>Full
-                                                Time</span></div>
-                                        <div class="jbs-grid-single-info"><span><i
-                                                    class="fa-solid fa-location-dot"></i>London</span></div>
-                                    </div>
-                                </div>
-                                <div class="jbs-grid-job-description">
-                                    <p>Consistently create well-designed, tested code using best practices for website
-                                        development, including mobile...</p>
-                                </div>
-                                <div class="jbs-grid-job-edrs">
-                                    <div class="jbs-grid-job-edrs-group">
-                                        <span>HTML</span>
-                                        <span>CSS3</span>
-                                        <span>Bootstrap</span>
-                                        <span>Redux</span>
-                                    </div>
-                                </div>
-                                <div class="jbs-grid-job-package-info">
-                                    <div class="jbs-grid-package-title">
-                                        <h5>$370<span>\Year</span></h5>
-                                    </div>
-                                    <div class="jbs-grid-posted"><span>26 March 2023</span></div>
-                                </div>
-                                <div class="jbs-grid-job-apply-btns">
-                                    <div class="jbs-btn-groups">
-                                        <a href="job-detail.html" class="btn btn-md btn-light-primary px-4">View
-                                            Detail</a>
-                                        <a href="JavaScript:Void(0);" class="btn btn-md btn-primary px-4">Quick Apply</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <!-- Pagination -->
-                    <div class="row">
-                        <div class="col-lg-12 col-md-12 col-sm-12">
-                            <nav aria-label="Page navigation example">
-                                <ul class="pagination">
-                                    <li class="page-item">
-                                        <a class="page-link" href="JavaScript:Void(0);" aria-label="Previous">
-                                            <span aria-hidden="true">&laquo;</span>
-                                        </a>
-                                    </li>
-                                    <li class="page-item"><a class="page-link" href="JavaScript:Void(0);">1</a></li>
-                                    <li class="page-item"><a class="page-link" href="JavaScript:Void(0);">2</a></li>
-                                    <li class="page-item active"><a class="page-link" href="JavaScript:Void(0);">3</a>
-                                    </li>
-                                    <li class="page-item"><a class="page-link" href="JavaScript:Void(0);">4</a></li>
-                                    <li class="page-item"><a class="page-link" href="JavaScript:Void(0);">5</a></li>
-                                    <li class="page-item"><a class="page-link" href="JavaScript:Void(0);">6</a></li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="JavaScript:Void(0);" aria-label="Next">
-                                            <span aria-hidden="true">&raquo;</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </nav>
-                        </div>
-                    </div>
+                    @endif
 
                 </div>
 

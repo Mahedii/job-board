@@ -15,7 +15,7 @@ class JobController extends Controller
      *
      * @return view
      */
-    public function job(): view
+    public function index(): view
     {
         $jobCategoryData = JobCategory::withCount('jobs')->get();
 
@@ -66,13 +66,16 @@ class JobController extends Controller
     }
 
     /**
-     * redirect to home page with required data
+     * redirect to detail page with required data
      *
      * @return view
      */
-    public function jobDetail(): view
+    public function jobDetail($slug): view
     {
-        return view('v1.careepick.pages.common.job-detail');
+        // $jobData = Jobs::select("*")->where('slug', $slug)->get();
+        $jobData = Jobs::getJobDetail($slug);
+
+        return view('v1.careepick.pages.common.job-detail', ['jobData' => $jobData]);
     }
 
     /**
