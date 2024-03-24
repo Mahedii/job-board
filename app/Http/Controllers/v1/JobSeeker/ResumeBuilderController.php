@@ -73,12 +73,13 @@ class ResumeBuilderController extends Controller
         $skillsData = Skills::getAllData();
 
         $jobSeekerData = JobSeeker::select("*")->where('user_id', Auth::user()->id)->get();
-        $jobSeekerData->transform(function ($jobSeeker) {
-            if ($jobSeeker->jobseeker_dob != null) {
-                $jobSeeker->formatted_dob = Carbon::createFromFormat('m/d/Y', $jobSeeker->jobseeker_dob)->format('Y-m-d');
-            }
-            return $jobSeeker;
-        });
+        // $jobSeekerData->transform(function ($jobSeeker) {
+        //     if ($jobSeeker->jobseeker_dob != null) {
+        //         dd($jobSeeker->jobseeker_dob);
+        //         $jobSeeker->formatted_dob = Carbon::createFromFormat('m/d/Y', $jobSeeker->jobseeker_dob)->format('Y-m-d');
+        //     }
+        //     return $jobSeeker;
+        // });
         $jobSeekerSkillsData = JobSeekerSkills::with(['skills'])->where('job_seeker_id', app('jobSeeker')->id)->get();
         $jobSeekerLanguagesData = JobSeekerLanguages::with(['language'])->where('job_seeker_id', app('jobSeeker')->id)->get();
         $jobSeekerResearchPapersData = JobSeekerResearchPapers::select("*")->where('job_seeker_id', app('jobSeeker')->id)->get();

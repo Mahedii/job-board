@@ -75,71 +75,19 @@
                                                         <div class="inner_widget_link">
                                                             <ul class="no-ul-list filter-list">
                                                                 <li>
-                                                                    <input id="a1" class="form-check-input"
-                                                                        name="ADA" type="checkbox" checked="">
-                                                                    <label for="a1" class="form-check-label">IT
-                                                                        Computers (62)</label>
+                                                                    <input id="a1" class="form-check-input" name="ADA" type="checkbox" checked="">
+                                                                    <label for="a1" class="form-check-label">
+                                                                        All Category (100)
+                                                                    </label>
                                                                 </li>
-                                                                <li>
-                                                                    <input id="aa1" class="form-check-input"
-                                                                        name="ADA" type="checkbox">
-                                                                    <label for="aa1" class="form-check-label">Web
-                                                                        Design (31)</label>
-                                                                </li>
-                                                                <li>
-                                                                    <input id="aa2" class="form-check-input"
-                                                                        name="Parking" type="checkbox">
-                                                                    <label for="aa2" class="form-check-label">Web
-                                                                        development (20)</label>
-                                                                </li>
-                                                                <li>
-                                                                    <input id="aa3" class="form-check-input"
-                                                                        name="Coffee" type="checkbox">
-                                                                    <label for="aa3" class="form-check-label">SEO
-                                                                        Services (43)</label>
-                                                                </li>
-                                                                <li>
-                                                                    <input id="a2" class="form-check-input"
-                                                                        name="Parking" type="checkbox">
-                                                                    <label for="a2" class="form-check-label">Financial
-                                                                        Service (16)</label>
-                                                                </li>
-                                                                <li>
-                                                                    <input id="a3" class="form-check-input"
-                                                                        name="Coffee" type="checkbox">
-                                                                    <label for="a3" class="form-check-label">Art,
-                                                                        Design, Media (22)</label>
-                                                                </li>
-                                                                <li>
-                                                                    <input id="a4" class="form-check-input"
-                                                                        name="Mother" type="checkbox">
-                                                                    <label for="a4" class="form-check-label">Coach &
-                                                                        Education (21)</label>
-                                                                </li>
-                                                                <li>
-                                                                    <input id="a5" class="form-check-input"
-                                                                        name="Outdoor" type="checkbox">
-                                                                    <label for="a5" class="form-check-label">Apps
-                                                                        Developements (17)</label>
-                                                                </li>
-                                                                <li>
-                                                                    <input id="ab1" class="form-check-input"
-                                                                        name="ADA" type="checkbox">
-                                                                    <label for="ab1" class="form-check-label">IOS
-                                                                        Development (12)</label>
-                                                                </li>
-                                                                <li>
-                                                                    <input id="ab2" class="form-check-input"
-                                                                        name="Parking" type="checkbox">
-                                                                    <label for="ab2" class="form-check-label">Android
-                                                                        Development (04)</label>
-                                                                </li>
-                                                                <li>
-                                                                    <input id="a6" class="form-check-input"
-                                                                        name="Pet" type="checkbox">
-                                                                    <label for="a6" class="form-check-label">Writing
-                                                                        & Translation (04)</label>
-                                                                </li>
+                                                                @foreach ($jobCategoryData as $key => $data)
+                                                                    <li>
+                                                                        <input id="a1" class="form-check-input" name="ADA" type="checkbox" @if($data->isSelected) checked="" @endif>
+                                                                        <label for="a1" class="form-check-label">
+                                                                            {{ $data->category_name }} ({{ $data->jobs_count }})
+                                                                        </label>
+                                                                    </li>
+                                                                @endforeach
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -160,7 +108,6 @@
                                         <div class="widget-boxed-body collapse" id="locations"
                                             data-bs-parent="#locations">
                                             <div class="side-list no-border">
-                                                <!-- Single Filter Card -->
                                                 <div class="single_filter_card">
                                                     <div class="card-body p-0">
                                                         <div class="inner_widget_link">
@@ -590,63 +537,78 @@
                     <!-- Start All List -->
                     <div class="row justify-content-center gx-3 gy-4">
 
-                        <!-- Single Item -->
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-12">
-                            <div class="jbs-grid-layout border">
-                                <div class="right-tags-capt">
-                                    <span class="featured-text">Featured</span>
-                                    <span class="urgent">Urgent</span>
-                                </div>
-                                <div class="jbs-grid-emp-head">
-                                    <div class="jbs-grid-emp-thumb"><a href="job-detail.html">
-                                            <figure><img src="{{ URL::asset('assets/img/l-1.png') }}" class="img-fluid" alt="">
-                                            </figure>
-                                        </a></div>
-                                </div>
-                                <div class="jbs-grid-job-caption">
-                                    <div class="jbs-job-employer-wrap"><span>Google Inc.</span></div>
-                                    <div class="jbs-job-title-wrap">
-                                        <h4><a href="job-detail.html" class="jbs-job-title">Sr. Front-end Developer</a>
-                                        </h4>
+                        @foreach($jobsData as $key => $data)
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-12">
+                                <div class="jbs-grid-layout border">
+
+                                    {{-- <div class="right-tags-capt">
+                                        <span class="featured-text">Featured</span>
+                                        <span class="urgent">Urgent</span>
+                                    </div> --}}
+                                    <div class="jbs-grid-emp-head">
+                                        <div class="jbs-grid-emp-thumb">
+                                            <a href="job-detail.html">
+                                                <figure><img src="{{ URL::asset('assets/img/l-1.png') }}" class="img-fluid" alt="">
+                                                </figure>
+                                            </a>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="jbs-grid-job-info-wrap">
-                                    <div class="jbs-grid-job-info">
-                                        <div class="jbs-grid-single-info"><span><i class="fa-solid fa-user-group"></i>1-2
-                                                Year</span></div>
-                                        <div class="jbs-grid-single-info"><span><i class="fa-regular fa-clock"></i>Full
-                                                Time</span></div>
-                                        <div class="jbs-grid-single-info"><span><i
-                                                    class="fa-solid fa-location-dot"></i>London</span></div>
+                                    <div class="jbs-grid-job-caption">
+                                        <div class="jbs-job-employer-wrap"><span>{{ $data['company_name'] }}</span></div>
+                                        <div class="jbs-job-title-wrap">
+                                            <h4 class="my-2">
+                                                <a href="job-detail.html" class="jbs-job-title">{{ $data['job_title'] }}</a>
+                                            </h4>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="jbs-grid-job-description">
-                                    <p>Consistently create well-designed, tested code using best practices for website
-                                        development, including mobile...</p>
-                                </div>
-                                <div class="jbs-grid-job-edrs">
-                                    <div class="jbs-grid-job-edrs-group">
-                                        <span>HTML</span>
-                                        <span>CSS3</span>
-                                        <span>Bootstrap</span>
-                                        <span>Redux</span>
+                                    <div class="jbs-grid-job-info-wrap">
+                                        <div class="jbs-grid-job-info">
+                                            <div class="jbs-grid-single-info">
+                                                <span>
+                                                    <i class="fa-solid fa-user-group"></i>{{ $data['experience_range_name'] }}
+                                                </span>
+                                            </div>
+                                            <div class="jbs-grid-single-info">
+                                                <span>
+                                                    <i class="fa-regular fa-clock"></i>{{ $data['job_nature_name'] }}
+                                                </span>
+                                            </div>
+                                            <div class="jbs-grid-single-info"><span><i
+                                                        class="fa-solid fa-location-dot"></i>{{ $data['job_location'] }}</span></div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="jbs-grid-job-package-info">
-                                    <div class="jbs-grid-package-title">
-                                        <h5>$370<span>\Year</span></h5>
+                                    <div class="jbs-grid-job-description my-2">
+                                        <a href="job-detail.html" style="text-decoration:none; color:black">
+                                            <p>{{ Str::limit(strip_tags($data['responsibilities']), 200) }}</p>
+                                        </a>
                                     </div>
-                                    <div class="jbs-grid-posted"><span>26 March 2023</span></div>
-                                </div>
-                                <div class="jbs-grid-job-apply-btns">
-                                    <div class="jbs-btn-groups">
-                                        <a href="job-detail.html" class="btn btn-md btn-light-primary px-4">View
-                                            Detail</a>
-                                        <a href="JavaScript:Void(0);" class="btn btn-md btn-primary px-4">Quick Apply</a>
+                                    <div class="jbs-grid-job-edrs">
+                                        <div class="jbs-grid-job-edrs-group">
+                                            @foreach($data["job_skills"] as $key1 => $skillData)
+                                                <span>{{ $skillData }}</span>
+                                            @endforeach
+                                        </div>
                                     </div>
+                                    <div class="jbs-grid-job-package-info">
+                                        <div class="jbs-grid-posted">
+                                            @if($data['salary'] != null)
+                                                <span>Salary: Tk. {{ $data['job_title'] }}</span>
+                                            @else
+                                                <span>Salary: {{ $data['salary_type_name'] }}</span>
+                                            @endif
+                                        </div>
+                                        <div class="jbs-grid-posted"><span>Deadline: {{ $data['deadline'] }}</span></div>
+                                    </div>
+                                    {{-- <div class="jbs-grid-job-apply-btns">
+                                        <div class="jbs-btn-groups">
+                                            <a href="job-detail.html" class="btn btn-md btn-light-primary px-4">View
+                                                Detail</a>
+                                            <a href="JavaScript:Void(0);" class="btn btn-md btn-primary px-4">Quick Apply</a>
+                                        </div>
+                                    </div> --}}
                                 </div>
                             </div>
-                        </div>
+                        @endforeach
 
                         <!-- Single Item -->
                         <div class="col-xl-6 col-lg-6 col-md-6 col-12">

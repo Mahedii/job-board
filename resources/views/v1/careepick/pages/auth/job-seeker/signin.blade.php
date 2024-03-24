@@ -35,6 +35,13 @@
                                         aria-label="Close"></button>
                                 </div>
                             @endif
+                            @if (session('signinPageMessage'))
+                                <div class="alert alert-succcess alert-dismissible fade show my-2" role="alert">
+                                    <strong>{{ session('signinPageMessage') }}</strong>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                            @endif
                             <div class="row gx-3 gy-4">
                                 <div class="modal-login-form">
                                     <form method="POST" action="{{ route('js-signin') }}">

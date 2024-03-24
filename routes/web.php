@@ -5,6 +5,7 @@ use App\Http\Controllers\v1\careepick\JobController;
 use App\Http\Controllers\v1\careepick\ContactController;
 use App\Http\Controllers\v1\careepick\EmployeeController;
 use App\Http\Controllers\v1\careepick\EmployerController;
+use App\Http\Controllers\v1\careepick\HomePageController;
 use App\Http\Controllers\v1\Ajax\ValidationDataController;
 use App\Http\Controllers\v1\JobProvider\JobPostController;
 use App\Http\Controllers\v1\employer\SocialLoginController;
@@ -102,9 +103,9 @@ Route::get('/register-company', [EmployerController::class, 'createCompany'])->n
 //     Route::get('authorized/{platform}/callback', 'handleCallback')->name('social.auth.handleCallback');
 // });
 
-Route::get('/', function () {
-    return view('v1.careepick.pages.common.home');
-})->name("home");
+Route::controller(HomePageController::class)->group(function () {
+    Route::get('/', 'index')->name('home');
+});
 
 Route::controller(EmployerController::class)->group(function () {
     Route::prefix('employer')->group(function () {
@@ -127,6 +128,7 @@ Route::controller(EmployeeController::class)->group(function () {
 Route::controller(JobController::class)->group(function () {
     Route::prefix('job')->group(function () {
         Route::get('/', 'job')->name('browse-job');
+        Route::get('/list/{id}', 'fetchJobByCategory')->name('fetch-job-by-category');
         Route::get('/manage-job', 'manageJob')->name('manage-job');
         Route::get('/job-detail', 'jobDetail')->name('job-detail');
         Route::get('/category', 'browseCategory')->name('browse-category');

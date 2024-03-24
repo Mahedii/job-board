@@ -9,6 +9,18 @@ class Skills extends Model
 {
     use HasFactory;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
+    protected $fillable = [
+        'skill_name',
+        'job_category_id',
+        'slug',
+        'remarks',
+    ];
+
     public static function getAllData()
     {
         $processedData = [];

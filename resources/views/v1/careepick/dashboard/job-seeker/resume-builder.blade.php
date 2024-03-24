@@ -78,8 +78,8 @@
 
                                     <div class="form-group col-lg-6 col-md-6 col-sm-12">
                                         <label>Date of Birth <span class="text-danger">*</span></label>
-                                        <input type="date" name="jobseeker_dob" value="{{ $jsData->formatted_dob }}"
-                                            class="form-control input-custom-style" placeholder="MM/DD/YYYY">
+                                        <input type="date" name="jobseeker_dob" value="{{ $jsData->jobseeker_dob }}"
+                                            class="form-control input-custom-style" placeholder="YYYY-MM-DD">
                                     </div>
 
                                     <div class="form-group col-lg-6 col-md-6 col-sm-12">

@@ -23,6 +23,7 @@ use App\Models\v1\careepick\JobSeeker\JobSeeker;
 class AuthController extends Controller
 {
     private $user = [];
+    private string $token = '';
 
     /**
      * redirect to home page with required data
@@ -62,26 +63,21 @@ class AuthController extends Controller
         // dd($data);
 
         $createUser = $this->createUser($data, 1);
-        // dd($createUser);
 
-        $token = Str::random(64);
+        if ($createUser) {
+            // Mail::send('v1.careepick.pages.auth.emailVerificationEmail', ['token' => $token], function ($message) use ($request) {
+            //     $message->to($request->email);
+            //     $message->subject('Email Verification Mail');
+            // });
 
-        UserVerify::create([
-            'user_id' => $createUser->id,
-            'token' => $token
-        ]);
+            // $mailData = [
+            //     'token' => $token,
+            // ];
+            // Mail::to($request->email)->send(new VerifyEmail($mailData));
+            // return Redirect()->back()->with('registrationMessage', 'A verification mail has been sent to your email address, please confirm your mail account.');
+        }
 
-        // Mail::send('v1.careepick.pages.auth.emailVerificationEmail', ['token' => $token], function ($message) use ($request) {
-        //     $message->to($request->email);
-        //     $message->subject('Email Verification Mail');
-        // });
-
-        $mailData = [
-            'token' => $token,
-        ];
-        Mail::to($request->email)->send(new VerifyEmail($mailData));
-
-        return Redirect()->back()->with('registrationMessage', 'A verification mail has been sent to your email address, please confirm your mail account.');
+        return Redirect()->route('js-signin-page')->with('signinPageMessage', 'You have been registered, please signin to your account.');
         // dd("Email is sent successfully.");
 
         // return redirect("dashboard")->withSuccess('Great! You have Successfully loggedin');
@@ -194,13 +190,11 @@ class AuthController extends Controller
     /**
      * Write code on Method
      *
-     * @return response()
+     * @return string
      */
     public function createUser(array $data, int $userType)
     {
         try {
-            $user = null;
-
             DB::transaction(function () use ($data, $userType) {
                 // First query: Create a new user
                 $this->user = User::create([
@@ -208,16 +202,28 @@ class AuthController extends Controller
                     'email' => $data['email'],
                     'phone_no' => $data['phone_no'],
                     'password' => Hash::make($data['password']),
-                    'user_type' => $userType
+                    'user_type' => $userType,
+                    'email_verified_at' => Carbon::now()->getTimestamp(),
                 ]);
 
+                // dd($this->user);
+
                 // Second query: Create a new job seeker
-                JobSeeker::create([
+                $jobSeeker = JobSeeker::create([
                     'user_id' => $this->user->id,
                     'jobseeker_name' => $data['name'],
                     'jobseeker_mail' => $data['email'],
                     'jobseeker_password' => Hash::make($data['password']),
                     'jobseeker_phone_no_1' => $data['phone_no'],
+                ]);
+
+                // dd($jobSeeker);
+
+                $this->token = Str::random(64);
+
+                UserVerify::create([
+                    'user_id' => $this->user->id,
+                    'token' => $this->token
                 ]);
             });
 
@@ -225,7 +231,7 @@ class AuthController extends Controller
             // Commit the transaction
             DB::commit();
 
-            return $this->user;
+            return $this->token;
         } catch (\Exception $e) {
             // Something went wrong
             // Roll back the transaction

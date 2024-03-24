@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Jobs;
+use App\Models\v1\careepick\Skills;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class JobRequiredSkills extends Model
 {
@@ -18,6 +20,16 @@ class JobRequiredSkills extends Model
         'job_id',
         'skill_id',
     ];
+
+    public function job()
+    {
+        return $this->belongsTo(Jobs::class, 'job_id');
+    }
+
+    public function skill()
+    {
+        return $this->belongsTo(Skills::class, 'skill_id');
+    }
 
     /**
      * Add skills for a job seeker.
