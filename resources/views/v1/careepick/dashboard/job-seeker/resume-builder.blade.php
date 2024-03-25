@@ -48,7 +48,7 @@
                             @csrf
                             @foreach ($jobSeekerData as $key => $jsData)
                                 <div class="row">
-                                    <div class="form-group col-lg-12 col-md-12">
+                                    {{-- <div class="form-group col-lg-12 col-md-12">
                                         <div class="uploading-outer">
                                             <!-- Display the image here -->
                                             <img src="{{ asset($jsData->jobseeker_image) }}" class="uploaded-image"
@@ -61,7 +61,7 @@
                                                 <span class="uploadButton-file-name"></span>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> --}}
 
                                     <div class="form-group col-lg-6 col-md-6 col-sm-12">
                                         <label>Full Name <span class="text-danger">*</span></label>

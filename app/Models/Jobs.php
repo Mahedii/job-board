@@ -122,6 +122,40 @@ class Jobs extends Model
         return $processedData;
     }
 
+    public static function getJobsByCompany($id)
+    {
+        $processedData = [];
+
+        self::with(['salaryType', 'experienceRange', 'ageRange', 'company', 'jobNature', 'jobSkills.skill'])
+            ->where('company_id', $id)
+            ->chunk(100, function ($jobs) use (&$processedData) {
+                foreach ($jobs as $job) {
+                    $jobSkills = $job->jobSkills->take(5)->map(function ($jobSkill) {
+                        return $jobSkill->skill->skill_name;
+                    });
+
+                    $processedData[] = (object) [
+                        'id' => $job->id,
+                        'job_category_id' => $job->job_category_id,
+                        'job_title' => $job->job_title,
+                        'deadline' => $job->deadline,
+                        'job_location' => $job->job_location,
+                        'responsibilities' => $job->responsibilities,
+                        'salary' => $job->salary,
+                        'slug' => $job->slug,
+                        'salary_type_name' => optional($job->salaryType)->type,
+                        'experience_range_name' => optional($job->experienceRange)->experience,
+                        'age_range_name' => optional($job->ageRange)->age,
+                        'company_name' => optional($job->company)->company_name,
+                        'job_nature_name' => optional($job->jobNature)->nature,
+                        'job_skills' => $jobSkills,
+                    ];
+                }
+            });
+
+            return new Collection($processedData);
+    }
+
     public static function getJobDetail($slug)
     {
         $processedData = [];

@@ -7,7 +7,7 @@
 <link href="{{ URL::asset('dashboard/assets/css/custom.css') }}" rel="stylesheet">
 
 <!--Jquery-->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <!-- Include jQuery UI -->
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">

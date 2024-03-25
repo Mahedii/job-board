@@ -6,7 +6,7 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12">
 
-                    <h2 class="ipt-title text-light">Create An Account</h2>
+                    <h2 class="ipt-title text-light">Recruiter</h2>
                     <span class="text-light opacity-75">Create an account or signin</span>
 
                 </div>

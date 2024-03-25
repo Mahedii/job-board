@@ -128,8 +128,10 @@ class JobPostController extends Controller
      */
     public function manageJobPostsPage(): view
     {
+        $jobsData = Jobs::getJobsByCompany(app('jobProvider')->id);
+        // dd($jobsData);
 
-        return view('v1.careepick.dashboard.job-provider.manage-jobs');
+        return view('v1.careepick.dashboard.job-provider.manage-jobs', ['jobsData' => $jobsData]);
     }
 
     /**
