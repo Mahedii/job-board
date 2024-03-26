@@ -50,7 +50,9 @@ class ResumeBuilderController extends Controller
 
     public function showResume()
     {
-        return view('v1.careepick.dashboard.job-seeker.resume');
+        $data = $this->getNecessaryData();
+
+        return view('v1.careepick.dashboard.job-seeker.resume', $data);
     }
 
     /**
@@ -63,7 +65,6 @@ class ResumeBuilderController extends Controller
         // $schoolAndCollegeData = SchoolAndCollege::getAllSchoolAndCollegeData();
         // $universitiesData = Universities::getAllUniversitiesData();
         $educationLevelsData = EducationLevels::all();
-        $educationResultTypeData = EducationResultType::all();
         $educationDegreeTitleData = EducationDegreeTitle::select("*")->get();
         $educationSubjectsData = EducationSubjects::select("*")->get();
         $educationResultTypeData = EducationResultType::select("*")->get();
@@ -72,6 +73,21 @@ class ResumeBuilderController extends Controller
         $languagesData = Languages::select("*")->get();
         $skillsData = Skills::getAllData();
 
+        $data = $this->getNecessaryData();
+        $data['educationLevelsData'] = $educationLevelsData;
+        $data['educationResultTypeData'] = $educationResultTypeData;
+        $data['educationDegreeTitleData'] = $educationDegreeTitleData;
+        $data['educationSubjectsData'] = $educationSubjectsData;
+        $data['yearsData'] = $yearsData;
+        $data['monthsData'] = $monthsData;
+        $data['languagesData'] = $languagesData;
+        $data['skillsData'] = $skillsData;
+
+        return view('v1.careepick.dashboard.job-seeker.resume-builder', $data);
+    }
+
+    private function getNecessaryData()
+    {
         $jobSeekerData = JobSeeker::select("*")->where('user_id', Auth::user()->id)->get();
         // $jobSeekerData->transform(function ($jobSeeker) {
         //     if ($jobSeeker->jobseeker_dob != null) {
@@ -162,17 +178,6 @@ class ResumeBuilderController extends Controller
         // dd($jobSeekerEducationsData);
 
         $data = [
-            // 'schoolAndCollegeData' => $schoolAndCollegeData,
-            // 'universitiesData' => $universitiesData,
-            'educationLevelsData' => $educationLevelsData,
-            'educationResultTypeData' => $educationResultTypeData,
-            'educationDegreeTitleData' => $educationDegreeTitleData,
-            'educationSubjectsData' => $educationSubjectsData,
-            'educationResultTypeData' => $educationResultTypeData,
-            'yearsData' => $yearsData,
-            'monthsData' => $monthsData,
-            'languagesData' => $languagesData,
-            'skillsData' => $skillsData,
             'jobSeekerData' => $jobSeekerData,
             'jobSeekerEducationsData' => $jobSeekerEducationsData,
             'jobSeekerExperiencesData' => $jobSeekerExperiencesData,
@@ -182,7 +187,7 @@ class ResumeBuilderController extends Controller
             'jobSeekerSkillsData' => $jobSeekerSkillsData,
         ];
 
-        return view('v1.careepick.dashboard.job-seeker.resume-builder', $data);
+        return $data;
     }
 
     private function calculateDuration($startMonth, $startYear, $endMonth, $endYear)

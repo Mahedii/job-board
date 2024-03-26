@@ -44,10 +44,16 @@
             <div class="auto-container">
                 <div class="invoice-wrap">
                     <div class="invoice-content">
-                        <div class="logo-box">
-                            <div class="logo"><a href="index.html"><img src="images/logo.svg" alt=""></a>
+                        <div class="logo-box" style="display: block">
+                            {{-- <div class="logo"><a href="index.html"><img src="images/logo.svg" alt=""></a>
+                            </div> --}}
+                            <div class="invoice-id" style="max-width: 100%; display: block">
+                                {{ $jobSeekerData[0]->jobseeker_name }}
+                                <span></span>
+                                <p>{{ $jobSeekerData[0]->jobseeker_mail }}</p>
+                                <p>{{ $jobSeekerData[0]->jobseeker_phone_no_1 }}</p>
+                                <p>{{ $jobSeekerData[0]->jobseeker_address }}</p>
                             </div>
-                            <div class="invoice-id">Invoice # <span>0043128641</span></div>
                         </div>
 
                         <div class="info-box">

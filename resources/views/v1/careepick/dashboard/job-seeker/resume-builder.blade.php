@@ -40,6 +40,12 @@
                 <div class="tabs-box">
                     <div class="widget-title">
                         <h4>My Profile</h4>
+                        <div class="d-flex justify-content-sm-end">
+                            <a href="{{ route('show-resume') }}" class="btn btn-primary m-3" target="_blank">
+                                <i class="ri-add-line align-bottom me-1"></i>
+                                View Resume
+                            </a>
+                        </div>
                     </div>
 
                     <div class="widget-content">
