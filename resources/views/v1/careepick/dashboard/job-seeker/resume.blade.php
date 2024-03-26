@@ -47,12 +47,28 @@
                         <div class="logo-box" style="display: block">
                             {{-- <div class="logo"><a href="index.html"><img src="images/logo.svg" alt=""></a>
                             </div> --}}
-                            <div class="invoice-id" style="max-width: 100%; display: block">
+                            <div class="invoice-id" style="max-width: 100%; display: block; margin-bottom: 20px;">
                                 {{ $jobSeekerData[0]->jobseeker_name }}
                                 <span></span>
                                 <p>{{ $jobSeekerData[0]->jobseeker_mail }}</p>
                                 <p>{{ $jobSeekerData[0]->jobseeker_phone_no_1 }}</p>
                                 <p>{{ $jobSeekerData[0]->jobseeker_address }}</p>
+                            </div>
+                        </div>
+
+                        <div class="logo-box" style="display: block">
+                            <div class="invoice-id" style="max-width: 100%; display: block; margin-bottom: 20px;">
+                                Career Summary
+                                <span></span>
+                                <p>{{ $jobSeekerData[0]->jobseeker_career_summary }}</p>
+                            </div>
+                        </div>
+
+                        <div class="logo-box" style="display: block">
+                            <div class="invoice-id" style="max-width: 100%; display: block; margin-bottom: 20px;">
+                                Professional Experience
+                                <span></span>
+                                <p>{{ $jobSeekerData[0]->jobseeker_career_summary }}</p>
                             </div>
                         </div>
 
